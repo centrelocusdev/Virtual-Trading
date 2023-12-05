@@ -1,10 +1,10 @@
 import { useState ,useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import document_upload from '../assets/images/document-upload.png';
-import vector from "../assets/images/Vector-2.svg";
+import document_upload from '/document-upload.png';
+import vector from "/Vector-2.svg";
 import { kycAPI } from '../requests/kyc';
 import { toast } from "react-toastify";
-import defaultImage from '../assets/images/download.png';
+import defaultImage from '/download.png';
 const Backend_URL = "https://trade.thedelvierypointe.com";
 
 const Kyc_ = () => {
