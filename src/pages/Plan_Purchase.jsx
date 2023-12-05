@@ -1,4 +1,4 @@
-import vector from "../assets/image/login/Vector-2.svg";
+import vector from "../assets/images/Vector-2.svg";
 import { auth } from "../requests/auth";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";

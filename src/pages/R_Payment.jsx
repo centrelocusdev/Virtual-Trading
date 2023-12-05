@@ -1,9 +1,9 @@
-import GooglePay from "../assets/image/login/GooglePay.svg";
-import Mastercard from "../assets/image/login/Mastercard.svg";
-import Paypal from "../assets/image/login/PayPal.svg";
-import Stripe from "../assets/image/login/stripe.svg";
-import visa from "../assets/image/login/visa.svg";
-import vector from "../assets/image/login/Vector-2.svg";
+import GooglePay from "../assets/images/GooglePay.svg";
+import Mastercard from "../assets/images/Mastercard.svg";
+import Paypal from "../assets/images/PayPal.svg";
+import Stripe from "../assets/images/stripe.svg";
+import visa from "../assets/images/visa.svg";
+import vector from "../assets/images/Vector-2.svg";
 import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
