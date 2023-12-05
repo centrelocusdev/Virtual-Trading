@@ -73,6 +73,7 @@ async function displayRazorpay() {
         return;
     }
     // console.log(result);
+    const razorpay = result.data.razorpay_key;
     const order_id = result.data.order.provider_order_id;
     const amount = result.data.order.amount;
     const name = result.data.order.name;
@@ -80,7 +81,7 @@ async function displayRazorpay() {
     // const { amount, id: order_id, currency } = result.data;
 
     const options = {
-        key: "rzp_test_rJ5Tre6MC14z5Y", // Enter the Key ID generated from the Dashboard
+        key: razorpay, // Enter the Key ID generated from the Dashboard
         amount: amount.toString(),
          currency: "INR",
         name: name,
@@ -111,9 +112,10 @@ async function displayRazorpay() {
             // alert(result.data.msg);
         },
         prefill: {
-            name: "Soumya Dey",
-            email: "SoumyaDey@example.com",
-            contact: "9999999999",
+            name: name,
+            // phone: "9999999999"
+            // email: "SoumyaDey@example.com",
+            
         },
         notes: {
             address: "Soumya Dey Corporate Office",
