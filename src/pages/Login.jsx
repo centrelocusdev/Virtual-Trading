@@ -1,8 +1,8 @@
-import AccountOverview from "/Account Overview 1.png";
-import Group from "/Group.png";
-import TradingPlateform from "/Trading Platform 1.png";
-import vector from "/Vector.svg";
-import Eclipse from "/Ellipse 2.svg";
+import AccountOverview from "../assets/images/Account Overview 1.png";
+import Group from "../assets/images/Group.png";
+import TradingPlateform from "../assets/images/Trading Platform 1.png";
+import vector from "../assets/images/Vector.svg";
+import Eclipse from "../assets/images/Ellipse 2.svg";
 import { auth } from "../requests/auth";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
