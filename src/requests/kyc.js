@@ -81,7 +81,9 @@ async function getUserDetails(){
             const kyc = await axios.put(`${Backend_URL}/api/kyc/`, formDataToSend, config
             );
             // console.log("add kyc" , kyc);
-            message= "Your kyc has been done."
+            if(kyc){
+              message= "Your kyc has been done."
+            }
 
         }else {
               //Update User kyc details
@@ -89,21 +91,6 @@ async function getUserDetails(){
                   return {status: "error" ,message: "Not found kyc id!"};
                 }
                 kycFormData.id = kycId;
-                // console.log(kycFormData);
-                // const formData = new FormData();
-                // formData.append("address", kycFormData.address);
-                // formData.append("date_of_birth" , kycFormData.date_of_birth)
-                // formData.append("government_id" , kycFormData.government_id)
-                // formData.append("address_proof" , kycFormData.address_proof)
-                // formData.append("id", kycFormData.id);
-                // formData.append("government_id_number", kycFormData.government_id_number)
-                // formData.append("address_proof_number", kycFormData.address_proof_number)
-                // formData.append("government_id_image", kycFormData.government_id_image)
-                // formData.append("address_proof_image", kycFormData.address_proof_image);
-                // formData.append("city" , kycFormData.city)
-                // formData.append("postal_code", kycFormData.postal_code)
-                // formData.append("country" , kycFormData.country)
-
                 const formDataToSend = new FormData();
                 Object.entries(kycFormData).forEach(([key, value]) => {
                     formDataToSend.append(key, value);
@@ -118,7 +105,9 @@ async function getUserDetails(){
 
               const kyc = await axios.patch(`${Backend_URL}/api/kyc/`, formDataToSend, config);
           // console.log("updated kyc" ,kyc);
-          message= 'Kyc updated successfully!'
+          if(kyc){
+            message= 'Kyc updated successfully!'
+          }
 
         }
            //Update User personal details
@@ -131,7 +120,11 @@ async function getUserDetails(){
            }
        );
       //  console.log("updated user" , user);
-       return {status: "success" , message: message};
+      if(user){
+        return {status: "success" , message: message};
+      }else {
+        return {status: "error" , message: 'Something went wrong!'};
+      }
 
 
     }catch(err){
