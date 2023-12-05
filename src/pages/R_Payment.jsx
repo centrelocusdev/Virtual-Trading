@@ -13,7 +13,7 @@ const Backend_URL = "https://trade.thedelvierypointe.com";
 const R_Payment = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  console.log(location.state);
+  // console.log(location.state);
   const [plan, setPlan] = useState({
     plan: "",
     amount: 0
@@ -43,7 +43,7 @@ const R_Payment = () => {
 }
 
 async function displayRazorpay() {
-  console.log(localStorage.getItem("token_access"));
+  // console.log(localStorage.getItem("token_access"));
     const res = await loadScript(
         "https://checkout.razorpay.com/v1/checkout.js"
     );
@@ -52,7 +52,7 @@ async function displayRazorpay() {
         alert("Razorpay SDK failed to load. Are you online?");
         return;
     }
-    console.log(1);
+    // console.log(1);
     
     const result = await axios.post(`${Backend_URL}/api/razorpay/payment/` , 
     {
@@ -72,7 +72,7 @@ async function displayRazorpay() {
         alert("Server error. Are you online?");
         return;
     }
-    console.log(result);
+    // console.log(result);
     const order_id = result.data.order.provider_order_id;
     const amount = result.data.order.amount;
     const name = result.data.order.name;
@@ -98,7 +98,7 @@ async function displayRazorpay() {
             };
 
             const result = await axios.post(callback_url, data);
-            console.log(result);
+            // console.log(result);
             if(result && result.data && result.data.status && result.data.status === 'Success'){
               toast.success("Payment has been done successfully!");
               setTimeout(() => {

@@ -83,7 +83,7 @@ const Kyc_ = () => {
   } , [])
 
   async function onChangeHandlerKyc (event){
-    console.log(event.target.name, event.target.value);
+    // console.log(event.target.name, event.target.value);
       if(event.target.type === 'file' && event.target.name === 'government_id_image'){
       setGovernmentIdFileName(event.target.files[0].name);
      
@@ -99,7 +99,7 @@ const Kyc_ = () => {
     }))
   }
   async function onChangeHandlerUser (event){
-    console.log(event.target.name, event.target.value);
+    // console.log(event.target.name, event.target.value);
     const {name,value } = event.target;
     setUserFormData((prevState) =>({
         ...prevState,

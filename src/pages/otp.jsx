@@ -26,14 +26,14 @@ const Otp = () => {
       setLoading(true);
       const res = await auth.registrationOtpVerification(formData);
       if (res && res.status === 'success') {
-        console.log("in the otp", res);
+        // console.log("in the otp", res);
         setLoading(false);
         toast.success(res.message);
         setTimeout(() => {
           navigate("/purchase");
         }, 2000);
       }else if(res && res.status === "error"){
-        console.log("in the otp", res);
+        // console.log("in the otp", res);
         toast.error(res.message);
       } 
       setLoading(false);

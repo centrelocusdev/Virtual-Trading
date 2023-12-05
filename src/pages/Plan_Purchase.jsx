@@ -16,7 +16,7 @@ const Plan_Purchase = () => {
       setPlans(res.data);
       setLoading(false);
     }
-    console.log(res);
+    // console.log(res);
   }
   async function goToPaymentPage (){
     if(selectedOption === ""){

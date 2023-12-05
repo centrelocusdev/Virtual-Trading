@@ -27,18 +27,18 @@ const Registration = () => {
     try {
       e.preventDefault();
       setLoading(true);
-      console.log("in the registration" , formData);
+      // console.log("in the registration" , formData);
       const res = await auth.registration(formData);
       if (res && res.message) {
         if(res && res.status === "success"){
-          console.log("in the registration", res);
+          // console.log("in the registration", res);
           setLoading(false);
           toast.success(res.message);
           setTimeout(() => {
             navigate("/otp" , {state: {email: formData.email}});
           }, 2000);
         }else if(res && res.status === "error"){
-          console.log("in the registration", res);
+          // console.log("in the registration", res);
           toast.error(res.message);
         } 
       }

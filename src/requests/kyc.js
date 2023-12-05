@@ -11,7 +11,7 @@ async function getUserDetails(){
         }
       }
       );
-      console.log("in the auth" , user);
+      // console.log("in the auth" , user);
       if(user && user.data){
         return {status: "success" , message: "success",  data: user.data};
       }
@@ -30,7 +30,7 @@ async function getUserDetails(){
             }
           }
         );
-      console.log("in the kyc" , getKyc);
+      // console.log("in the kyc" , getKyc);
       if(getKyc && getKyc.data && getKyc.data.kyc_data && getKyc.data.kyc_data.length> 0){
         return {status: "success" , message: "success",  data: getKyc.data.kyc_data[0]};
       }
@@ -60,13 +60,13 @@ async function getUserDetails(){
         if(getKyc && getKyc.data && getKyc.data.kyc_data && getKyc.data.kyc_data.length> 0){
             isAddingKyc = false;
             kycId = getKyc.data.kyc_data[0].id;
-            console.log("found kyc id", isAddingKyc, kycId , getKyc);
+            // console.log("found kyc id", isAddingKyc, kycId , getKyc);
         }
 
         if(isAddingKyc){
-            console.log(userId);
+            // console.log(userId);
             //Update User kyc details
-            console.log(kycFormData);
+            // console.log(kycFormData);
             kycFormData.user = userId;
             const formDataToSend = new FormData();
             Object.entries(kycFormData).forEach(([key, value]) => {
@@ -80,7 +80,7 @@ async function getUserDetails(){
               };
             const kyc = await axios.put(`${Backend_URL}/api/kyc/`, formDataToSend, config
             );
-            console.log("add kyc" , kyc);
+            // console.log("add kyc" , kyc);
             message= "Your kyc has been done."
 
         }else {
@@ -89,7 +89,7 @@ async function getUserDetails(){
                   return {status: "error" ,message: "Not found kyc id!"};
                 }
                 kycFormData.id = kycId;
-                console.log(kycFormData);
+                // console.log(kycFormData);
                 // const formData = new FormData();
                 // formData.append("address", kycFormData.address);
                 // formData.append("date_of_birth" , kycFormData.date_of_birth)
@@ -117,7 +117,7 @@ async function getUserDetails(){
 
 
               const kyc = await axios.patch(`${Backend_URL}/api/kyc/`, formDataToSend, config);
-          console.log("updated kyc" ,kyc);
+          // console.log("updated kyc" ,kyc);
           message= 'Kyc updated successfully!'
 
         }
@@ -130,7 +130,7 @@ async function getUserDetails(){
                }
            }
        );
-       console.log("updated user" , user);
+      //  console.log("updated user" , user);
        return {status: "success" , message: message};
 
 

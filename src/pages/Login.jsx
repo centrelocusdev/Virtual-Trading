@@ -26,18 +26,18 @@ const Login = () => {
     try {
       e.preventDefault();
       setLoading(true);
-      console.log("in the login", formData);
+      // console.log("in the login", formData);
       const res = await auth.login(formData);
       if (res && res.message) {
         if (res && res.status === "success") {
-          console.log("in the login", res);
+          // console.log("in the login", res);
           setLoading(false);
           toast.success(res.message);
           setTimeout(() => {
             navigate("/landing");
           }, 2000);
         } else if (res && res.status === "error") {
-          console.log("in the login", res);
+          // console.log("in the login", res);
           toast.error(res.message);
         }
       }
