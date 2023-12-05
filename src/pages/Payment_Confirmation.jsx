@@ -1,5 +1,5 @@
-import check from "../assets/images/check.svg";
-import vector from "../assets/images/Vector-2.svg";
+import check from "/check.svg";
+import vector from "/Vector-2.svg";
 const Payment_Confirmation = () => {
   
   return (

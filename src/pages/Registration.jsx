@@ -1,4 +1,4 @@
-import vector from "../assets/images/Vector-2.svg";
+import vector from "/Vector-2.svg";
 import { useState } from "react";
 import { auth } from "../requests/auth";
 import { toast } from "react-toastify";
