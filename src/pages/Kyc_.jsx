@@ -485,7 +485,7 @@ const Kyc_ = () => {
         </div>
 
         <div className='border-b-2 border-b-solid border-b-blue2 w-full mb-10'></div>
-        <button className="px-11 py-4.1 text-lg bg-font_blue1 text-white rounded-md self-center mb-28">
+        <button className="px-11 py-4.1 esm:text-sm sm:text-lg bg-font_blue1 text-white rounded-md self-center mb-28">
         {loading ? (
                 <div className="flex justify-center items-center gap-5 m-0 text-base">
                   Loading...

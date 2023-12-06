@@ -143,21 +143,21 @@ async function displayRazorpay() {
     paymentObject.open();
 }
   return (
-    <div className="w-screen h-fit py-20 px-60 flex justify-center items-center bg-bg_Light">
+    <div className="w-screen min-h-screen h-fit py-20 esm:px-5 md:px-60 flex justify-center items-center bg-bg_Light">
       <img
         src={vector}
         alt="vector"
-        className="h-10 w-10 absolute top-12 right-28"
+        className="h-10 w-10 absolute top-12 esm:right-5 sm:right-28"
       />
       <img
         src={vector}
         alt="vector"
-        className="h-6 w-10 absolute top-24 left-40"
+        className="h-6 w-10 absolute top-24 esm:left-10 sm:left-40"
       />
       <img
         src={vector}
         alt="vector"
-        className="h-10 w-10 absolute bottom-10 right-20"
+        className="h-10 w-10 absolute bottom-10 esm:right-10 sm:right-20"
       />
       <img
         src={vector}
@@ -165,30 +165,30 @@ async function displayRazorpay() {
         className="h-10 w-10 absolute bottom-20 left-10"
       />
       <div className="w-full h-fit flex flex-col">
-        <p className="text-font_blue1 text-5.1xl font-bold text-center font-sans mb-5">
+        <p className="text-font_blue1 esm:text-4xl md:text-5.1xl font-bold text-center font-sans mb-10">
           Payment
         </p>
 
         <div className="flex flex-col mb-5">
-          <p className="text-font_blue1 font-bold text-xl self-start mb-4">
+          <p className="text-font_blue1 font-bold esm:text-lg md:text-xl self-start mb-4">
             Payment Details
           </p>
           <div className="flex justify-between w-full border-b-2 border-b-solid border-b-gray4 mb-4 pb-4">
             <div className="flex flex-col gap-y-5">
-              <p className="text-base font-bold text-gray4">Plan</p>
-              <p className="text-base font-bold text-gray4">Platform</p>
-              <p className="text-base font-bold text-gray4">Price</p>
-              <p className="text-base font-bold text-gray4">Discount</p>
+              <p className="esm:text-sm sm:text-base font-bold text-gray4">Plan</p>
+              <p className="esm:text-sm sm:text-base font-bold text-gray4">Platform</p>
+              <p className="esm:text-sm sm:text-base font-bold text-gray4">Price</p>
+              <p className="esm:text-sm sm:text-base font-bold text-gray4">Discount</p>
             </div>
             <div className="flex flex-col gap-y-5">
-              <p className="text-base font-bold text-gray4 text-start">
+              <p className="esm:text-sm sm:text-base font-bold text-gray4 text-start">
                 {plan.plan}
               </p>
-              <p className="text-base font-bold text-gray4 text-start">
+              <p className="esm:text-sm sm:text-base font-bold text-gray4 text-start">
                 Trades .Lo
               </p>
-              <p className="text-base font-bold text-gray4">₹ {plan.amount}</p>
-              <p className="text-base font-bold text-gray4">-/+ %</p>
+              <p className="esm:text-sm sm:text-base font-bold text-gray4">₹ {plan.amount}</p>
+              <p className="esm:text-sm sm:text-base font-bold text-gray4">-/+ %</p>
             </div>
           </div>
           <div className="flex jsutify-between w-full">
@@ -200,7 +200,7 @@ async function displayRazorpay() {
             </div>
           </div>
         </div>
-        <div className="flex gap-x-5 mb-4">
+        <div className="flex flex-wrap gap-y-5 gap-x-5 mb-4">
           <img src={visa} alt="card" />
           <img src={Stripe} alt="card" />
           <div className="px-6 h-11 w-18 bg-slate-100 flex justify-center items-center" >
@@ -266,7 +266,7 @@ async function displayRazorpay() {
             privacy policy.
           </span>
         </div>
-        <button onClick={displayRazorpay} className="px-12 py-4.1 text-lg bg-font_blue1 text-white rounded-md self-center flex justify-center items-center">
+        <button onClick={displayRazorpay} className="px-12 py-4.1 esm:text-sm sm:text-lg bg-font_blue1 text-white rounded-md self-center flex justify-center items-center">
         {loading ? (
                 <div className="flex justify-center items-center gap-5 m-0 text-base">
                   Loading...

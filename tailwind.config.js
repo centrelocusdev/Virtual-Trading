@@ -7,6 +7,9 @@ export default {
   theme: {
    
     extend: {
+      screens: {
+        'esm': '310px'
+      },
       padding: {
         '4.1': "18px"
       },

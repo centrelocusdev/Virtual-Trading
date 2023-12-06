@@ -49,21 +49,21 @@ const Registration = () => {
   }
 
   return (
-    <div className="flex min-h-screen justify-center items-center w-screen h-fit px-32 py-20 relative bg-bg_Light">
+    <div className="flex min-h-screen justify-center items-center w-screen h-fit esm:px-10 md:px-20  px-32 py-20 relative bg-bg_Light">
       <img
         src={vector}
         alt="vector"
-        className="h-10 w-10 absolute top-12 right-28"
+        className="h-10 w-10 absolute esm:top-5 md:top-12 esm:right-14 md:right-28"
       />
       <img
         src={vector}
         alt="vector"
-        className="h-6 w-10 absolute top-24 left-40"
+        className="h-6 w-10 absolute top-24 esm:left-2 md:left-40"
       />
       <img
         src={vector}
         alt="vector"
-        className="h-10 w-10 absolute bottom-10 right-20"
+        className="h-10 w-10 absolute bottom-10 esm:right-10 md:right-20"
       />
       <img
         src={vector}
@@ -72,10 +72,10 @@ const Registration = () => {
       />
 
       <div className="flex items-center flex-col w-full h-fit">
-        <p className="text-font_blue1 text-5.1xl font-bold text-center font-sans mb-5">
+        <p className="text-font_blue1 esm:text-4xl md:text-5.1xl font-bold text-center font-sans mb-5">
           Registration
         </p>
-        <p className="text-xl font-bold text-gray2 mb-10">
+        <p className="esm:text-lg md:text-xl font-bold text-gray2 mb-10">
           Fill the information carefully
         </p>
         <div className="flex flex-col items-start w-full h-fit">
@@ -83,11 +83,11 @@ const Registration = () => {
             onSubmit={onSubmitHandler}
             className="flex flex-col items-start w-full h-fit"
           >
-            <p className="text-font_blue1 font-bold text-xl self-start mb-4">
+            <p className="text-font_blue1 font-bold esm:text-lg md:text-xl self-start mb-4">
               Personal Information
             </p>
-            <div className="flex w-full gap-x-4 mb-4">
-              <div className="flex flex-col w-1/2">
+            <div className="esm:flex-col flex lg:flex-row w-full gap-x-4 mb-4">
+              <div className="flex flex-col esm:w-full lg:w-1/2">
                 <label
                   className="text-lg font-bold text-gray1"
                   htmlFor="first_name"
@@ -105,7 +105,7 @@ const Registration = () => {
                   required
                 />
               </div>
-              <div className="flex flex-col w-1/2">
+              <div className="flex flex-col esm:w-full lg:w-1/2">
                 <label
                   className="text-lg font-bold text-gray1"
                   htmlFor="last_name"
@@ -124,8 +124,8 @@ const Registration = () => {
                 />
               </div>
             </div>
-            <div className="flex w-full gap-x-4 mb-4">
-              <div className="flex flex-col w-1/2">
+            <div className="esm:flex-col flex lg:flex-row w-full gap-x-4 mb-4">
+              <div className="flex flex-col esm:w-full lg:w-1/2">
                 <label className="text-lg font-bold text-gray1" htmlFor="email">
                   Email Address<span className="text-red-600">*</span>
                 </label>
@@ -140,7 +140,7 @@ const Registration = () => {
                   required
                 />
               </div>
-              <div className="flex flex-col w-1/2">
+              <div className="flex flex-col esm:w-full lg:w-1/2">
                 <label
                   className="text-lg font-bold text-gray1"
                   htmlFor="phone_number"
@@ -159,8 +159,8 @@ const Registration = () => {
                 />
               </div>
             </div>
-            <div className="flex w-full gap-x-4 mb-4">
-              <div className="flex flex-col w-1/2">
+            <div className="esm:flex-col flex lg:flex-row w-full gap-x-4 mb-4">
+              <div className="flex flex-col esm:w-full lg:w-1/2">
                 <label
                   className="text-lg font-bold text-gray1"
                   htmlFor="password"
@@ -178,7 +178,7 @@ const Registration = () => {
                   required
                 />
               </div>
-              <div className="flex flex-col w-1/2">
+              <div className="flex flex-col esm:w-full lg:w-1/2">
                 <label
                   className="text-lg font-bold text-gray1"
                   htmlFor="confirm_password"
@@ -204,7 +204,7 @@ const Registration = () => {
                 and privacy policy.
               </span>
             </div>
-            <button className="px-11 py-4.1 text-lg bg-font_blue1 text-white rounded-md self-center">
+            <button className="px-11 py-4.1 esm:text-sm sm:text-lg bg-font_blue1 text-white rounded-md self-center">
             {loading ? (
                 <div className="flex justify-center items-center gap-5 m-0 text-base">
                   Loading...

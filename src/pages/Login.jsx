@@ -125,7 +125,7 @@ const Login = () => {
         <img
           src={TradingPlateform}
           alt="trading-plateform"
-          className="max-w-full w-60 h-auto z-10 absolute bottom-36 right-10"
+          className="max-w-full esm:text-sm sm:text-lg w-60 h-auto z-10 absolute bottom-36 right-10"
         />
         <img
           src={Group}

@@ -3,7 +3,6 @@ import { auth } from "../requests/auth";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
-import ClipLoader from "react-spinners/ClipLoader";
 
 const Plan_Purchase = () => {
   const [plans, setPlans] = useState([]);
@@ -31,34 +30,34 @@ const Plan_Purchase = () => {
     getPlanDetails();
   }, []);
   return (
-    <div className="w-screen h-fit px-10 py-10 bg-bg_Light flex flex-col relative">
+    <div className="w-screen h-fit esm:px-2 sm:px-10 py-10 bg-bg_Light flex flex-col relative">
       <img
         src={vector}
         alt="vector"
-        className="h-10 w-10 absolute top-8 right-28"
+        className="h-10 w-10 absolute esm:right-10 md:top-8 md:right-28"
       />
       <img
         src={vector}
         alt="vector"
-        className="h-6 w-10 absolute top-48 left-28"
+        className="h-6 w-10 absolute esm:left-10 esm:top-36 sm:top-28 md:top-48 md:left-28"
       />
       <img
         src={vector}
         alt="vector"
-        className="h-10 w-10 absolute bottom-10 right-20"
+        className="h-10 w-10 absolute bottom-10 esm:right-10 md:right-20"
       />
       <img
         src={vector}
         alt="vector"
-        className="h-10 w-10 absolute bottom-28 left-10"
+        className="h-10 w-10 absolute esm:bottom-20 md:bottom-28 left-10"
       />
-      <p className="text-font_blue1 text-5.1xl font-bold text-center font-sans mb-10">
+      <p className="text-font_blue1 esm:text-4xl md:text-5.1xl font-bold text-center font-sans mb-10">
         Purchase
       </p>
-      <div className="h-fit w-full flex gap-10 py-10 justify-center items-center">
-        <div className="w-1/2 h-fit">
+      <div className="h-fit w-full flex esm:flex-col md:flex-row gap-10 py-10 justify-center items-center">
+        <div className="esm:w-full md:w-1/2 h-fit">
           <div className="w-full p-5 mb-12">
-            <p className="text-lg mb-5">Select your preferred option:</p>
+            <p className="esm:text-center md:text-start text-lg mb-5">Select your preferred option:</p>
             <div className="w-full flex gap-x-5 gap-y-5 flex-wrap justify-center px-5">
               {!loading && plans && plans.length>0 && plans.map((plan) => {
                 return (
@@ -96,7 +95,7 @@ const Plan_Purchase = () => {
               })}
           </div>
         </div>
-        <div className="w-1/2 h-fit bg-bg_Medium p-4 rounded-2lg">
+        <div className="esm:w-full md:w-1/2 h-fit bg-bg_Medium p-4 rounded-2lg">
           <p className="font-bold text-2xl border-b-2 w-1/2 m-auto border-b-black text-center mb-4 ">
             Demo Account Rules
           </p>
@@ -137,7 +136,7 @@ const Plan_Purchase = () => {
           </p>
         </div>
       </div>
-      <button onClick={goToPaymentPage} className="px-11 py-4.1 text-lg bg-font_blue1 text-white rounded-md  self-center">
+      <button onClick={goToPaymentPage} className="px-11 py-4.1 esm:text-sm sm:text-lg bg-font_blue1 text-white rounded-md  self-center">
         Next
       </button>
     </div>

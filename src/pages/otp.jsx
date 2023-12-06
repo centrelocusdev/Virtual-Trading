@@ -80,7 +80,7 @@ const Otp = () => {
                   required
                 />
               </div>
-              <button className="px-11 py-4 bg-font_blue1 text-white rounded-md w-1/2 mt-10 self-center">
+              <button className="px-11 py-4.1 esm:text-sm sm:text-lg bg-font_blue1 text-white rounded-md w-1/2 mt-10 self-center">
               {loading ? (
                 <div className="flex justify-center items-center gap-5 m-0 text-base">
                   Loading...
