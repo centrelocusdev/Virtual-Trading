@@ -108,8 +108,8 @@ async function displayRazorpay() {
               setLoading(false);
               toast.success("Payment has been done successfully!");
               setTimeout(() => {
-                navigate('/kyc');
-              } , 1000)
+                navigate('/confirmation');
+              } , 2000)
             }else{
               toast.error('Something went wrong!');
             }
