@@ -27,14 +27,15 @@ export default defineConfig({
       },
     }
   },
-  plugins: [react(
-    {
-      template: {
-        transformAssetUrls: {
-            includeAbsolute: false,
-            base: null,
-        },
-    },
-    }
-  )],
+  plugins: [react()]
+  // plugins: [react(
+  //   {
+  //     template: {
+  //       transformAssetUrls: {
+  //           includeAbsolute: false,
+  //           base: null,
+  //       },
+  //   },
+  //   }
+  // )],
 });
