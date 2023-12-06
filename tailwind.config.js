@@ -7,6 +7,9 @@ export default {
   theme: {
    
     extend: {
+      padding: {
+        '4.1': "18px"
+      },
       borderRadius: {
         '2lg': "10px",
         '4xl': '30px'

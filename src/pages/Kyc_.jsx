@@ -5,10 +5,13 @@ import vector from "/Vector-2.svg";
 import { kycAPI } from '../requests/kyc';
 import { toast } from "react-toastify";
 import defaultImage from '/download.png';
+import ClipLoader from "react-spinners/ClipLoader";
+
 const Backend_URL = "https://trade.thedelvierypointe.com";
 
 const Kyc_ = () => {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   const [images, setImages] = useState({
     address: "",
     gov: ""
@@ -110,9 +113,11 @@ const Kyc_ = () => {
 
   async function onSubmitHandler (e){
     try{
+      setLoading(true);
       e.preventDefault();
       const res = await kycAPI.updateKycDetails(userFormData , kycFormData);
       if(res && res.status === 'success'){
+        setLoading(false);
         toast.success(res.message);
         setTimeout(() => {
           navigate('/landing')
@@ -480,7 +485,16 @@ const Kyc_ = () => {
         </div>
 
         <div className='border-b-2 border-b-solid border-b-blue2 w-full mb-10'></div>
-        <button className="px-11 py-4 bg-font_blue1 text-white rounded-md w-46 self-center mb-28">Submit</button>
+        <button className="px-11 py-4.1 text-lg bg-font_blue1 text-white rounded-md self-center mb-28">
+        {loading ? (
+                <div className="flex justify-center items-center gap-5 m-0 text-base">
+                  Loading...
+                  <ClipLoader size={20} color="white" />
+                </div>
+              ) : (
+                "Submit"
+              )}
+        </button>
         </form>
       </div>
     </div>

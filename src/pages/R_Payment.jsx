@@ -5,12 +5,15 @@ import Stripe from "/stripe.svg";
 import visa from "/visa.svg";
 import vector from "/Vector-2.svg";
 import axios from "axios";
+import ClipLoader from "react-spinners/ClipLoader";
+
 import { useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 const Backend_URL = "https://trade.thedelvierypointe.com";
 
 const R_Payment = () => {
+  const [loading, setLoading] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
   // console.log(location.state);
@@ -43,6 +46,7 @@ const R_Payment = () => {
 }
 
 async function displayRazorpay() {
+  setLoading(true);
   // console.log(localStorage.getItem("token_access"));
     const res = await loadScript(
         "https://checkout.razorpay.com/v1/checkout.js"
@@ -101,6 +105,7 @@ async function displayRazorpay() {
             const result = await axios.post(callback_url, data);
             // console.log(result);
             if(result && result.data && result.data.status && result.data.status === 'Success'){
+              setLoading(false);
               toast.success("Payment has been done successfully!");
               setTimeout(() => {
                 navigate('/kyc');
@@ -261,8 +266,15 @@ async function displayRazorpay() {
             privacy policy.
           </span>
         </div>
-        <button onClick={displayRazorpay} className="px-12 py-2 bg-font_blue1 text-white rounded-md w-1/6 self-center flex justify-center items-center">
-          Next
+        <button onClick={displayRazorpay} className="px-12 py-4.1 text-lg bg-font_blue1 text-white rounded-md self-center flex justify-center items-center">
+        {loading ? (
+                <div className="flex justify-center items-center gap-5 m-0 text-base">
+                  Loading...
+                  <ClipLoader size={20} color="white" />
+                </div>
+              ) : (
+                "Next"
+              )}
         </button>
       </div>
     </div>

@@ -1,5 +1,6 @@
 import check from "/check.svg";
 import vector from "/Vector-2.svg";
+
 const Payment_Confirmation = () => {
   
   return (
@@ -33,7 +34,7 @@ const Payment_Confirmation = () => {
         <p className="text-3xl font-bold text-gray4 text-center">Thank You</p>
         <p className="text-3xl font-bold text-gray4 text-center">Order Confirmed</p>
         </div>
-        <button className="px-11 py-4 bg-font_blue1 text-white rounded-md w-3/2 self-center">Go to Dashboard</button>
+        <button className="px-11 py-4.1 text-lg bg-font_blue1 text-white rounded-md self-center">Go to Dashboard</button>
       </div>
     </div>
   );

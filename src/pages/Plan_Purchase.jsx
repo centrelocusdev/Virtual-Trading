@@ -3,6 +3,8 @@ import { auth } from "../requests/auth";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
+import ClipLoader from "react-spinners/ClipLoader";
+
 const Plan_Purchase = () => {
   const [plans, setPlans] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -135,7 +137,7 @@ const Plan_Purchase = () => {
           </p>
         </div>
       </div>
-      <button onClick={goToPaymentPage} className="px-11 py-2 bg-font_blue1 text-white rounded-md w-1/7 self-center">
+      <button onClick={goToPaymentPage} className="px-11 py-4.1 text-lg bg-font_blue1 text-white rounded-md  self-center">
         Next
       </button>
     </div>

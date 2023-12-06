@@ -95,7 +95,7 @@ const Login = () => {
             <button className="bg-font_blue1 w-full text-white rounded-md py-2.5 px-11">
               {loading ? (
                 <div className="flex justify-center items-center gap-5 m-0 text-base">
-                  Logging In..
+                  Loading...
                   <ClipLoader size={20} color="white" />
                 </div>
               ) : (
