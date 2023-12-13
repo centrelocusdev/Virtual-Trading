@@ -1,0 +1,14 @@
+.imageBox {
+    top:42rem;
+}
+@media (max-width:1280px){
+    .imageBox{
+        top:46rem;
+    }
+}
+
+@media (max-width:768px){
+    .imageBox{
+        top:50rem;
+    }
+}

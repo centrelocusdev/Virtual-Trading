@@ -123,7 +123,7 @@ async function displayRazorpay() {
             
         },
         notes: {
-            address: "Soumya Dey Corporate Office",
+            address: "Virtual Trading Corporate Office",
         },
         theme: {
             color: "#61dafb",

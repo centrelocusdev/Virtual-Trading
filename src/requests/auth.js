@@ -52,8 +52,17 @@ async function registrationOtpVerification(formData) {
   async function getRegistrationPurchasePlanDetails (){
     try{
       const res = await axios.get(`${Backend_URL}/api/plans/`);
-      // console.log(res);
       return res;
+    }catch(err){
+      console.log("Error", err.message);
+      return {status: "error", message: "Something went wrong!"};
+    }
+  }
+
+  async function getCouponData (){
+    try{
+      const coupons = await axios.get(`${Backend_URL}/api/coupons/`);
+      return coupons.data;
     }catch(err){
       console.log("Error", err.message);
       return {status: "error", message: "Something went wrong!"};
@@ -61,4 +70,11 @@ async function registrationOtpVerification(formData) {
   }
   
 
-export const auth = { registration , registrationOtpVerification , login , getRegistrationPurchasePlanDetails};
+export const auth = { 
+  registration ,
+   registrationOtpVerification ,
+    login ,
+     getRegistrationPurchasePlanDetails,
+     getCouponData
+    
+    };

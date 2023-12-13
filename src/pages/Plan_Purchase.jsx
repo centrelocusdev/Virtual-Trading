@@ -3,78 +3,103 @@ import { auth } from "../requests/auth";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
+import { FaRupeeSign } from "react-icons/fa";
 
 const Plan_Purchase = () => {
   const [plans, setPlans] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [selectedOption, setSelectedOption] = useState("Stellar");
-  const [selectedAmount, setSelectedAmount] = useState(1800);
+  const [selectedPlan, setSelectedPlan] = useState("Stellar");
+  const [selectedPlanId, setSelectedPlanId] = useState("");
+  const [selectedAmount, setSelectedAmount] = useState("30,000");
+  const [selectedFees, setSelectedFees] = useState(1800);
   const navigate = useNavigate();
+
+
   async function getPlanDetails() {
     setLoading(true);
     const res = await auth.getRegistrationPurchasePlanDetails();
+    // console.log(res);
     if (res && res.data) {
       setPlans(res.data);
       setLoading(false);
     }
     // console.log(res);
   }
-  async function goToPaymentPage (){
-    if(selectedOption === ""){
-      toast.warning('Kindly select any of these plans!');
+  async function goToPaymentPage() {
+    if (selectedPlan === "") {
+      toast.warning("Kindly select any of these plans!");
       return;
     }
-     navigate('/payment' , {state: {selectedPlan: selectedOption , selectedAmount: selectedAmount}});
+    navigate("/registration", {
+      state: { selectedPlan: selectedPlan, selectedFees: selectedFees , selectedAmount: selectedAmount, selectedPlanId: selectedPlanId },
+    });
   }
   useEffect(() => {
     getPlanDetails();
   }, []);
   return (
-    <div className="w-screen h-fit esm:px-2 sm:px-10 py-10 bg-bg_Light flex flex-col relative">
+    <div className="min-h-screen w-screen h-fit esm:pt-20 md:pt-36 pb-10 bg-bg_Light flex flex-col relative">
       <img
         src={vector}
         alt="vector"
-        className="h-10 w-10 absolute esm:right-10 md:top-8 md:right-28"
+        className="esm:h-0 esm:w-0 md:h-12 md:w-14 absolute esm:right-10 md:top-8 md:right-28"
       />
       <img
         src={vector}
         alt="vector"
-        className="h-6 w-10 absolute esm:left-10 esm:top-36 sm:top-28 md:top-48 md:left-28"
+        className="esm:h-0 esm:w-0 md:h-6 md:w-10 absolute esm:left-10 esm:top-36 sm:top-28 md:top-20 md:left-20"
       />
       <img
         src={vector}
         alt="vector"
-        className="h-10 w-10 absolute bottom-10 esm:right-10 md:right-20"
+        className="esm:h-0 esm:w-0 md:h-12 md:w-14 absolute bottom-10 esm:right-10 md:right-20"
       />
       <img
         src={vector}
         alt="vector"
-        className="h-10 w-10 absolute esm:bottom-20 md:bottom-28 left-10"
+        className="esm:h-0 esm:w-0 md:h-12 md:w-14 absolute esm:bottom-20 md:bottom-28 left-10"
       />
       <p className="text-font_blue1 esm:text-4xl md:text-5.1xl font-bold text-center font-sans mb-10">
         Purchase
       </p>
-      <div className="h-fit w-full flex esm:flex-col md:flex-row gap-10 py-10 justify-center items-center">
+      <div className="h-fit esm:w-11/12 md:w-0.87 m-auto flex esm:flex-col md:flex-row py-10 justify-center items-start">
         <div className="esm:w-full md:w-1/2 h-fit">
-          <div className="w-full p-5 mb-12">
-            <p className="esm:text-center md:text-start text-lg mb-5">Select your preferred option:</p>
-            <div className="w-full flex gap-x-5 gap-y-5 flex-wrap justify-center px-5">
-              {!loading && plans && plans.length>0 && plans.map((plan) => {
-                return (
-                  <button onClick={()=> {setSelectedOption(plan.name); setSelectedAmount(Number(plan.price))}} key={plan.id} className={`hover:bg-font_blue1 hover:text-white  cursor-pointer font-bold rounded-2lg px-8 py-2 bg-bg_Medium text-font_blue1 border-2 border-font_blue1 text-sm ${selectedOption === plan.name ? "bg-font_blue1 text-white" : ""}`}>
-                    {plan.name}
-                </button>
-                )
-              })}
+          <div className="w-full mb-12 pt-2">
+            <p className="esm:text-center md:text-start text-2xl font-bold mb-5 text-font_blue1">
+              Select your preferred option:
+            </p>
+            <div className="w-full flex gap-y-5 flex-wrap justify-evenly">
+              {!loading &&
+                plans &&
+                plans.length > 0 &&
+                plans.map((plan) => {
+                  return (
+                    <button
+                      onClick={() => {
+                        setSelectedPlan(plan.name);
+                        setSelectedFees(Number(plan.price));
+                        setSelectedAmount(Number(plan.account_size));
+                        setSelectedPlanId(plan.id);
+                      }}
+                      key={plan.id}
+                      className={`${
+                        selectedPlan === plan.name
+                          ? "bg-bg_Medium text-font_blue1 border-2 border-font_blue1"
+                          : "bg-font_blue1 text-white border-2 border-font_blue1"
+                      } hover:bg-bg_Medium hover:text-font_blue1 hover:border-2 hover:border-font_blue1 cursor-pointer font-bold rounded-2lg esm:px-4  md:px-8 py-2 text-sm `}
+                    >
+                      {plan.name}
+                    </button>
+                  );
+                })}
             </div>
           </div>
-          <div className="w-full border-b-2 border-b--solid border-b-black mb-12"></div>
+          <div className="w-full border-b border-b-solid border-b-black mb-12"></div>
           <div className="w-full flex flex-col items-center">
-            <div className=" w-full flex justify-between mb-5 px-5">
-              <span className="text-lg font-medium text-gray4">
+            <div className=" w-full flex justify-center mb-5 px-5">
+              <span className="font-bold text-2xl text-font_blue1">
                 Account Size
               </span>
-              <span className="text-lg font-medium text-gray4">Fees</span>
             </div>
             {loading ? <div>Loading...</div> : ""}
             {!loading &&
@@ -84,59 +109,94 @@ const Plan_Purchase = () => {
                 return (
                   <div
                     key={plan.id}
-                    className={`w-full flex justify-between bg-bg_Medium border-2 border-solid border-font_blue1 py-2 px-7 rounded-2lg mb-5 ${selectedOption === plan.name ? "bg-font_blue1" : ""}`}
+                    className={`esm:w-3/4 md:w-1/2 flex justify-center  py-2 px-7 rounded-2lg mb-5 ${
+                      selectedPlan === plan.name
+                        ? "bg-bg_Medium border-2 border-solid border-font_blue1"
+                        : "bg-font_blue1"
+                    }`}
                   >
-                    <span className={`text-sm text-font_blue1 ${selectedOption === plan.name ? "text-white" : ""}`}>{plan.price}</span>
-                    <span className={`text-sm text-font_blue1 ${selectedOption === plan.name ? "text-white" : ""}`}>
-                      {plan.price}
+                    <span
+                      className={`flex items-center text-sm   ${
+                        selectedPlan === plan.name
+                          ? "text-font_blue1"
+                          : "text-white"
+                      }`}
+                    >
+                      <span>
+                        <FaRupeeSign />
+                      </span>
+                      <span>{plan.account_size}</span>
                     </span>
                   </div>
                 );
               })}
           </div>
         </div>
-        <div className="esm:w-full md:w-1/2 h-fit bg-bg_Medium p-4 rounded-2lg">
-          <p className="font-bold text-2xl border-b-2 w-1/2 m-auto border-b-black text-center mb-4 ">
-            Demo Account Rules
-          </p>
-          <p className="text-lg">-5% Daily loss limit </p>
-          <p className="text-lg">-10% overall loss limit</p>
-          <p className="text-lg">
-            -8% profit achievability in first demo account{" "}
-          </p>
-          <p className="text-lg">
-            -5% profit achievability in second demo account (once first one is
-            passed){" "}
-          </p>
-          <p className="text-lg">
-            -Trailing stoploss (daily and overall loss) -withdraw tab will be
-            available after first challenge is cleared{" "}
-          </p>
-          <p className="text-lg">
-            -Amount withdrawn will always be calculated from 3rd demo account(
-            once both the challenges have passed)
-          </p>
-          <p className="text-lg">
-            -First month withdrawal will only be 60%, second month will be 75
-            and then on the basis of monitoring, it will reach 80%{" "}
-          </p>
-          <p className="text-lg">
-            -Commission per trade will be calculated as follows: 0.3rs per lot
-            for derivates(index), 0.22 per lot for equity, 0.16 for
-            options(equity)
-          </p>
-          <p className="text-lg">
-            -minimum 5 days to trade to clear first two demo accounts -5 days
-            trading cycle after which 14-20 days for withdrawal in third main
-            account{" "}
-          </p>
-          <p className="text-lg">
-            -minimum 5 days to trade in third account in order to withdraw the
-            overall balance according to percentage
-          </p>
+        <div className="h-fit md:py-72 md:border-r md:border-r-solid md:border-r-black md:ml-8 md:mr-2"></div>
+        <div className="esm:w-full md:w-1/2 h-fit flex flex-col gap-10 md:pl-5 esm:mt-5 md:mt-0">
+          <div className="w-full h-fit bg-bg_Medium rounded-2lg p-5">
+            <p className="text-font_blue1 text-center font-bold md:text-2xl self-start mb-4">
+              Total Amount to be Paid
+            </p>
+            <div className="flex justify-between w-full border-b border-b-solid border-b-black mb-4 pb-4">
+              <div className="flex flex-col gap-y-5">
+                <p className="esm:text-sm sm:text-base font-medium text-gray4">
+                  Plan
+                </p>
+                <p className="esm:text-sm sm:text-base font-medium text-gray4">
+                  Platform
+                </p>
+                <p className="esm:text-sm sm:text-base font-medium text-gray4">
+                  Total Price
+                </p>
+              </div>
+              <div className="flex flex-col gap-y-5">
+                <p className="esm:text-sm sm:text-base font-medium text-gray4 text-start">
+                  {selectedPlan} 2-step {selectedAmount}
+                </p>
+                <p className="esm:text-sm sm:text-base font-medium text-gray4 text-start">
+                  Trades .Lo
+                </p>
+                <p className="esm:text-sm sm:text-base font-medium text-gray4 text-start" >
+                  ₹ {selectedFees}
+                </p>
+              </div>
+            </div>
+            <div className="flex justify-between w-full">
+              <div className="flex flex-col gap-y-5">
+                <p className="esm:text-sm sm:text-base font-medium text-gray4">Total</p>
+              </div>
+              <div className="flex flex-col gap-y-5">
+                <p className="esm:text-sm sm:text-base font-medium text-gray4 text-start pr-24">
+                  ₹ {selectedFees}{" "}
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className=" w-full h-fit  rounded-2lg esm:px-2 md:px-10">
+            <p className="w-fit font-bold text-xl.1 border-b-2  m-auto border-b-black text-center mb-5 ">
+              Demo Account Rules
+            </p>
+            <p className="text-base">-5% Daily loss limit </p>
+            <p className="text-base">-10% overall loss limit</p>
+            <p className="text-base">
+              -8% profit achievability in first demo account{" "}
+            </p>
+            <p className="text-base">
+              -5% profit achievability in second demo account (once first one is
+              passed){" "}
+            </p>
+            <p className="text-base">
+              -Trailing stoploss (daily and overall loss) -withdraw tab will be
+              available after first challenge is cleared{" "}
+            </p>
+          </div>
         </div>
       </div>
-      <button onClick={goToPaymentPage} className="px-11 py-4.1 esm:text-sm sm:text-lg bg-font_blue1 text-white rounded-md  self-center">
+      <button
+        onClick={goToPaymentPage}
+        className="px-11 esm:py-4 md:py-4 esm:text-sm sm:text-lg bg-font_blue1 text-white rounded-md  self-center"
+      >
         Next
       </button>
     </div>

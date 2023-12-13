@@ -7,17 +7,26 @@ export default {
   theme: {
    
     extend: {
+      top:{
+        "top_42": "42rem"
+      },
+      width: {
+        "0.87": "87%"
+      },
       screens: {
-        'esm': '310px'
+        'esm': '200px'
       },
       padding: {
         '4.1': "18px"
       },
       borderRadius: {
         '2lg': "10px",
-        '4xl': '30px'
+        '4xl': '30px',
+        'largest': "4.75rem"
       },
       fontSize: {
+        'xl.1': "22px",
+        '2xl.1': "28px",
         '5.1xl': '56px'
 
       },
@@ -35,6 +44,9 @@ export default {
         'gray6': "#F5F5F5",
         "gray7": "#CACACA",
         'black1': "#353535",
+        'link_active': "#0000EE",
+        'link_visited': "#551A8B",
+        'select_arrow': "#4a5568"
       },
     },
   },

@@ -20,8 +20,8 @@ function App() {
       <Route path="/landing" element={<Landing />} />
       <Route path="/login" element={<Login />} />
       <Route path="/kyc" element={<Kyc_ />} />
-      <Route path="/" element={<Registration />} />
-      <Route path="/purchase" element={<Plan_Purchase />} />
+      <Route path="/" element={<Plan_Purchase />} />
+      <Route path="/registration" element={<Registration />} />
       <Route path="/payment" element={<R_Payment />} />
       <Route path="/confirmation" element={<Payment_Confirmation />} />
       <Route path="/otp" element={<Otp />} />
