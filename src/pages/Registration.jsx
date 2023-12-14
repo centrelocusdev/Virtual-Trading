@@ -56,6 +56,7 @@ const Registration = () => {
     phone_number: "",
     password: "",
     confirm_password: "",
+    terms: false
   });
 
   useEffect(() => {
@@ -122,9 +123,12 @@ const Registration = () => {
   }
  
   async function onChangeHandler(e) {
+    if(e.target.name === "terms"){
+      console.log(e.target.checked);
+    }
     setFormData(() => ({
       ...formData,
-      [e.target.name]: e.target.value,
+      [e.target.name]: e.target.name === 'terms' ? e.target.checked : e.target.value,
     }));
 
     if(e.target.name !== 'phone_number' && state.phone === "Valid Number"){
@@ -338,7 +342,10 @@ function isValid_Mobile_Number(mobile_number) {
       formData.email === "" ||
       formData.phone_number === "" ||
       formData.password === "" ||
-      formData.confirm_password === "" ){
+      formData.confirm_password === ""
+      ||
+      formData.terms === false
+      ){
         toast.error("kindly fill all the fields of the form!");
         return;
       }
@@ -713,8 +720,13 @@ function isValid_Mobile_Number(mobile_number) {
       </div>
 
       {/* Button and terms */}
-      <div className="esm:px-10 md:px-0 self-center mt-9 mb-9 flex esm:items-start md:items-center ">
-        <input className="focus:outline-none cursor-pointer mr-2.5" type="checkbox" required />
+      <div className="esm:px-10 md:px-0 self-center mt-9 mb-9 flex esm:items-center md:items-center ">
+        <input
+        name="terms"
+        id="terms"
+        onChange={onChangeHandler}
+        // value={formData.terms}
+        className="focus:outline-none cursor-pointer mr-2.5" type="checkbox" required />
         <span className=" font-sm font-medium text-black">
           I have read and agree to  the legal documents, <Link className="text-link_active underline" href="#">terms and conditions</Link> and <Link className="text-link_active underline" href="#">privacy policy</Link>.
         </span>
