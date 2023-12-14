@@ -462,7 +462,7 @@ function isValid_Mobile_Number(mobile_number) {
                   </label>
                   <div className="flex items-center rounded-l-4xl w-full">
                   <div className="rounded-l-4xl h-full">
-                    <select name="country_code" value={formData.country_code} onChange={onChangeHandler} className="focus:outline-none rounded-l-4xl h-full">
+                    <select name="country_code" value={formData.country_code} onChange={onChangeHandler} className="focus:outline-none rounded-l-4xl h-full pt-1.5  pb-1.5 pl-4">
                      {countryCodes.map((item , i) => {
                       return (
                         <option value={item} key={i}>{item}</option>
@@ -566,7 +566,6 @@ function isValid_Mobile_Number(mobile_number) {
                             >
                               {item}
                             </option>
-
                           );
                         })}
                         
