@@ -95,11 +95,11 @@ const Registration = () => {
 
   function verifyCoupon() {
     if (enteredCoupon === "") {
-      toast.warning("Kindly add the coupon code!");
+      toast.warning("Add Coupon Code!");
       return;
     }
     if (coupons.length <= 0) {
-      toast.error("Not Valid Coupon!");
+      toast.error("Invalid Coupon!");
       return;
     }
     const coupon = coupons.filter((item) => {
@@ -107,7 +107,7 @@ const Registration = () => {
     });
     // console.log("filter" , coupon);
     if (coupon.length <= 0) {
-      toast.error("Not Valid Coupon!");
+      toast.error("Invalid Coupon!");
       return;
     }
     setCouponId(coupon[0].id);
@@ -348,7 +348,7 @@ function isValid_Mobile_Number(mobile_number) {
       ||
       formData.terms === false
       ){
-        toast.error("kindly fill all the fields of the form!");
+        toast.error("All the fields are required!");
         return;
       }
 
