@@ -34,7 +34,7 @@ const Payment_Confirmation = () => {
         <p className="text-3xl font-bold text-gray4 text-center">Thank You!</p>
         <p className="text-3xl font-bold text-gray4 text-center">Order Confirmed</p>
         </div>
-        <button onClick={() => {navigate('/landing')}} className="px-11 esm:py-4 md:py-4 tracking-wide text-lg bg-font_blue1 text-white rounded-md self-center">Go to Dashboard</button>
+        <button onClick={() => {navigate('/user-dashboard')}} className="px-11 esm:py-4 md:py-4 tracking-wide text-lg bg-font_blue1 text-white rounded-md self-center">Go to Dashboard</button>
       </div>
     </div>
   );
