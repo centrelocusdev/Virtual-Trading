@@ -6,7 +6,7 @@ import Registration from "./pages/Registration";
 import Plan_Purchase from "./pages/Plan_Purchase";
 import R_Payment from "./pages/R_Payment";
 import Payment_Confirmation from "./pages/Payment_Confirmation";
-import Otp from "./pages/otp";
+import UserDashboard from "./pages/UserDashboard";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -24,7 +24,7 @@ function App() {
       <Route path="/registration" element={<Registration />} />
       <Route path="/payment" element={<R_Payment />} />
       <Route path="/confirmation" element={<Payment_Confirmation />} />
-      <Route path="/otp" element={<Otp />} />
+      <Route path="/user-dashboard" element={<UserDashboard/>}/>
     </Routes>
     <ToastContainer /></>
 

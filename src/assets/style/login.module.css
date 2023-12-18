@@ -1,6 +1,17 @@
 .imageBox {
     top:42rem;
 }
+.slider div ul {
+    margin-top: 20px;
+}
+.slider div ul li button::before{
+background-color: white;
+border-radius: 100%;
+}
+.landing7Container{
+    min-height: 768px;
+    /* max-height: 1024px; */
+}
 @media (max-width:1280px){
     .imageBox{
         top:46rem;

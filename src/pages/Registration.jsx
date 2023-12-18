@@ -142,17 +142,19 @@ const Registration = () => {
         dispatch({type: "updatePhoneStatus" , payload: "Invalid Number"})
         // console.log(res);
       }else if(res === 'true'){
-        dispatch({type: "updatePhoneStatus" , payload: "Valid Number"})
+        dispatch({type: "updatePhoneStatus" , payload: ""})
       }
     }
-
-    if(e.target.name !== 'password' && state.password === ' Password is strong'){
+    if(e.target.name !== 'password' && state.password === 'Password is strong'){
       dispatch({type: "updatePasswordStatus", payload: ""})
     }
     if(e.target.name === "password"){
       const res = checkStrength(e.target.value);
-      // console.log(res);
-      dispatch({type: "updatePasswordStatus", payload: res})
+      if(res === 'Password is strong'){
+        dispatch({type: "updatePasswordStatus", payload: ""})
+      }else{
+        dispatch({type: "updatePasswordStatus", payload: res})
+      }
     }
     
   }
@@ -292,18 +294,18 @@ function checkStrength(pass) {
   const strength = { 
     1: "very weak", 
     2: "weak", 
-    3: "meduim", 
+    3: "medium", 
     4: "strong", 
   }; 
   if (pass.length > 15) 
-      return " Password is too lengthy";
+      return "Password is too lengthy";
   else if (pass.length < 8) 
-      return " Password is too short"
+      return "Password is too short"
 
   let regex = 
 /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@.#$!%*?&])[A-Za-z\d@.#$!^%*?&]{8,15}$/; 
   if (regex.test(pass)) { 
-      return " Password is strong"; 
+      return "Password is strong"; 
   } 
   let count = 0; 
   let regex1 = /[a-z]/; 
@@ -315,7 +317,7 @@ function checkStrength(pass) {
   let regex4 = /[!@#$%^&*.?]/; 
   if (regex4.test(pass)) count++; 
 
-  return "Pasword is " + strength[count]; 
+  return "Password is " + strength[count]; 
 } 
 
 function isValid_Mobile_Number(mobile_number) {
