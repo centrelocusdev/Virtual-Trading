@@ -131,9 +131,9 @@ const Registration = () => {
       [e.target.name]: e.target.name === 'terms' ? e.target.checked : e.target.value,
     }));
 
-    if(e.target.name !== 'phone_number' && state.phone === "Valid Number"){
-      dispatch({type: "updatePhoneStatus" , payload: ""})
-    }
+    // if(e.target.name !== 'phone_number' && state.phone === "Valid Number"){
+    //   dispatch({type: "updatePhoneStatus" , payload: ""})
+    // }
 
     if(e.target.name === "phone_number" && formData.country_code === '+91'){
       const res = isValid_Mobile_Number(e.target.value);
@@ -145,9 +145,9 @@ const Registration = () => {
         dispatch({type: "updatePhoneStatus" , payload: ""})
       }
     }
-    if(e.target.name !== 'password' && state.password === 'Password is strong'){
-      dispatch({type: "updatePasswordStatus", payload: ""})
-    }
+    // if(e.target.name !== 'password' && state.password === 'Password is strong'){
+    //   dispatch({type: "updatePasswordStatus", payload: ""})
+    // }
     if(e.target.name === "password"){
       const res = checkStrength(e.target.value);
       if(res === 'Password is strong'){
@@ -356,16 +356,16 @@ function isValid_Mobile_Number(mobile_number) {
         toast.error("Confirm password must be matched with the password!");
         return;
       }
-      // console.log(formData);
+      console.log(state.password);
       if(state.password === "Password is too lengthy"
       ||
       state.password === "Password is too short"
       || 
-      state.password === "Pasword is very weak"
+      state.password === "Password is very weak"
       ||
-      state.password === "Pasword is weak"
+      state.password === "Password is weak"
       || 
-      state.password === "Pasword is medium"
+      state.password === "Password is medium"
       ){
         toast.error("Add Strong Password!");
         return;
