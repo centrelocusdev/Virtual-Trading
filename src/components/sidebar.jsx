@@ -13,7 +13,7 @@ import billing from '/billing.png';
 // import topup from '/dashboard-topup.svg';
 const Sidebar = () => {
   return (
-    <div className="w-1/5 h-screen shadow-box bg-white rounded-2xl.1 py-16 px-9 flex flex-col items-center gap-y-12">
+    <div className="w-1/5 overflow-y-scroll shadow-box bg-white rounded-2xl.1 py-16 px-9 flex flex-col items-center gap-y-12">
         <div className='flex flex-col gap-y-12'>
             <div className='flex flex-col gap-y-5 w-full h-fit items-center'>
             <img className='w-12 h-12' src={logo} alt='user'/>

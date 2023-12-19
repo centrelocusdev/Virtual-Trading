@@ -43,6 +43,7 @@ export default {
       },
       colors: {
         'bg_Dark': '#0D1B27;',
+        'black2': "#1C1C1C",
         'bg_Medium': "#90FAEA",
         'bg_Light': '#CEFFF8;',
         'font_blue1': '#0F4C81',
