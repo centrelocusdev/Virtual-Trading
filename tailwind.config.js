@@ -8,18 +8,31 @@ export default {
   theme: {
    
     extend: {
+    
+      maxWidth: {
+        '306': "306px"
+      },
       height:{
+        "h-80" :"5rem",
+        "h-90": "5.6rem",
+        'h-71': "91px",
+        'h-118': "138px",
+        'h-30': "30rem",
         'h-97.1': "34rem",
         'h-98': "37rem",
         'h-98.1': "40rem",
         'h-99': "44rem",
-        'h-100': "64rem"
+        'h-100': "64rem",
+        'little-screen': "94vh",
+        '163': "163px"
       },
       top:{
         "top_42": "42rem"
       },
       width: {
-        "0.87": "87%"
+        "0.87": "80%",
+        "w-128": "8rem",
+        "w-160": "10rem"
       },
       screens: {
         'esm': '200px'
@@ -31,6 +44,7 @@ export default {
       borderRadius: {
         '2lg': "10px",
         '2xl.1': "20px",
+        '2xl.2': "25px",
         '4xl': '30px',
         '5xl': "50px",
         'largest': "4.75rem"
@@ -54,6 +68,8 @@ export default {
         'blue6': "rgba(144, 250, 234, 0.20)",
         'blue7': "#1067B3",
         'blue8': "#CDE5FB",
+        "blue9": "#D4EBFF",
+        "blue10": "rgba(206, 255, 248, 0.50)",
         'gray1': "#586166",
         'gray2': "#343D42",
         'gray3': "#8D9396",
@@ -63,6 +79,8 @@ export default {
         "gray7": "#CACACA",
         'gray9': "#FDFDFD",
         "gray8": "rgba(0, 0, 0, 0.46)",
+        "gray10": "#E5ECF6",
+        "gray11": "#E0E0E0",
         'black1': "#353535",
         'link_active': "#0000EE",
         'link_visited': "#551A8B",

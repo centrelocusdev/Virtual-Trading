@@ -1,4 +1,4 @@
-import vector from "/Vector-2.svg";
+// import vector from "/Vector-2.svg";
 import { auth } from "../requests/auth";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
@@ -38,8 +38,8 @@ const Plan_Purchase = () => {
     getPlanDetails();
   }, []);
   return (
-    <div className="min-h-screen w-screen h-fit esm:pt-20 md:pt-36 pb-10 bg-bg_Light flex flex-col relative">
-      <img
+    <div className="bg-no-repeat bg-cover bg-center bg-[url('/plan_back.png')] min-h-screen w-screen h-fit esm:pt-20 md:pt-36 pb-10  flex flex-col relative">
+      {/* <img
         src={vector}
         alt="vector"
         className="esm:h-0 esm:w-0 md:h-12 md:w-14 absolute esm:right-10 md:top-8 md:right-28"
@@ -58,17 +58,17 @@ const Plan_Purchase = () => {
         src={vector}
         alt="vector"
         className="esm:h-0 esm:w-0 md:h-12 md:w-14 absolute esm:bottom-20 md:bottom-28 left-10"
-      />
+      /> */}
       <p className="text-font_blue1 esm:text-4xl md:text-5.1xl font-bold text-center font-sans mb-10">
         Purchase
       </p>
-      <div className="h-fit esm:w-11/12 md:w-0.87 m-auto flex esm:flex-col md:flex-row py-10 justify-center items-start">
-        <div className="esm:w-full md:w-1/2 h-fit">
+      <div className="h-fit esm:w-11/12 md:w-0.87 2xl:w-4/6 mx-auto flex esm:flex-col md:flex-row py-10 justify-center items-start gap-8 ">
+        <div className="esm:w-full md:w-1/2 min-h-full h-fit bg-white p-5 rounded-2lg border border-solid border-bg_Dark">
           <div className="w-full mb-12 pt-2">
-            <p className="esm:text-center md:text-start text-2xl font-bold mb-5 text-font_blue1">
+            <p className="esm:text-center text-2xl font-bold mb-5 text-font_blue1 ">
               Select your preferred option:
             </p>
-            <div className="w-full flex gap-y-5 flex-wrap justify-evenly">
+            <div className="flex gap-y-5 flex-wrap justify-evenly flex-col w-3/6 m-auto">
               {!loading &&
                 plans &&
                 plans.length > 0 &&
@@ -86,7 +86,7 @@ const Plan_Purchase = () => {
                         selectedPlan === plan.name
                           ? "bg-bg_Medium text-font_blue1 border-2 border-font_blue1"
                           : "bg-font_blue1 text-white border-2 border-font_blue1"
-                      } hover:bg-bg_Medium hover:text-font_blue1 hover:border-2 hover:border-font_blue1 cursor-pointer font-bold rounded-2lg esm:px-4  md:px-8 py-2 text-sm `}
+                      } hover:bg-bg_Medium hover:text-font_blue1 hover:border-2 hover:border-font_blue1 cursor-pointer font-bold rounded-2lg esm:px-4  md:px-10 py-2.5 text-sm `}
                     >
                       {plan.name}
                     </button>
@@ -94,14 +94,15 @@ const Plan_Purchase = () => {
                 })}
             </div>
           </div>
-          <div className="w-full border-b border-b-solid border-b-black mb-12"></div>
-          <div className="w-full flex flex-col items-center">
+          {/* <div className="w-full border-b border-b-solid border-b-black mb-12"></div> */}
+          <div className="w-full flex flex-col items-center mb-16">
             <div className=" w-full flex justify-center mb-5 px-5">
               <span className="font-bold text-2xl text-font_blue1">
                 Account Size
               </span>
             </div>
             {loading ? <div>Loading...</div> : ""}
+            <div className="flex esm:flex-col sm:flex-row gap-5 w-full items-center justify-center">
             {!loading &&
               plans &&
               plans.length > 0 &&
@@ -109,7 +110,7 @@ const Plan_Purchase = () => {
                 return (
                   <div
                     key={plan.id}
-                    className={`esm:w-3/4 md:w-1/2 flex justify-center  py-2 px-7 rounded-2lg mb-5 ${
+                    className={`flex justify-center p-5 rounded-2lg esm:w-4/5  md:w-w-128 esm:h-h-80 lg:w-w-160 lg:h-h-90 ${
                       selectedPlan === plan.name
                         ? "bg-bg_Medium border-2 border-solid border-font_blue1"
                         : "bg-font_blue1"
@@ -130,12 +131,13 @@ const Plan_Purchase = () => {
                   </div>
                 );
               })}
+            </div>
           </div>
         </div>
-        <div className="h-fit md:py-72 md:border-r md:border-r-solid md:border-r-black md:ml-8 md:mr-2"></div>
-        <div className="esm:w-full md:w-1/2 h-fit flex flex-col gap-10 md:pl-5 esm:mt-5 md:mt-0">
-          <div className="w-full h-fit bg-bg_Medium rounded-2lg p-5">
-            <p className="text-font_blue1 text-center font-bold md:text-2xl self-start mb-4">
+        {/* <div className="h-fit md:py-72 md:border-r md:border-r-solid md:border-r-black md:ml-8 md:mr-2"></div> */}
+        <div className="esm:w-full md:w-1/2 h-fit flex flex-col gap-8  esm:mt-5 md:mt-0">
+          <div className="w-full h-fit  bg-white p-5 rounded-2lg border border-solid border-bg_Dark">
+            <p className="text-font_blue1 text-center font-bold text-2xl self-start mb-4">
               Total Amount to be Paid
             </p>
             <div className="flex justify-between w-full border-b border-b-solid border-b-black mb-4 pb-4">
@@ -173,8 +175,8 @@ const Plan_Purchase = () => {
               </div>
             </div>
           </div>
-          <div className=" w-full h-fit  rounded-2lg esm:px-2 md:px-10">
-            <p className="w-fit font-bold text-xl.1 border-b-2  m-auto border-b-black text-center mb-5 ">
+          <div className=" w-full h-fit esm:px-2 md:px-10 bg-white p-5 rounded-2lg border border-solid border-bg_Dark">
+            <p className="w-fit font-bold text-2xl border-b-2  m-auto border-b-black text-center mb-5 ">
               Demo Account Rules
             </p>
             <p className="text-base">-5% Daily loss limit </p>
@@ -195,7 +197,7 @@ const Plan_Purchase = () => {
       </div>
       <button
         onClick={goToPaymentPage}
-        className="px-11 esm:py-4 md:py-4 esm:text-sm sm:text-lg bg-font_blue1 text-white rounded-md  self-center"
+        className="px-11 esm:py-4 md:py-4 esm:text-sm sm:text-lg bg-font_blue1 text-white rounded-md self-center"
       >
         Next
       </button>

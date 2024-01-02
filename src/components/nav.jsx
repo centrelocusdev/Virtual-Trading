@@ -1,5 +1,7 @@
 import logo from '/logo.svg';
+import { useNavigate } from 'react-router-dom';
 const Nav = () => {
+  const navigate = useNavigate();
   return (
     <div className="w-full bg-bg_Light h-fit flex justify-between items-center px-6 py-2 ">
       <div className='flex justify-between items-center gap-2'>
@@ -18,7 +20,7 @@ const Nav = () => {
           <option className='font-base font-medium text-black font-inter'>Option4</option>
         </select>
       </div>
-      <button className='py-4 px-11 bg-font_blue1 rounded-md text-white text-lg'>Login</button>
+      <button onClick={()=> {navigate('/login')}} className='py-4 px-11 bg-font_blue1 rounded-md text-white text-lg'>Login</button>
     </div>
   )
 }

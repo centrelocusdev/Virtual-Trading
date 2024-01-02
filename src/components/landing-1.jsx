@@ -3,9 +3,8 @@ import facebook from '/ic_round-facebook.svg';
 import twitter from '/devicon_twitter.svg';
 import youtube from '/mdi_youtube.svg';
 import instagram from '/bi_instagram.svg';
-import { useNavigate } from 'react-router-dom';
+import { Link } from "react-scroll";
 const Landing_1 = () => {
-  const navigate = useNavigate();
   return (
     <div className="w-full h-h-98 bg-bg_Light flex justify-center items-center px-56 py-12">
         <div className='w-full h-fit bg-bg_Light gap-x-12 flex items-center'>
@@ -16,7 +15,14 @@ const Landing_1 = () => {
            </div>
             <p className='text-gray8 text-xl'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa laboriosam  voluptates sed beatae?</p>
             {/* <Link href="/plan"> */}
-            <button onClick={()=> {navigate('/plan')}} className='px-11 py-4 bg-font_blue1 text-white text-lg rounded-md'>Start Challenge</button>
+            <Link to="start-challenge"
+              spy={true}
+              smooth={true}
+              offset={100}
+              duration={500}
+              className='cursor-pointer px-11 py-4 bg-font_blue1 text-white text-lg rounded-md'>
+                Get Started
+              </Link >
             {/* </Link> */}
             <div className='flex gap-x-5 items-center'>
                 <p className='text-xs font-semibold tracking-low text-blue3'>JOIN OUR COMMUNITY</p>

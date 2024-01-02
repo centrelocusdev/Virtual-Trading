@@ -1,12 +1,14 @@
 import UserNav from "../components/user-nav"
 import Sidebar from "../components/sidebar"
 import user from '/dash-user.svg';
+import { useNavigate } from "react-router-dom";
 const UserDashboard = () => {
+ const navigate = useNavigate();
   return (
     <div className="w-screen min-h-screen h-fit py-5 pl-5 pr-9 bg-gradient-to-r from-bg_Medium to-blue8 flex gap-x-6">
         <Sidebar/>
         <div className="w-4/5">
-            <UserNav/>
+            <UserNav title={"Account"}/>
             <div className="w-full h-fit flex flex-col py-7 gap-y-12">
                 <div className="w-full h-fit flex gap-x-6">
                   <div className="w-1/3 py-12 h-64 px-5 bg-white flex justify-center items-center rounded-2lg">
@@ -52,7 +54,7 @@ const UserDashboard = () => {
                 </div>
                 <div className="w-full flex gap-x-6">
                     <button className="w-1/2 px-11 py-4 bg-font_blue1 text-white rounded-md text-lg font-inter">Create a new Account</button>
-                    <button className="w-1/2 px-11 py-4 bg-font_blue1 text-white rounded-md text-lg font-inter">Go to dashbaord</button>
+                    <button onClick={( )=> {navigate('/account-overview')}} className="w-1/2 px-11 py-4 bg-font_blue1 text-white rounded-md text-lg font-inter">Go to dashbaord</button>
                 </div>
             </div>
         </div>

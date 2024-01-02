@@ -1,4 +1,8 @@
+import { useNavigate } from 'react-router-dom';
+
 const Landing_6 = () => {
+    const navigate = useNavigate();
+
     const StellarData = [
         {
             'title': "Account Size",
@@ -74,7 +78,7 @@ const Landing_6 = () => {
         },
     ]
   return (
-    <div className="w-full h-fit py-5 px-80 bg-gradient-to-b from-white to-bg_medium ">
+    <div id="start-challenge" className="w-full h-fit py-5 px-80 bg-gradient-to-b from-white to-bg_medium ">
         <div className="w-full h-fit  gap-y-12 flex flex-col">
             <p className="text-5xl font-bold text-black text-center w-full">Choose the Best TradersLo Challenge</p>
             <div className="w-full h-fit gap-y-4 flex flex-col">
@@ -96,7 +100,7 @@ const Landing_6 = () => {
                    })}
                 </table>
             </div>
-            <button className="rounded-md bg-font_blue1 text-white py-4 px-11 self-center">Get Started</button>
+            <button onClick={()=> {navigate('/plan')}} className="rounded-md bg-font_blue1 text-white py-4 px-11 self-center">Start Challenge</button>
         </div>
 
     </div>

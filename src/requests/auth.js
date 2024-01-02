@@ -37,7 +37,7 @@ async function registrationOtpVerification(formData) {
     try {
       // console.log("in login req", formData);
       const res = await axios.post(`${Backend_URL}/api/login/`, formData);
-      // console.log("in login req", res);
+      console.log("in login req", res);
       if(res && res.statusText === 'OK'){
         localStorage.setItem("token_access" , res.data.access);
         localStorage.setItem("token_refresh" , res.data.refresh);
@@ -45,7 +45,40 @@ async function registrationOtpVerification(formData) {
       }
       return res;
     } catch (err) {
-      console.log("Error", err.message);
+      console.log("Error", err);
+      return {status: "error", message: "Something went wrong!"};
+    }
+  }
+  async function forgotPassword(email) {
+    try {
+      // console.log("in login req", formData);
+      const res = await axios.post(`${Backend_URL}/api/password_reset/`, {
+        "email" : email
+      });
+      if(res && res.data && res.data.status && res.data.status === 'OK'){
+        return {status: "success"};
+      }else{
+        return {status: "error"};
+      }
+    } catch (err) {
+      console.log("Error", err);
+      return {status: "error", message: "Something went wrong!"};
+    }
+  }
+  async function resetPassword(newPassword, token) {
+    try {
+      // console.log("in login req", formData);
+      const res = await axios.post(`${Backend_URL}/api/password_reset/confirm/`, {
+        "password": newPassword,
+        "token": token
+      });
+      if(res && res.data && res.data.status && res.data.status === 'OK'){
+        return {status: "success"};
+      }else{
+        return {status: "error"};
+      }
+    } catch (err) {
+      console.log("Error", err);
       return {status: "error", message: "Something went wrong!"};
     }
   }
@@ -75,6 +108,8 @@ export const auth = {
    registrationOtpVerification ,
     login ,
      getRegistrationPurchasePlanDetails,
-     getCouponData
+     getCouponData,
+     forgotPassword,
+     resetPassword
     
     };
