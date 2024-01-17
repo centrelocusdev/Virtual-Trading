@@ -69,7 +69,7 @@ const Sidebar2 = ({active}) => {
                         <span>News Calender</span>
                     </li>
                     <Link to="/educational-blog">
-                    <li className='gap-x-7 flex justify-start items-center px-2'>
+                    <li className={`gap-x-7 flex justify-start items-center px-2 ${active === 'educational-blogs'? "bg-bg_Medium": ""}`}>
                     <img className='w-7 h-7' src={educationBlog} alt="help"/>
                         <span>Educational Blogs</span>
                     </li>

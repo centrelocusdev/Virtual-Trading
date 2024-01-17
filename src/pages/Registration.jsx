@@ -37,6 +37,7 @@ const Registration = () => {
   };
   const navigate = useNavigate();
   const location = useLocation();
+  console.log(location.state);
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
   const [loading, setLoading] = useState(false);
@@ -78,6 +79,7 @@ const Registration = () => {
       location.state.selectedAmount &&
       location.state.selectedFees
     ) {
+      // console.log(location.state.selectedPlan);
       setPlan({
         plan: location.state.selectedPlan,
         amount: location.state.selectedAmount,
@@ -786,7 +788,7 @@ const Registration = () => {
               </div>
               <div className="flex flex-col gap-y-5">
                 <p className="esm:text-sm sm:text-base font-bold text-gray4 text-start">
-                  {plan.plan} 2-step {plan.amount}
+                  {plan.plan === 'Stellar' ? `${plan.plan}-2 step challenge` : plan.plan} 
                 </p>
                 <p className="esm:text-sm sm:text-base font-bold text-gray4 text-start">
                   Trades .Lo

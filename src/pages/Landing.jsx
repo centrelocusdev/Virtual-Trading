@@ -11,7 +11,7 @@ import Landing_8 from "../components/landing-8";
 import Landing_9 from "../components/landing-9";
 const Landing = () => {
   return (
-    <div className="flex flex-col min-h-screen  w-screen h-fit bg-bg_Light">
+    <div className="flex flex-col min-h-screen w-screen h-fit bg-bg_Light">
       <Nav/>
       <Landing_1/>
       <img className="w-full h-64" src={stripe} alt="strip"/>

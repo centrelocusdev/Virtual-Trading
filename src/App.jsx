@@ -1,4 +1,3 @@
-import "./App.css";
 import Login from "./pages/Login";
 import Landing from "./pages/Landing";
 import Kyc_ from "./pages/Kyc_";

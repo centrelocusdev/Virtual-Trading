@@ -8,7 +8,9 @@ export default {
   theme: {
    
     extend: {
-    
+    minHeight: {
+      "24": "24rem",
+    },
       maxWidth: {
         '306': "306px"
       },
@@ -17,6 +19,7 @@ export default {
         "h-90": "5.6rem",
         'h-71': "91px",
         'h-118': "138px",
+        'h-24h': "24rem",
         'h-30': "30rem",
         'h-97.1': "34rem",
         'h-98': "37rem",
@@ -32,7 +35,9 @@ export default {
       width: {
         "0.87": "80%",
         "w-128": "8rem",
-        "w-160": "10rem"
+        "w-160": "10rem",
+        '306': "306px",
+        '270': "270px"
       },
       screens: {
         'esm': '200px'
