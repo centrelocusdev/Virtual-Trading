@@ -9,6 +9,7 @@ import UserDashboard from "./pages/UserDashboard";
 import Account_Overview from "./pages/Account_Overview";
 import TradingOverview from "./pages/Trading-Overview";
 import Education_Blog from "./pages/Education_Blog";
+import Education_Blog_Details from "./pages/Education_Blog_Details";
 // import Landing from "./pages/Landing";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -32,7 +33,8 @@ function App() {
       <Route path="/user-dashboard" element={<UserDashboard/>}/>
       <Route path="/account-overview" element={<Account_Overview/>}/>
       <Route path="/trading-overview" element={<TradingOverview/>}/>
-      <Route path="/educational-blog" element={<Education_Blog/>}/>
+      <Route path="/educational-blogs" element={<Education_Blog/>}/>
+      <Route path="/blog_details" element={<Education_Blog_Details/>}/>
     </Routes>
     <ToastContainer /></>
 

@@ -8,8 +8,12 @@ export default {
   theme: {
    
     extend: {
+    
     minHeight: {
       "24": "24rem",
+      '11': "11rem",
+      'h-118': "138px",
+      'h-71': "91px",
     },
       maxWidth: {
         '306': "306px"
@@ -27,7 +31,7 @@ export default {
         'h-99': "44rem",
         'h-100': "64rem",
         'little-screen': "94vh",
-        '163': "163px"
+        '163': "163px",
       },
       top:{
         "top_42": "42rem"
@@ -36,11 +40,14 @@ export default {
         "0.87": "80%",
         "w-128": "8rem",
         "w-160": "10rem",
-        '306': "306px",
+        "306": "306px",
+        '260': "260px",
         '270': "270px"
       },
       screens: {
-        'esm': '200px'
+        'esm': '200px',
+        "ipad_pro": "1020px",
+        'msm': "450px"
       },
       padding: {
         '4.1': "18px",
@@ -86,6 +93,7 @@ export default {
         "gray8": "rgba(0, 0, 0, 0.46)",
         "gray10": "#E5ECF6",
         "gray11": "#E0E0E0",
+        'gray12': "#031A2E",
         'black1': "#353535",
         'link_active': "#0000EE",
         'link_visited': "#551A8B",
@@ -95,6 +103,9 @@ export default {
         'green1': "#3DA864",
         'yellow1': '#FFD12E',
         'yellow2': "#E1AB20",
+        'purple1': "#683AB5",
+        'purple2': "#ab7ff5",
+        'green2': "#B6EED4"
       },
       letterSpacing: {
         "low": "1px"
