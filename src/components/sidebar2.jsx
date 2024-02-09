@@ -6,13 +6,13 @@ import logo from "/logo.svg";
 // import help from "/dashboard-help.svg";
 // import news from "/dash-news.png";
 // import tradingOverview from "/dashboard-trading-overview.svg";
-// import tradingPlateform from "/dashboard-trading-plateform.svg";
+// import tradingPlateform from "/dashboard-trading-platform.svg";
 // import withdrawl from "/dashboard-withdrawl.svg";
 // import billing from "/billing.png";
 // import leadboard from "/dash-leadboard.png";
 // import topup from "/dashboard-topup.svg";
 import { Link } from "react-router-dom";
-import { FaRegCircleUser } from "react-icons/fa6";
+// import { FaRegCircleUser } from "react-icons/fa6";
 import { FaBook } from "react-icons/fa";
 import { FaClipboardList } from "react-icons/fa";
 import { BsGraphUpArrow } from "react-icons/bs";
@@ -25,9 +25,12 @@ import { BiMoneyWithdraw } from "react-icons/bi";
 import { MdLeaderboard } from "react-icons/md";
 import { FaRegNewspaper } from "react-icons/fa";
 import { IoMdHelpCircle } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
+
 
 const Sidebar2 = ({ active }) => {
   const [activeTab, setActiveTab] = useState(active);
+  const navigatge = useNavigate();
 
   return (
     <div className="w-1/5 h-fit shadow-box bg-white rounded-2xl.1 py-16 px-9 flex flex-col items-center gap-y-12">
@@ -40,7 +43,7 @@ const Sidebar2 = ({ active }) => {
         </div>
         <div className="w-full h-fit">
           <ul className="w-full h-fit flex flex-col py-7 gap-y-7">
-            <Link to="/user-dashboard">
+            {/* <Link to="/user-dashboard">
               <li
                 onClick={() => {
                   setActiveTab("user-dashboard");
@@ -51,7 +54,6 @@ const Sidebar2 = ({ active }) => {
                     : "text-purple1"
                 } `}
               >
-                {/* <img className="w-7 h-7" src={user} alt="help" /> */}
                 <FaRegCircleUser
                   size={20}
                   color={`${
@@ -60,7 +62,7 @@ const Sidebar2 = ({ active }) => {
                 />
                 <span>Account</span>
               </li>
-            </Link>
+            </Link> */}
             <Link to="/account-overview">
               <li
                 onClick={() => {
@@ -104,13 +106,13 @@ const Sidebar2 = ({ active }) => {
                 <span>Trading Overview</span>
               </li>
             </Link>
-            <Link to={"/trading-plateform"}>
+            <Link to={"/trading-platform"}>
               <li
                 onClick={() => {
-                  setActiveTab("trading-plateform");
+                  setActiveTab("trading-platform");
                 }}
                 className={`${
-                  activeTab === "trading-plateform"
+                  activeTab === "trading-platform"
                     ? "bg-purple1 text-white"
                     : "text-purple1"
                 } hover:bg-purple2 hover:text-white rounded-4xl gap-x-7 flex justify-start items-center px-4 py-2`}
@@ -119,10 +121,10 @@ const Sidebar2 = ({ active }) => {
                 <BsGraphUpArrow
                   size={20}
                   color={`${
-                    activeTab === "trading-plateform" ? "white" : "#683AB5"
+                    activeTab === "trading-platform" ? "white" : "#683AB5"
                   }`}
                 />
-                <span>Trading Plateform</span>
+                <span>Trading Platform</span>
               </li>
             </Link>
             <Link to={"/top-up-reset"}>
@@ -292,7 +294,7 @@ const Sidebar2 = ({ active }) => {
           </ul>
         </div>
       </div>
-      <button className="px-11 py-4 bg-purple1 text-white rounded-4xl text-lg font-inter">
+      <button onClick={() => {navigatge('/trading-platform')}} className="px-11 py-4 bg-purple1 text-white rounded-4xl text-lg font-inter">
         Start Challenge
       </button>
     </div>

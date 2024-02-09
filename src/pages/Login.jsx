@@ -130,7 +130,7 @@ const Login = () => {
           setLoading(false);
           toast.success(res.message);
           setTimeout(() => {
-            navigate("/user-dashboard");
+            navigate("/account-overview");
           }, 2000);
         } else if (res && res.status === "error") {
           // console.log("in the login", res);
@@ -152,7 +152,7 @@ const Login = () => {
         />
         <img
           src={AccountOverview}
-          alt="trading-plateform"
+          alt="trading-platform"
           className="max-w-full w-3/6 h-auto z-10 relative ml-48 "
         />
       </div>
@@ -246,7 +246,7 @@ const Login = () => {
           />
           <img
             src={AccountOverview}
-            alt="trading-plateform"
+            alt="trading-platform"
             className="max-w-full sm:w-1/2 h-auto z-10 absolute sm:bottom-0 sm:right-0"
           />
         </div>

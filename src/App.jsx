@@ -1,3 +1,4 @@
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import Login from "./pages/Login";
 import Landing from "./pages/Landing";
 import Kyc_ from "./pages/Kyc_";
@@ -10,17 +11,35 @@ import Account_Overview from "./pages/Account_Overview";
 import TradingOverview from "./pages/Trading-Overview";
 import Education_Blog from "./pages/Education_Blog";
 import Education_Blog_Details from "./pages/Education_Blog_Details";
+import Trading_Platform from './pages/Trading_Platform';
 // import Landing from "./pages/Landing";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Trading_Platform_Detail from './pages/Trading_Platform_Detail';
+import News_Calender from './pages/News_Calender';
+import News_Calender_Details from './pages/News_Calender_Details';
+import { Provider } from 'react-redux';
+import store from './store/store';
+import {
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query'
 
-
-
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries:{
+      staleTime: 0,
+    }
+  }
+})
 import { Route, Routes } from "react-router-dom";
 
 function App() {
   return (
    <>
+   <Provider store={store}>
+   <QueryClientProvider client={queryClient}>
+   <ReactQueryDevtools initialIsOpen={false} />
     <Routes>
       {/* <Route path="/landing" element={<Landing />} /> */}
       <Route path="/login" element={<Login />} />
@@ -35,9 +54,17 @@ function App() {
       <Route path="/trading-overview" element={<TradingOverview/>}/>
       <Route path="/educational-blogs" element={<Education_Blog/>}/>
       <Route path="/blog_details" element={<Education_Blog_Details/>}/>
-    </Routes>
-    <ToastContainer /></>
+      <Route path='/trading-platform' element={<Trading_Platform/>}/>
+      <Route path='/trading-platform-detail' element={<Trading_Platform_Detail/>}/>
+      <Route path='/news-calender' element={<News_Calender/>}/>
+      <Route path='/news-calender-details' element={<News_Calender_Details/>}/>
 
+
+    </Routes>
+    <ToastContainer />
+    </QueryClientProvider>
+    </Provider>
+    </>
   );
 }
 

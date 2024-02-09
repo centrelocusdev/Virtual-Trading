@@ -12,7 +12,7 @@ import { MdOutlineCancel } from "react-icons/md";
 // import help from "/dashboard-help.svg";
 // import news from "/dash-news.png";
 // import tradingOverview from "/dashboard-trading-overview.svg";
-// import tradingPlateform from "/dashboard-trading-plateform.svg";
+// import tradingPlateform from "/dashboard-trading-platform.svg";
 // import withdrawl from "/dashboard-withdrawl.svg";
 // import billing from "/billing.png";
 // import leadboard from "/dash-leadboard.png";
@@ -32,13 +32,13 @@ import { MdLeaderboard } from "react-icons/md";
 import { Link } from "react-router-dom";
 
 const UserNav = ({ title, sidebarType, active }) => {
-  console.log(active , sidebarType);
+  // console.log(active , sidebarType);
   const [screenWidth, setScreenWidth] = useState("");
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("");
   useEffect(() => {
     setActiveTab(active);
-    console.log(activeTab);
+    // console.log(activeTab);
   }, [active , activeTab]);
 
   useEffect(() => {
@@ -52,7 +52,7 @@ const UserNav = ({ title, sidebarType, active }) => {
     };
   }, []);
   useEffect(() => {
-    console.log(screenWidth);
+    // console.log(screenWidth);
   }, []);
   return (
     <>
@@ -275,13 +275,13 @@ const UserNav = ({ title, sidebarType, active }) => {
                       <span>Trading Overview</span>
                     </li>
                   </Link>
-                  <Link to={"/trading-plateform"}>
+                  <Link to={"/trading-platform"}>
                     <li
                       onClick={() => {
-                        setActiveTab("trading-plateform");
+                        setActiveTab("trading-platform");
                       }}
                       className={`${
-                        activeTab === "trading-plateform"
+                        activeTab === "trading-platform"
                           ? "bg-purple1 text-white"
                           : "text-purple1"
                       } hover:bg-purple2 hover:text-white rounded-4xl gap-x-7 flex justify-start items-center px-4 py-2`}
@@ -290,12 +290,12 @@ const UserNav = ({ title, sidebarType, active }) => {
                       <BsGraphUpArrow
                         size={20}
                         color={`${
-                          activeTab === "trading-plateform"
+                          activeTab === "trading-platform"
                             ? "white"
                             : "#683AB5"
                         }`}
                       />
-                      <span>Trading Plateform</span>
+                      <span>Trading Platform</span>
                     </li>
                   </Link>
                   <Link to={"/top-up-reset"}>

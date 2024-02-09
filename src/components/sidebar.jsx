@@ -82,7 +82,7 @@ const Sidebar = ({ active }) => {
               </li>
             </Link>
 
-            <Link to="/educational-blog">
+            <Link to="/educational-blogs">
               <li
                 onClick={() => setActiveTab("educational-blogs")}
                 className={`hover:bg-purple2 hover:text-white ${
