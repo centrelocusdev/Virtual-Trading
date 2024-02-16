@@ -91,7 +91,7 @@ const Trading_Platform = () => {
     async function fetchHeaderData() {
       try {
         setIsLoadingHeader(true);
-        const res = await stockAPI.getHeaderStocks(headerPage);
+        const res = await stockAPI.getHeaderStocks(headerPage , 4);
         if (res.status === "success") {
           console.log("header data", res);
           setHeaderStockData(res.data);
@@ -487,7 +487,7 @@ const Trading_Platform = () => {
                   Open Price
                 </th>
                 <th className="w-1/6 font-poppins text-xs font-medium text-center">
-                  Close Price
+                 Previous Close Price
                 </th>
                 <th className="w-1/6 font-poppins text-xs font-medium text-center">
                   High
@@ -519,6 +519,7 @@ const Trading_Platform = () => {
                             symbol: item.metadata.symbol,
                             series: item.metadata.series,
                             listingDate: item.metadata.listingDate,
+                            previousClose: item.price_info.previousClose
                           },
                         });
                       }}
@@ -565,7 +566,7 @@ const Trading_Platform = () => {
                         {item.price_info.open}
                       </td>
                       <td className="w-1/6 font-poppins text-xs font-normal text-center">
-                        {item.price_info.close}
+                        {item.price_info.close!= 0 ? item.price_info.close: item.price_info.previousClose}
                       </td>
                       <td className="w-1/6 font-poppins text-xs font-normal text-center">
                         {item.price_info.intraDayHighLow.max}

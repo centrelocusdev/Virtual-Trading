@@ -32,10 +32,12 @@ const Sidebar2 = ({ active }) => {
   const [activeTab, setActiveTab] = useState(active);
   const navigatge = useNavigate();
 
+  
+
   return (
-    <div className="w-1/5 h-fit shadow-box bg-white rounded-2xl.1 py-16 px-9 flex flex-col items-center gap-y-12">
-      <div className="flex flex-col gap-y-12">
-        <div className="flex flex-col gap-y-5 w-full h-fit items-center">
+    <div className="w-1/5 h-fit shadow-box bg-white rounded-2xl.1 py-16 px-9 flex flex-col items-center">
+      <div className="flex flex-col gap-y-12 mb-12">
+        <div onClick={() => {navigatge("/")}} className="cursor-pointer flex flex-col gap-y-5 w-full h-fit items-center">
           <img className="w-12 h-12" src={logo} alt="user" />
           <p className="text-xl font-inter font-semibold text-black">
             Virtual Trading
@@ -294,9 +296,12 @@ const Sidebar2 = ({ active }) => {
           </ul>
         </div>
       </div>
-      <button onClick={() => {navigatge('/trading-platform')}} className="px-11 py-4 bg-purple1 text-white rounded-4xl text-lg font-inter">
+      
+      <button onClick={() => {navigatge('/trading-platform')}} className="mb-2  w-full py-4 bg-purple1 text-white rounded-4xl text-lg font-inter">
         Start Challenge
       </button>
+      
+      
     </div>
   );
 };

@@ -115,14 +115,16 @@ async function get10StocksData(page, size) {
     return { status: "error", message: "Something went wrong!" };
   }
 }
-async function getHeaderStocks(page) {
+async function getHeaderStocks(page , size) {
   try {
-    const res = await axios.get(`${Backend_URL}/api/nse/get-nifty-fifty/?page=${page}&page_size=4 `, {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${localStorage.getItem("token_access")}`,
-      },
-    });
+    const res = await axios.get(`${Backend_URL}/api/nse/get-nifty-fifty/?page=${page}&page_size=${size} `
+    //  {
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //     Authorization: `Bearer ${localStorage.getItem("token_access")}`,
+    //   },
+    // }
+    );
     console.log("in api header", res);
     return { status: "success", data: res.data };
   } catch (err) {
@@ -141,7 +143,7 @@ async function getAllTransactionsOfUser(){
       },
     }
     );
-    console.log("transaction history in api" , res.data);
+    console.log("transaction history in api 1" , res.data);
     return { status: "success", data: res.data };
   }catch(err){
     console.log("Error", err);
@@ -158,22 +160,26 @@ async function getAllTransactionsOfUser2(){
       },
     }
     );
-    console.log("transaction history in api" , res.data);
+    console.log("transaction history in api 2" , res.data);
     return { status: "success", data: res.data };
   }catch(err){
     console.log("Error", err);
     return { status: "error", message: "Something went wrong!" };
   }
 }
-async function transaction(stock_name, stock_symbol, transaction_type, quantity, price_per_unit, stop_loss){
+async function transaction(stock_name, stock_symbol, transaction_type, quantity, price_per_unit, stop_loss , buy_limit, sell_limit){
+  let limit=0;
+  transaction_type === 'BUY' ? limit = buy_limit : limit = sell_limit;
   try{
+    console.log("name", stock_name ,"symbol", stock_symbol,"type", transaction_type ,"quan", quantity, "price", price_per_unit, "stop", stop_loss)
     const res = await axios.put(`${Backend_URL}/api/stock/transaction/` , {
       stock_name,
       stock_symbol,
       transaction_type,
       quantity,
       price_per_unit,
-      stop_loss
+      stop_loss,
+      limit
     } , {
       headers: {
         'Content-Type': 'application/json',

@@ -13,6 +13,7 @@ import { stockAPI } from "../requests/stock";
 // import graycircle from '/dash-graycircle.svg';
 // import support from '/dash-support.svg';
 const TradingOverview = () => {
+  const [transactions, setTransactions] = useState([]);
   const [screenWidth, setScreenWidth] = useState("");
   useEffect(() => {
     setScreenWidth(window.innerWidth);
@@ -29,11 +30,26 @@ const TradingOverview = () => {
 
   useEffect(() => {
     async function fetchUserTransactionHistory() {
-     const res = await stockAPI.getAllTransactionsOfUser();
-     const res2 = await stockAPI.getAllTransactionsOfUser2();
-     console.log("transactions2" , res2);
+     const res = await stockAPI.getAllTransactionsOfUser2();
      if(res.status === 'success'){
       console.log("transactions", res.data);
+      let data = res.data.map((item) => {
+        const dateString = item.transaction_date;
+        const dateObject = new Date(dateString);
+
+        const year = dateObject.getFullYear();
+        const month = dateObject.getMonth() + 1; // Month starts from 0
+        const day = dateObject.getDate();
+        const hours = dateObject.getHours();
+        const minutes = dateObject.getMinutes();
+        const seconds = dateObject.getSeconds();
+
+        const formattedDate = `${day}/${month}/${year}  (${hours}:${minutes}:${seconds})`;
+        item.transaction_date = formattedDate;
+        return item;
+      })
+      console.log(data);
+      setTransactions(data);
      }
     }
     fetchUserTransactionHistory();
@@ -80,60 +96,39 @@ const TradingOverview = () => {
               </tr>
             </thead>
             <tbody className="w-full">
-              <tr className="w-full bg-white py-3 px-7 flex  items-center mb-3.5 shadow-table">
-                <td className="w-11p text-sm font-poppins font-normal text-center">
-                  2022/7/30 16:18:41
-                </td>
-                <td className="w-11p font-poppins text-xs font-normal text-green3 text-center">
-                  REL
-                </td>
-                <td className="w-11p font-poppins text-xs font-normal text-center">
-                  Limit Order
-                </td>
-                <td className="w-11p font-poppins text-xs font-normal text-center">Sell</td>
-                <td className="w-11p font-poppins text-xs font-normal text-center">20</td>
-                <td className="w-11p font-poppins text-xs font-normal text-green3 text-center">
-                  641.20
-                </td>
-                <td className="w-11p font-poppins text-xs font-normal text-center">
-                  641.20
-                </td>
-                <td className="w-11p font-poppins text-xs font-normal text-center">
-                  641.20
-                </td>
-                <td className="w-11p font-poppins text-xs font-normal text-center">
-                  <button className="font-poppins text-xs font-normal text-purple1 py-0.5 px-2.5 border border-solid border-purple1">
-                    View
-                  </button>
-                </td>
-              </tr>
-              <tr className="w-full bg-white py-3 px-7 flex  items-center shadow-table">
-                <td className="w-11p text-sm font-poppins font-normal text-center">
-                  2022/7/30 16:18:41
-                </td>
-                <td className="w-11p font-poppins text-xs font-normal text-green3 text-center">
-                  REL
-                </td>
-                <td className="w-11p font-poppins text-xs font-normal text-center">
-                  Limit Order
-                </td>
-                <td className="w-11p font-poppins text-xs font-normal text-center">Sell</td>
-                <td className="w-11p font-poppins text-xs font-normal text-center">20</td>
-                <td className="w-11p font-poppins text-xs font-normal text-green3 text-center">
-                  641.20
-                </td>
-                <td className="w-11p font-poppins text-xs font-normal text-center">
-                  641.20
-                </td>
-                <td className="w-11p font-poppins text-xs font-normal text-center">
-                  641.20
-                </td>
-                <td className="w-11p font-poppins text-xs font-normal text-center">
-                  <button className="font-poppins text-xs font-normal text-purple1 py-0.5 px-2.5 border border-solid border-purple1">
-                    View
-                  </button>
-                </td>
-              </tr>
+              {transactions && transactions.length>0 && transactions.map((item) => {
+                return (
+                  <tr key={item.id} className="w-full bg-white py-3 px-7 flex  items-center mb-3.5 shadow-table">
+                  <td className="w-11p text-sm font-poppins font-normal text-center">
+                    {item.transaction_date}
+                  </td>
+                  <td className="w-11p font-poppins text-xs font-normal text-green3 text-center">
+                   {item.stock_name}
+                  </td>
+                  <td className="w-11p font-poppins text-xs font-normal text-center">
+                    {item.limit_triggered ? "Limit" : "Market Price"}
+                  </td>
+                  <td className="w-11p font-poppins text-xs font-normal text-center">{item.transaction_type}</td>
+                  <td className="w-11p font-poppins text-xs font-normal text-center">{item.quantity}</td>
+                  <td className="w-11p font-poppins text-xs font-normal text-green3 text-center">
+                    -
+                  </td>
+                  <td className="w-11p font-poppins text-xs font-normal text-center">
+                    {item.price_per_unit}
+                  </td>
+                  <td className="w-11p font-poppins text-xs font-normal text-center">
+                    {item.price_per_unit * item.quantity}
+                  </td>
+                  <td className="w-11p font-poppins text-xs font-normal text-center">
+                    <button className="font-poppins text-xs font-normal text-purple1 py-0.5 px-2.5 border border-solid border-purple1">
+                      View
+                    </button>
+                  </td>
+                </tr>
+                )
+              })}
+             
+             
             </tbody>
           </table>
         </div>

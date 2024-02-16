@@ -30,16 +30,33 @@ import { LiaCertificateSolid } from "react-icons/lia";
 import { BiMoneyWithdraw } from "react-icons/bi";
 import { MdLeaderboard } from "react-icons/md";
 import { Link } from "react-router-dom";
-
+import { auth } from "../requests/auth";
+import { toast } from 'react-toastify';
+import { useNavigate } from "react-router-dom";
 const UserNav = ({ title, sidebarType, active }) => {
+  const navigate = useNavigate();
   // console.log(active , sidebarType);
   const [screenWidth, setScreenWidth] = useState("");
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("");
+  const [openOptions, setOpenOptions] = useState(false);
+
   useEffect(() => {
     setActiveTab(active);
     // console.log(activeTab);
   }, [active , activeTab]);
+
+  async function handleLogout(){
+    try{
+      const res = await auth.logout();
+      if(res && res.status === 'success'){
+        toast.success(res.message);
+        navigate("/");
+      }
+    }catch(err){
+      console.log(err);
+    }
+  }
 
   useEffect(() => {
     setScreenWidth(window.innerWidth);
@@ -81,8 +98,12 @@ const UserNav = ({ title, sidebarType, active }) => {
           <img className="esm:hidden md:block w-12 h-12" src={sett} />
           <div className="flex items-center">
             <img className="w-12 h-12" src={logo} />
-            <img className="w-6 h-6" src={arrowB} />
+            <img onClick={() => {setOpenOptions(!openOptions)}} className="cursor-pointer w-6 h-6" src={arrowB} />
           </div>
+          {openOptions &&
+          <ul className={`flex flex-col w-fit h-fit gap-2 absolute top-28  right-10`}>
+            <li onClick={() => {handleLogout()}} className=' cursor-pointer hover:bg-gray7 text-black font-medium font-inter font-base border border-solid border-gray bg-white rounded-md flex items-center justify-center drop-shadow-lg py-2 px-16'>Logout</li>
+          </ul>}
         </div>
       </div>
       {sidebarType === "sidebar1"

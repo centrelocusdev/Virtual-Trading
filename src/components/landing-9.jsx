@@ -38,7 +38,7 @@ const Landing_9 = () => {
   return (
     <div className="w-full bg-white h-fit py-12">
       <div className="w-4/6 h-fit m-auto gap-y-14 flex flex-col">
-        <p className="text-5xl font-poppins font-bold text-black text-center">Frequently Asked Questions </p>
+        <p className="text-5xl text-purple1 font-poppins font-bold  text-center">Frequently Asked Questions </p>
           <Accordion allowToggle defaultIndex={[]}>
               {faqs &&
                 faqs.length > 0 &&
@@ -50,15 +50,15 @@ const Landing_9 = () => {
                     mb={10}
                   >
                     <AccordionButton
-                      bg="#90FAEA"
+                      bg="#E0FAEE"
                       border="none"
                       borderRadius="10px"
                       _expanded={{
-                        bg: "#90FAEA",
+                        bg: "#E0FAEE",
                         color: "black",
                         border: "none",
                       }}
-                      _hover={{ bg: "whiteAlpha.300", border: "none" }}
+                      _hover={{ bg: "#cbf5e2", border: "none" }}
                       py={2}
                       pr={"20px"}
                     >

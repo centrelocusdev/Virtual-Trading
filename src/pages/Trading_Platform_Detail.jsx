@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState , useRef } from "react";
+import { useEffect, useState } from "react";
 import Sidebar2 from "../components/sidebar2";
 import UserNav from "../components/user-nav";
 import { FaArrowLeft } from "react-icons/fa";
@@ -8,6 +8,10 @@ import { MdArrowDropDown } from "react-icons/md";
 import { stockAPI } from "../requests/stock";
 import { useNavigate } from "react-router-dom";
 import ClipLoader from "react-spinners/ClipLoader";
+import BuyModal from "../components/buy-modal";
+import SellModal from "../components/sell-modal";
+import { toast } from "react-toastify";
+
 // import Error from "../components/error";
 import { IoMdArrowDropup } from "react-icons/io";
 import moment from "moment";
@@ -22,6 +26,27 @@ const Trading_Platform_Detail = () => {
   const [stockData2, setStockData2] = useState("");
   const [lastPriceLoading, setLastPriceLoading] = useState(true);
   const [lastPriceError, setLastPriceError] = useState(false);
+  const [openBuyModal, setOpenBuyModal] = useState(false);
+  const [openSellModal, setOpenSellModal] = useState(false);
+  const [quantity, setQuantity] = useState(1);
+  const [orderValue, setOrdervalue] = useState(0);
+  const [stoploss, setStoploss] = useState(0);
+  const [isBuyDone, setIsBuyDone] = useState(false);
+  const [isSellDone, setisSellDone] = useState(false);
+  const [buyLimit, setBuyLimit] = useState(0);
+  const [sellLimit, setSellLimit] = useState(0);
+  const [buyLimitError, setBuyLimitError] = useState(null);
+  const [sellLimitError, setSellLimitError] = useState(null);
+  const [liveStockData, setLiveStockData] = useState({
+    price: null,
+    time: null,
+  });
+  const [pChange, setPChange] = useState({
+    p: null,
+    type: null,
+  });
+  const [liveStockDataLoading, setLiveStockDataLoading] = useState(false);
+  const [liveStockDataError, setLiveStockDataError] = useState(false);
   // const [isWithinTimeRange, setIsWithinTimeRange] = useState(false);
   const [options, setOptions] = useState({
     chart: {
@@ -49,7 +74,6 @@ const Trading_Platform_Detail = () => {
 
   const [series, setSeries] = useState([]);
   const [series2, setSeries2] = useState([]);
-
 
   const location = useLocation();
   const stockData = location.state;
@@ -128,13 +152,75 @@ const Trading_Platform_Detail = () => {
   }
 
   useEffect(() => {
- console.log("chart loading 2" , chartLoading2);
-  } , [chartLoading2])
+    console.log("chart loading 2", chartLoading2);
+  }, [chartLoading2]);
 
   // fetch historical data for graph
 
   useEffect(() => {
-    console.log("in the use effect" , timePeriod);
+    function formatTimestamp(timestamp) {
+      let date = new Date(timestamp);
+      date = date.toUTCString();
+      return date;
+    }
+    async function fetchData() {
+      try {
+        setLiveStockDataLoading(true);
+        const res = await stockAPI.getDailyDataOfStock(stockData.symbol);
+        setLiveStockDataLoading(false);
+        console.log(
+          "live stock price",
+          res.data.grapthData[res.data.grapthData.length - 1]
+        );
+        const data = res.data.grapthData[res.data.grapthData.length - 1];
+        const time = formatTimestamp(data[0]);
+        console.log(res.data.grapthData.length);
+        console.log(time, data[1]);
+        setLiveStockData({
+          price: data[1],
+          time: time,
+        });
+        setOrdervalue(data[1]);
+        const profitOrLoss = stockData.previousClose - data[1];
+        const p_change = (
+          (profitOrLoss * -1 * 100) /
+          stockData.previousClose
+        ).toFixed(2);
+        let pChangeType = data[1] > stockData.previousClose ? "Profit" : "Loss";
+        setPChange({
+          p: p_change,
+          type: pChangeType,
+        });
+      } catch (err) {
+        console.log(err);
+        setLiveStockDataLoading(false);
+        setLiveStockDataError(true);
+      }
+    }
+
+    fetchData();
+    const interval = setInterval(() => {
+      const checkTimeRange = () => {
+        const currentTime = new Date();
+        const startTime = new Date();
+        startTime.setHours(9);
+        startTime.setMinutes(30);
+        const endTime = new Date();
+        endTime.setHours(15);
+        endTime.setMinutes(30);
+        return currentTime >= startTime && currentTime <= endTime;
+      };
+      const isWithinTimeRange = checkTimeRange(); // Check every 5 minutes
+      console.log(3);
+      if (isWithinTimeRange) {
+        fetchData();
+      }
+    }, 5000); // 5 minutes interval
+    return () => clearInterval(interval); // Cleanup interval on unmount
+  }, []);
+
+  useEffect(() => {
+    console.log("in the use effect", timePeriod);
     async function formateFetchedStockData2(stocks) {
       try {
         const newStocks =
@@ -172,61 +258,58 @@ const Trading_Platform_Detail = () => {
     }
     if (timePeriod === "1Day") {
       fetchData();
-        setChartLoading2(true);
-        console.log(1);
-        // checkTimeRange(); // Check immediately on mount
-        console.log(1.5);
-        const interval = setInterval(() => {
-          const checkTimeRange = () => {
-            const currentTime = new Date();
-            const startTime = new Date();
-            startTime.setHours(9);
-            startTime.setMinutes(30);
-            const endTime = new Date();
-            endTime.setHours(15);
-            endTime.setMinutes(30);
-            return currentTime >= startTime && currentTime <= endTime;
-            
-          };
-          console.log(2);
-          const isWithinTimeRange = checkTimeRange(); // Check every 5 minutes
-          console.log(3);
-          if (isWithinTimeRange) {
-            // Make API call if within time range
-            console.log(4);
-            fetchData();
-            // Your API call code here
-          }
-        }, 300000); // 5 minutes interval
-        return () => clearInterval(interval); // Cleanup interval on unmount
+      setChartLoading2(true);
+      console.log(1);
+      // checkTimeRange(); // Check immediately on mount
+      console.log(1.5);
+      const interval = setInterval(() => {
+        const checkTimeRange = () => {
+          const currentTime = new Date();
+          const startTime = new Date();
+          startTime.setHours(9);
+          startTime.setMinutes(30);
+          const endTime = new Date();
+          endTime.setHours(15);
+          endTime.setMinutes(30);
+          return currentTime >= startTime && currentTime <= endTime;
+        };
+        console.log(2);
+        const isWithinTimeRange = checkTimeRange(); // Check every 5 minutes
+        console.log(3);
+        if (isWithinTimeRange) {
+          // Make API call if within time range
+          console.log(4);
+          fetchData();
+          // Your API call code here
+        }
+      }, 300000); // 5 minutes interval
+      return () => clearInterval(interval); // Cleanup interval on unmount
     }
-
-  } , [])
-
+  }, []);
 
   useEffect(() => {
     console.log("in the not 1 day use effect");
     async function formateFetchedStockData(stocks) {
-        try {
-          const newStocks =
-            stocks &&
-            stocks.length > 0 &&
-            stocks.reverse().map((stock) => {
-              let y = [stock.OPEN, stock.HIGH, stock.LOW, stock.CLOSE];
-              let x = new Date(getCorrectDateFormate(new Date(stock.DATE)));
-              return {
-                x: x,
-                y: y,
-              };
-            });
-          console.log("new stocks", newStocks);
-          let finalStocks = [{ data: newStocks }];
-          setSeries(finalStocks);
-        } catch (err) {
-          console.log(err);
-          setChartError(true);
-        }
+      try {
+        const newStocks =
+          stocks &&
+          stocks.length > 0 &&
+          stocks.reverse().map((stock) => {
+            let y = [stock.OPEN, stock.HIGH, stock.LOW, stock.CLOSE];
+            let x = new Date(getCorrectDateFormate(new Date(stock.DATE)));
+            return {
+              x: x,
+              y: y,
+            };
+          });
+        console.log("new stocks", newStocks);
+        let finalStocks = [{ data: newStocks }];
+        setSeries(finalStocks);
+      } catch (err) {
+        console.log(err);
+        setChartError(true);
       }
+    }
 
     function checkFromDateIsGreaterThanListingDate(fromDate) {
       const isGreater = new Date(fromDate) > new Date(stockData.listingDate);
@@ -244,7 +327,7 @@ const Trading_Platform_Detail = () => {
           setChartLoading(true);
           setChartError(false);
           console.log("not 1 day");
-      
+
           let fromDate = new Date();
           let toDate = getCorrectDateFormate(new Date());
 
@@ -292,18 +375,32 @@ const Trading_Platform_Detail = () => {
       }
     }
     fetchStockData();
-  }, [timePeriod , stockData]);
+  }, [timePeriod, stockData]);
 
-  // useEffect(() => {
-  //   async function stockTransaction(transaction_type){
-  //     try{
-  //       const res = await stockAPI.transaction(stockData.name, stockData.symbol, transaction_type, quantity, price_per_unit, stop_loss);
-
-  //     }catch(err){
-  //       console.log(err);
-  //     }
-  //   }
-  // } , [])
+  async function stockTransaction(transaction_type) {
+    try {
+      if (buyLimitError != null || sellLimitError != null) {
+        toast.error("Limit value is invalid!");
+        return;
+      }
+      const res = await stockAPI.transaction(
+        stockData.name,
+        stockData.symbol,
+        transaction_type,
+        quantity,
+        liveStockData.price,
+        stoploss,
+        buyLimit,
+        sellLimit
+      );
+      if (res.status === "success") {
+        setIsBuyDone(true);
+        console.log("transaction done ui", res);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
   // if (chartError && !chartLoading) {
   //   return (
@@ -314,218 +411,316 @@ const Trading_Platform_Detail = () => {
   //     />
   //   );
   // }
-  return (
-    <div className="w-screen min-h-screen h-fit py-5 pl-5 pr-9 bg-green2 flex gap-x-6">
-      {screenWidth > 1023 ? <Sidebar2 active={"trading-platform"} /> : ""}
-      <div className="esm:w-full lg:w-4/5">
-        <UserNav
-          sidebarType={"sidebar2"}
-          active={"trading-platform"}
-          title={"Trading Platform"}
-        />
-        <div className="w-full p-10 h-fit">
-          <FaArrowLeft
-            style={{ cursor: "pointer" }}
-            size={20}
-            onClick={() => {
-              navigate("/trading-platform");
-            }}
-          />
-          <div className="w-full h-fit bg-white rounded-4xl.1 px-5 py-7 mt-5">
-            <div className="w-full flex justify-between border-b-2 border-b-solid border-b-gray2 pb-5">
-              <div>
-                <p className="font-manrope font-bold text-3xl ml-10 text-black1">
-                  {stockData && stockData.name ? stockData.name : "Stock Name"}
-                  {stockData && stockData.symbol ? stockData.symbol : "Symbol"}
-                </p>
-                <p className="font-manrope font-semibold text-lg ml-10 text-black1">
-                  {stockData && stockData.symbol ? stockData.symbol : "Symbol"}
-                </p>
-              </div>
+  function closeBuyModal() {
+    setOpenBuyModal(false);
+  }
+  function closeSellModal() {
+    setOpenSellModal(false);
+  }
+  function changeQuantity(value) {
+    setQuantity(value);
+    setOrdervalue(quantity * liveStockData.price);
+  }
+  function changeStoploss(value) {
+    setStoploss(value);
+  }
+  function changeBuyLimit(value) {
+    console.log(value);
+    console.log(value, liveStockData.price);
+    setBuyLimit(value);
+    if (value > liveStockData.price) {
+      setBuyLimitError(
+        "Buying Limit can't be greater than the current stock price!"
+      );
+      return;
+    }
+    setBuyLimitError(null);
+  }
 
-              <div className="flex flex-col gap-2">
-                {lastPriceLoading ? (
+  function changeSellLimit(value) {
+    setSellLimit(value);
+
+    if (value < liveStockData.price) {
+      setSellLimitError(
+        "Selling limit can't be lower than the current stock price!"
+      );
+      return;
+    }
+    setSellLimitError(null);
+  }
+
+  useEffect(() => {console.log(openSellModal)} , [openSellModal])
+
+  return (
+    <>
+      <div className="w-screen min-h-screen h-fit py-5 pl-5 pr-9 bg-green2 flex gap-x-6">
+        {screenWidth > 1023 ? <Sidebar2 active={"trading-platform"} /> : ""}
+        <div className="esm:w-full lg:w-4/5">
+          <UserNav
+            sidebarType={"sidebar2"}
+            active={"trading-platform"}
+            title={"Trading Platform"}
+          />
+          <div className="w-full p-10 h-fit">
+            <FaArrowLeft
+              style={{ cursor: "pointer" }}
+              size={20}
+              onClick={() => {
+                navigate("/trading-platform");
+              }}
+            />
+            <div className="w-full h-fit bg-white rounded-4xl.1 px-5 py-7 mt-5">
+              <div className="w-full flex justify-between border-b-2 border-b-solid border-b-gray2 pb-5">
+                <div>
+                  <p className="font-manrope font-bold text-3xl ml-10 text-black1">
+                    {stockData && stockData.name
+                      ? stockData.name
+                      : "Stock Name"}
+                    {stockData && stockData.symbol
+                      ? stockData.symbol
+                      : "Symbol"}
+                  </p>
+                  <p className="font-manrope font-semibold text-lg ml-10 text-black1">
+                    {stockData && stockData.symbol
+                      ? stockData.symbol
+                      : "Symbol"}
+                  </p>
+                </div>
+
+                <div className="flex flex-col gap-2">
+                  {lastPriceLoading ? (
+                    <div className="flex gap-2">
+                      <div
+                        className={`flex items-center   text-white rounded-full py-0.5 px-2.5`}
+                      >
+                        {/* {stockData2.p_change < 0 ? (
+                      <MdArrowDropDown size={20} color="white" />
+                    ) : (
+                      <IoMdArrowDropup size={20} color="white" />
+                    )} */}
+                        <span className="text-white text-sm font-medium">
+                          ...
+                        </span>
+                      </div>
+                      <p className="text-3xl font-bold text-black1">...</p>
+                    </div>
+                  ) : liveStockDataError || lastPriceError ? (
+                    <p className="text-red2 font-medium text-base">NA</p>
+                  ) : (
+                    <div className="flex gap-2 self-end">
+                      <div
+                        className={`flex items-center ${
+                          pChange.type === "Loss" ? "bg-red2" : "bg-green1"
+                        }  text-white rounded-full py-0.5 px-2.5`}
+                      >
+                        {pChange.type === "Loss" ? (
+                          <MdArrowDropDown size={20} color="white" />
+                        ) : (
+                          <IoMdArrowDropup size={20} color="white" />
+                        )}
+                        <span className="text-white text-sm font-medium">
+                          {pChange.p}%{/* -1.10% */}
+                        </span>
+                      </div>
+                      <p className="text-3xl font-bold text-black1">
+                        {liveStockData.price}
+                      </p>
+                    </div>
+                  )}
+                  <p className="text-base font-manrope font-bold text-gray14 text-end">
+                    Last Updated at: {liveStockData.time}
+                  </p>
+                </div>
+              </div>
+              <div className="w-full flex gap-x-8 items-center justify-center mt-5">
+                <button
+                  onClick={() => {
+                    setTimePeriod("1Day");
+                  }}
+                  className={`${
+                    timePeriod === "1Day"
+                      ? "bg-black text-white"
+                      : "bg-white text-black"
+                  } hover:bg-black hover:text-white rounded-full border border-solid border-gray16 px-3 py-2`}
+                >
+                  1Day
+                </button>
+                <button
+                  onClick={() => {
+                    setTimePeriod("1Week");
+                  }}
+                  className={`${
+                    timePeriod === "1Week"
+                      ? "bg-black text-white"
+                      : "bg-white text-black"
+                  } hover:bg-black hover:text-white rounded-full border border-solid border-gray16 px-3 py-2`}
+                >
+                  1 Week
+                </button>
+                <button
+                  onClick={() => {
+                    setTimePeriod("1Month");
+                  }}
+                  className={`${
+                    timePeriod === "1Month"
+                      ? "bg-black text-white"
+                      : "bg-white text-black"
+                  } hover:bg-black hover:text-white rounded-full border border-solid border-gray16 px-3 py-2`}
+                >
+                  1 Month
+                </button>
+                <button
+                  onClick={() => {
+                    setTimePeriod("3Months");
+                  }}
+                  className={`${
+                    timePeriod === "3Months"
+                      ? "bg-black text-white"
+                      : "bg-white text-black"
+                  } hover:bg-black hover:text-white rounded-full border border-solid border-gray16 px-3 py-2`}
+                >
+                  3 Months
+                </button>
+                <button
+                  onClick={() => {
+                    setTimePeriod("6Months");
+                  }}
+                  className={`${
+                    timePeriod === "6Months"
+                      ? "bg-black text-white"
+                      : "bg-white text-black"
+                  } hover:bg-black hover:text-white rounded-full border border-solid border-gray16 px-3 py-2`}
+                >
+                  6 Months
+                </button>
+                <button
+                  onClick={() => {
+                    setTimePeriod("1Year");
+                  }}
+                  className={`${
+                    timePeriod === "1Year"
+                      ? "bg-black text-white"
+                      : "bg-white text-black"
+                  } hover:bg-black hover:text-white rounded-full border border-solid border-gray16 px-3 py-2`}
+                >
+                  1 Year
+                </button>
+                <button
+                  onClick={() => {
+                    setTimePeriod("5Years");
+                  }}
+                  className={`${
+                    timePeriod === "5Years"
+                      ? "bg-black text-white"
+                      : "bg-white text-black"
+                  } hover:bg-black hover:text-white rounded-full border border-solid border-gray16 px-3 py-2`}
+                >
+                  5 Years
+                </button>
+                <button
+                  onClick={() => {
+                    setTimePeriod("All");
+                  }}
+                  className={`${
+                    timePeriod === "All"
+                      ? "bg-black text-white"
+                      : "bg-white text-black"
+                  } hover:bg-black hover:text-white flex items-center gap-2 rounded-full border border-solid border-gray16 px-3 py-2`}
+                >
+                  {/* <img src={tradingAll} alt="all"/> */}
+                  <span>All</span>
+                </button>
+              </div>
+              {timePeriod != "1Day" ? (
+                chartLoading ? (
+                  <div>
+                    <ClipLoader
+                      className="m-96 mt-20"
+                      size={20}
+                      color="#683AB5"
+                    />
+                  </div>
+                ) : chartError ? (
+                  <p className="text-base font-medium text-red2 text-center mt-60 mb-60">
+                    Oops! Something went wrong. Try Again.
+                  </p>
+                ) : (
+                  <Chart
+                    options={options}
+                    series={series}
+                    type="candlestick"
+                    // height={600}
+                  />
+                )
+              ) : chartLoading2 ? (
+                <div className="flex">
                   <ClipLoader
                     className="m-96 mt-20"
                     size={20}
                     color="#683AB5"
                   />
-                ) : lastPriceError ? (
-                  <p className="text-red2 font-medium text-base">NA</p>
-                ) : (
-                  <div className="flex gap-2">
-                    <div
-                      className={`flex items-center ${
-                        stockData2.p_change < 0 ? "bg-red2" : "bg-green1"
-                      }  text-white rounded-full py-0.5 px-2.5`}
-                    >
-                      {stockData2.p_change < 0 ? (
-                        <MdArrowDropDown size={20} color="white" />
-                      ) : (
-                        <IoMdArrowDropup size={20} color="white" />
-                      )}
-                      <span className="text-white text-sm font-medium">
-                        {stockData2.p_change.toFixed(2)}%{/* -1.10% */}
-                      </span>
-                    </div>
-                    <p className="text-3xl font-bold text-black1">
-                      {stockData2.last_price}
-                    </p>
-                  </div>
-                )}
-
-                <p className="text-base font-manrope font-bold text-gray14 text-end">
-                  Last Updated at
+                </div>
+              ) : chartError2 ? (
+                <p className="text-base font-medium text-red2 text-center mt-60 mb-60">
+                  Oops! Something went wrong. Try Again.
                 </p>
-              </div>
+              ) : (
+                <Chart
+                  options={options}
+                  series={series2}
+                  type="candlestick"
+                  // height={600}
+                />
+              )}
             </div>
-            <div className="w-full flex gap-x-8 items-center justify-center mt-5">
-              <button
-                onClick={() => {
-                  setTimePeriod("1Day");
-                }}
-                className={`${
-                  timePeriod === "1Day"
-                    ? "bg-black text-white"
-                    : "bg-white text-black"
-                } hover:bg-black hover:text-white rounded-full border border-solid border-gray16 px-3 py-2`}
-              >
-                1Day
-              </button>
-              <button
-                onClick={() => {
-                  setTimePeriod("1Week");
-                }}
-                className={`${
-                  timePeriod === "1Week"
-                    ? "bg-black text-white"
-                    : "bg-white text-black"
-                } hover:bg-black hover:text-white rounded-full border border-solid border-gray16 px-3 py-2`}
-              >
-                1 Week
-              </button>
-              <button
-                onClick={() => {
-                  setTimePeriod("1Month");
-                }}
-                className={`${
-                  timePeriod === "1Month"
-                    ? "bg-black text-white"
-                    : "bg-white text-black"
-                } hover:bg-black hover:text-white rounded-full border border-solid border-gray16 px-3 py-2`}
-              >
-                1 Month
-              </button>
-              <button
-                onClick={() => {
-                  setTimePeriod("3Months");
-                }}
-                className={`${
-                  timePeriod === "3Months"
-                    ? "bg-black text-white"
-                    : "bg-white text-black"
-                } hover:bg-black hover:text-white rounded-full border border-solid border-gray16 px-3 py-2`}
-              >
-                3 Months
-              </button>
-              <button
-                onClick={() => {
-                  setTimePeriod("6Months");
-                }}
-                className={`${
-                  timePeriod === "6Months"
-                    ? "bg-black text-white"
-                    : "bg-white text-black"
-                } hover:bg-black hover:text-white rounded-full border border-solid border-gray16 px-3 py-2`}
-              >
-                6 Months
-              </button>
-              <button
-                onClick={() => {
-                  setTimePeriod("1Year");
-                }}
-                className={`${
-                  timePeriod === "1Year"
-                    ? "bg-black text-white"
-                    : "bg-white text-black"
-                } hover:bg-black hover:text-white rounded-full border border-solid border-gray16 px-3 py-2`}
-              >
-                1 Year
-              </button>
-              <button
-                onClick={() => {
-                  setTimePeriod("5Years");
-                }}
-                className={`${
-                  timePeriod === "5Years"
-                    ? "bg-black text-white"
-                    : "bg-white text-black"
-                } hover:bg-black hover:text-white rounded-full border border-solid border-gray16 px-3 py-2`}
-              >
-                5 Years
-              </button>
-              <button
-                onClick={() => {
-                  setTimePeriod("All");
-                }}
-                className={`${
-                  timePeriod === "All"
-                    ? "bg-black text-white"
-                    : "bg-white text-black"
-                } hover:bg-black hover:text-white flex items-center gap-2 rounded-full border border-solid border-gray16 px-3 py-2`}
-              >
-                {/* <img src={tradingAll} alt="all"/> */}
-                <span>All</span>
-              </button>
-            </div>
-            {timePeriod != "1Day"
-              
-             ?
-             chartLoading ? (
-              <div><ClipLoader className="m-96 mt-20" size={20} color="#683AB5" /><span className="text-black"> not 1Day</span></div>
-            ) : chartError ? (
-              <p className="text-base font-medium text-red2 text-center mt-60 mb-60">
-                Oops! Something went wrong. Try Again.
-              </p>
-            ) : (
-              <Chart
-                options={options}
-                series={series}
-                type="candlestick"
-                // height={600}
-              />
-            )
-
-             :
-             chartLoading2 ? (
-              <div className="flex"><ClipLoader className="m-96 mt-20" size={20} color="#683AB5" /><span className="text-black">1Day</span></div>
-            ) : chartError2 ? (
-              <p className="text-base font-medium text-red2 text-center mt-60 mb-60">
-                Oops! Something went wrong. Try Again.
-              </p>
-            ) : (
-              <Chart
-                options={options}
-                series={series2}
-                type="candlestick"
-                // height={600}
-              />
-            )}
-             
-             
-            
+          </div>
+          <div className="w-full flex justify-center gap-x-12">
+            <button
+              onClick={() => setOpenBuyModal(!openBuyModal)}
+              className="hover:bg-purple1 hover:text-white cursor-pointer rounded-3xl border-4 border-solid border-purple1 py-5 px-11 text-lg font-bold font-inter text-purple1 w-80"
+            >
+              Buy
+            </button>
+            <button
+              onClick={() => setOpenSellModal(!openSellModal)}
+              className="hover:bg-purple1 hover:text-white cursor-pointer rounded-3xl border-4 border-solid border-purple1 py-5 px-11 text-lg font-bold font-inter text-purple1 w-80"
+            >
+              Sell
+            </button>
           </div>
         </div>
-        <div className="w-full flex justify-center gap-x-12">
-          <button className="hover:bg-purple1 hover:text-white cursor-pointer rounded-3xl border-4 border-solid border-purple1 py-5 px-11 text-lg font-bold font-inter text-purple1 w-80">
-            Buy
-          </button>
-          <button className="hover:bg-purple1 hover:text-white cursor-pointer rounded-3xl border-4 border-solid border-purple1 py-5 px-11 text-lg font-bold font-inter text-purple1 w-80">
-            Sell
-          </button>
-        </div>
       </div>
-    </div>
+      {openBuyModal && (
+        <BuyModal
+          buyLimitError={buyLimitError}
+          changeBuyLimit={changeBuyLimit}
+          buyLimit={buyLimit}
+          stockTransaction={stockTransaction}
+          isBuyDone={isBuyDone}
+          closeBuyModal={closeBuyModal}
+          livePrice={liveStockData.price}
+          stoploss={stoploss}
+          changeStoploss={changeStoploss}
+          quantity={quantity}
+          changeQuantity={changeQuantity}
+        />
+      )}
+      {openSellModal && (
+        <SellModal
+          sellLimitError={sellLimitError}
+          changeSellLimit={changeSellLimit}
+          sellLimit={sellLimit}
+          stockTransaction={stockTransaction}
+          isSellDone={isSellDone}
+          closeSellModal={closeSellModal}
+          livePrice={liveStockData.price}
+          stoploss={stoploss}
+          changeStoploss={changeStoploss}
+          quantity={quantity}
+          changeQuantity={changeQuantity}
+        />
+      )}
+    </>
   );
 };
 

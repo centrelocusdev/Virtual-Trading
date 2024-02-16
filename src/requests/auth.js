@@ -49,6 +49,34 @@ async function registrationOtpVerification(formData) {
       return {status: "error", message: "Something went wrong!"};
     }
   }
+
+  async function logout() {
+    try {
+      // console.log("in login req", formData);
+      const res = await axios.post(`${Backend_URL}/api/logout/` , 
+      {},
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem("token_access")}`,
+        },
+      }
+      );
+      console.log("logout" , res);
+      
+      if(res && res.status === 205){
+        localStorage.setItem("token_access" , "");
+        localStorage.setItem("token_refresh" , "");
+          return {status: "success", message: "Logout Successful!"};
+      }
+      
+    } catch (err) {
+      console.log("Error", err);
+      return {status: "error", message: "Something went wrong!"};
+    }
+  }
+
+
   async function forgotPassword(email) {
     try {
       // console.log("in login req", formData);
@@ -110,6 +138,7 @@ export const auth = {
      getRegistrationPurchasePlanDetails,
      getCouponData,
      forgotPassword,
-     resetPassword
+     resetPassword,
+     logout
     
     };

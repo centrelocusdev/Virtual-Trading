@@ -17,7 +17,8 @@ export default {
       'h-118': "138px",
       'h-71': "91px",
       'h-150': "150px",
-      'h-170': "170px"
+      'h-170': "170px",
+      'h-400': "400px",
     },
     minWidth:{
       '260': "260px"
@@ -34,11 +35,15 @@ export default {
         'h-118': "138px",
         'h-24h': "24rem",
         'h-30': "30rem",
+        'h-31': "32rem",
         'h-97.1': "34rem",
         'h-98': "37rem",
         'h-98.1': "40rem",
         'h-99': "44rem",
+        'h-53': "53rem",
+        'h-99.1': "60rem",
         'h-100': "64rem",
+        'h-68': "68rem",
         'little-screen': "94vh",
         '163': "163px",
       },
@@ -110,6 +115,7 @@ export default {
         'gray14': "#848484",
         'gray15': "#7A7A7A",
         'gray16': "#EBEDEE",
+        'gray17': '#C3C5D4',
         'black1': "#353535",
         'link_active': "#0000EE",
         'link_visited': "#551A8B",
@@ -122,8 +128,20 @@ export default {
         'yellow2': "#E1AB20",
         'purple1': "#683AB5",
         'purple2': "#ab7ff5",
+        'purple3': "#C19CFF",
+        'purple4': "#472E71",
         'green2': "#B6EED4",
-        'green3': "#0CAF60"
+        'green3': "#0CAF60",
+        'green4': '#367C30',
+        'green5': "#8FE8BF",
+        'green6': "#F0FBF6",
+        'green7': "#ADFBE9",
+        'green8': "#F0FBF6",
+        'green9': "#EAFAF3",
+        'green10': "#E2F9EF",
+        'green11': "#FFFAFA",
+        'green12': "#F3FDF8",
+        'green13': "#46DD97",
       },
       letterSpacing: {
         "low": "1px"
@@ -139,7 +157,8 @@ export default {
       manrope: ['Manrope' , 'san-serif']
     },
     boxShadow: {
-      box: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)"
+      box: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
+      box2: "0px 20px 95px 0px #3DA86499"
     }
   },
   plugins: [],

@@ -16,7 +16,7 @@ const Plan_Purchase = () => {
   async function getPlanDetails() {
     setLoading(true);
     const res = await auth.getRegistrationPurchasePlanDetails();
-    console.log(res);
+    console.log("plan details", res);
     if (res && res.data) {
       setPlans(res.data);
     }
@@ -46,7 +46,7 @@ const Plan_Purchase = () => {
       return item.name === plan && item.account_size === amount;
     });
     setSelectedPlanId(currentPlan[0].id);
-    setSelectedFees(Number(currentPlan[0].price));
+    setSelectedFees(Number(currentPlan[0].fees));
   }
   function handleClick(type, value) {
     if (type === "plan") {
@@ -79,13 +79,13 @@ const Plan_Purchase = () => {
         alt="vector"
         className="esm:h-0 esm:w-0 md:h-12 md:w-14 absolute esm:bottom-20 md:bottom-28 left-10"
       /> */}
-      <p className="text-font_blue1 esm:text-4xl md:text-5.1xl font-bold text-center font-sans mb-10">
+      <p className="text-purple1 esm:text-4xl md:text-5.1xl font-bold text-center font-sans mb-10">
         Purchase
       </p>
       <div className="h-fit esm:w-11/12 md:w-0.87 2xl:w-4/6 mx-auto flex esm:flex-col md:flex-row py-10 justify-center items-start gap-8 ">
         <div className="esm:w-full md:w-1/2 min-h-full h-fit bg-white p-5 rounded-2lg border border-solid border-bg_Dark">
           <div className="w-full mb-12 pt-2">
-            <p className="esm:text-center text-2xl font-bold mb-5 text-font_blue1 ">
+            <p className="esm:text-center text-2xl font-bold mb-5 text-purple1 ">
               Select your preferred option:
             </p>
             <div className="flex gap-y-5 flex-wrap justify-evenly flex-col w-3/6 m-auto">
@@ -100,9 +100,9 @@ const Plan_Purchase = () => {
                 // key={plan.id}
                 className={`${
                   selectedPlan === "Stellar"
-                    ? "bg-bg_Medium text-font_blue1 border-2 border-font_blue1"
-                    : "bg-font_blue1 text-white border-2 border-font_blue1"
-                } hover:bg-bg_Medium hover:text-font_blue1 hover:border-2 hover:border-font_blue1 cursor-pointer font-bold rounded-2lg esm:px-4  md:px-10 py-2.5 text-sm `}
+                    ? "bg-white text-purple1 border-2 border-purple1"
+                    : "bg-purple1 text-white border-2 border-purple1"
+                } hover:bg-white hover:text-purple1 hover:border-2 hover:border-purple1 cursor-pointer font-bold rounded-2lg esm:px-4  md:px-10 py-2.5 text-sm `}
               >
                 Stellar
               </button>
@@ -117,9 +117,9 @@ const Plan_Purchase = () => {
                 // key={plan.id}
                 className={`${
                   selectedPlan === "Evaluation"
-                    ? "bg-bg_Medium text-font_blue1 border-2 border-font_blue1"
-                    : "bg-font_blue1 text-white border-2 border-font_blue1"
-                } hover:bg-bg_Medium hover:text-font_blue1 hover:border-2 hover:border-font_blue1 cursor-pointer font-bold rounded-2lg esm:px-4  md:px-10 py-2.5 text-sm `}
+                    ? "bg-white text-purple1 border-2 border-purple1"
+                    : "bg-purple1 text-white border-2 border-purple1"
+                } hover:bg-white hover:text-purple1 hover:border-2 hover:border-purple1 cursor-pointer font-bold rounded-2lg esm:px-4  md:px-10 py-2.5 text-sm `}
               >
                 Evaluation
               </button>
@@ -134,9 +134,9 @@ const Plan_Purchase = () => {
                 // key={plan.id}
                 className={`${
                   selectedPlan === "Express"
-                    ? "bg-bg_Medium text-font_blue1 border-2 border-font_blue1"
-                    : "bg-font_blue1 text-white border-2 border-font_blue1"
-                } hover:bg-bg_Medium hover:text-font_blue1 hover:border-2 hover:border-font_blue1 cursor-pointer font-bold rounded-2lg esm:px-4  md:px-10 py-2.5 text-sm `}
+                    ? "bg-white text-purple1 border-2 border-purple1"
+                    : "bg-purple1 text-white border-2 border-purple1"
+                } hover:bg-white hover:text-purple1 hover:border-2 hover:border-purple1 cursor-pointer font-bold rounded-2lg esm:px-4  md:px-10 py-2.5 text-sm `}
               >
                 Express
               </button>
@@ -145,7 +145,7 @@ const Plan_Purchase = () => {
           {/* <div className="w-full border-b border-b-solid border-b-black mb-12"></div> */}
           <div className="w-full flex flex-col items-center mb-16">
             <div className=" w-full flex justify-center mb-5 px-5">
-              <span className="font-bold text-2xl text-font_blue1">
+              <span className="font-bold text-2xl text-purple1">
                 Account Size
               </span>
             </div>
@@ -160,14 +160,14 @@ const Plan_Purchase = () => {
                 }}
                 className={`cursor-pointer flex justify-center p-5 rounded-2lg esm:w-4/5  md:w-w-128 esm:h-h-80 lg:w-w-160 lg:h-h-90 ${
                   selectedAmount === "30000.00"
-                    ? "bg-bg_Medium border-2 border-solid border-font_blue1"
-                    : "bg-font_blue1"
+                    ? "bg-white border-2 border-solid border-purple1"
+                    : "bg-purple1"
                 }`}
               >
                 <span
                   className={`flex items-center text-sm   ${
                     selectedAmount === "30000.00"
-                      ? "text-font_blue1"
+                      ? "text-purple1"
                       : "text-white"
                   }`}
                 >
@@ -186,14 +186,14 @@ const Plan_Purchase = () => {
                 }}
                 className={`cursor-pointer flex justify-center p-5 rounded-2lg esm:w-4/5  md:w-w-128 esm:h-h-80 lg:w-w-160 lg:h-h-90 ${
                   selectedAmount === "50000.00"
-                    ? "bg-bg_Medium border-2 border-solid border-font_blue1"
-                    : "bg-font_blue1"
+                    ? "bg-white border-2 border-solid border-purple1"
+                    : "bg-purple1"
                 }`}
               >
                 <span
                   className={`flex items-center text-sm   ${
                     selectedAmount === "50000.00"
-                      ? "text-font_blue1"
+                      ? "text-purple1"
                       : "text-white"
                   }`}
                 >
@@ -212,14 +212,14 @@ const Plan_Purchase = () => {
                 }}
                 className={`cursor-pointer flex justify-center p-5 rounded-2lg esm:w-4/5  md:w-w-128 esm:h-h-80 lg:w-w-160 lg:h-h-90 ${
                   selectedAmount === "100000.00"
-                    ? "bg-bg_Medium border-2 border-solid border-font_blue1"
-                    : "bg-font_blue1"
+                    ? "bg-white border-2 border-solid border-purple1"
+                    : "bg-purple1"
                 }`}
               >
                 <span
                   className={`flex items-center text-sm   ${
                     selectedAmount === "100000.00"
-                      ? "text-font_blue1"
+                      ? "text-purple1"
                       : "text-white"
                   }`}
                 >
@@ -235,7 +235,7 @@ const Plan_Purchase = () => {
         {/* <div className="h-fit md:py-72 md:border-r md:border-r-solid md:border-r-black md:ml-8 md:mr-2"></div> */}
         <div className="esm:w-full md:w-1/2 h-fit flex flex-col gap-8  esm:mt-5 md:mt-0">
           <div className="w-full h-fit  bg-white p-5 rounded-2lg border border-solid border-bg_Dark">
-            <p className="text-font_blue1 text-center font-bold text-2xl self-start mb-4">
+            <p className="text-purple1 text-center font-bold text-2xl self-start mb-4">
               Total Amount to be Paid
             </p>
             <div className="flex justify-between w-full border-b border-b-solid border-b-black mb-4 pb-4">
@@ -282,7 +282,7 @@ const Plan_Purchase = () => {
           </div>
           {selectedPlan === "Stellar" && (
             <div className=" w-full h-fit esm:px-2 md:px-10 bg-white p-5 rounded-2lg border border-solid border-bg_Dark">
-              <p className="w-fit font-bold text-2xl border-b-2  m-auto border-b-black text-center mb-5 ">
+              <p className="w-fit font-bold text-2xl text-purple1 border-b-2  m-auto border-b-purple1 text-center mb-5 ">
                 Demo Account Rules
               </p>
               <div className="flex items-center gap-2"><div className="h-2 w-2 rounded-full bg-black"></div><p className="text-base">15% Profit Sharing from Challenges</p></div>
@@ -328,7 +328,7 @@ const Plan_Purchase = () => {
       </div>
       <button
         onClick={goToPaymentPage}
-        className="px-11 esm:py-4 md:py-4 esm:text-sm sm:text-lg bg-font_blue1 text-white rounded-md self-center"
+        className="px-11 esm:py-4 md:py-4 esm:text-sm sm:text-lg bg-purple1 text-white rounded-full self-center"
       >
         Next
       </button>

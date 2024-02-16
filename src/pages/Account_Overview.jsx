@@ -452,7 +452,7 @@ const Account_Overview = () => {
                     Hello! {userData.user.name}
                   </p>
                   <p className="text-xl esm:text-center lg:text-start font-lato font-semibold text-gray4">
-                    Currenty you are in phase {userData.user.phase}
+                    Currently you are in {userData.user.phase}
                   </p>
                   <div className="flex esm:items-center msm:items-start esm:flex-col msm:flex-row esm:justify-center lg:justify-start gap-2.5">
                     <img className="h-6 w-6" src={dollar} alt="dolalr" />
@@ -852,7 +852,7 @@ const Account_Overview = () => {
                 Demo Account Rules
               </p>
               <p className="text-lg font-inter">
-                -{userData.subscriptions[0].plan.max_daily_loss}% aily loss
+                -{userData.subscriptions[0].plan.max_daily_loss}% daily loss
                 limit
               </p>
               <p className="text-lg font-inter">

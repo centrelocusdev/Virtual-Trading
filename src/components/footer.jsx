@@ -4,15 +4,15 @@ import youtube from '/mdi_youtube.svg';
 import instagram from '/bi_instagram.svg';
 const Footer = () => {
   return (
-    <div className="w-full h-fit bg-bg_Medium flex  justify-center items-center gap-y-10 py-5 px-16">
-     <div className="w-full h-fit bg-bg_Medium flex flex-col py-6 px-16 gap-y-10">
+    <div className="w-full h-fit bg-green5 flex  justify-center items-center gap-y-10 py-5 px-16">
+     <div className="w-full h-fit bg-green5  flex flex-col py-6 px-16 gap-y-10">
      <div className="w-full h-fit flex justify-between gap-x-20">
         <div className="flex flex-col items-start w-2/6 gap-y-4">
           <p className="text-2xl font-bold font-poppins">Stay Updated!</p>
           <p className="text-sm font-poppins">Subscribe to get all the exclusive updates about the trading industry from the industry veterans. We will even rush our selective podcasts and top-notch ebooks to your mailbox.</p>
           <div className="flex justify-between gap-x-2">
             <input className="pl-2.5 pt-2.5 pb-2.5 pr-20 border-none rounded-md placeholder:text-xs font-semibold" type="email" name="email" placeholder="Enter Your Email"/>
-            <button className="py-1.5 px-4 bg-font_blue1 text-white rounded-md">Subscribe</button>
+            <button className="py-1.5 px-4 bg-purple1 text-white rounded-full">Subscribe</button>
           </div>
 
         </div>

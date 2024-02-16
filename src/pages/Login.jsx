@@ -143,7 +143,7 @@ const Login = () => {
     }
   }
   return (
-    <div className="min-h-screen h-fit esm:bg-bg_Dark md:bg-white w-screen esm:flex-col esm:justify-between sm:justify-normal  sm:flex-row flex">
+    <div className="bg-no-repeat bg-cover bg-center bg-[url('/plan_back.png')] min-h-screen h-fit esm:bg-bg_Dark md:bg-white w-screen esm:flex-col esm:justify-between sm:justify-normal  sm:flex-row flex">
       <div className="sticky h-fit w-full flex flex-col  esm:block sm:hidden mb-5">
         <img
           src={TradingPlatform}
@@ -156,22 +156,22 @@ const Login = () => {
           className="max-w-full w-3/6 h-auto z-10 relative ml-48 "
         />
       </div>
-      <div className=" esm:rounded-t-largest sm:rounded-none esm:pt-10 sm:pt-0 esm:w-full sm:w-2/5  esm:h-fit sm:h-fit sm:min-h-screen bg-bg_Light flex flex-col justify-center items-center">
-        <div className="esm:w-full esm:px-10 md:px-0 md:w-3/5 h-fit flex flex-col items-center">
+      <div className=" esm:rounded-t-largest sm:rounded-none esm:pt-10 sm:pt-0 esm:w-full sm:w-2/5  esm:h-fit sm:h-fit sm:min-h-screen  flex flex-col justify-center items-center">
+        <div className="esm:w-full esm:px-10 md:px-0 md:w-4/5 h-fit flex flex-col items-center">
           <div className="flex items-center justify-center gap-4 mb-10">
             <img src={Eclipse} alt="logo" className="h-14 w-14" />
             <p className="esm:text-3xl md:text-4xl font-semibold">
               Virtual Trading
             </p>
           </div>
-          <p className="text-font_blue1 esm:text-2xl md:text-xl mb-10 esm:font-bold md:font-medium">
+          <p className="text-purple1 esm:text-2xl md:text-2xl mb-5 esm:font-bold md:font-bold">
             Login into your account
           </p>
           <form
             onSubmit={onSubmitHandler}
-            className="flex flex-col w-full items-center"
+            className="flex flex-col w-full items-center border py-4 rounded-md border-solid border-purple1 px-5 bg-white"
           >
-            <div className="flex flex-col items-start w-full mb-6">
+            <div className="flex flex-col items-start w-full mb-4">
               <label
                 className="text-gray1 text-lg font-medium mb-2"
                 htmlFor="email"
@@ -179,7 +179,7 @@ const Login = () => {
                 Email Address <span className="text-red-600">*</span>
               </label>
               <input
-                className="focus:outline-none text-base pt-4 pb-4 pl-4 pr-8 rounded-4xl w-full"
+                className="focus:outline-none text-base bg-green9 pt-2.5 pb-2.5 pl-4 pr-8 rounded-4xl w-full"
                 value={formData.email}
                 onChange={onChangeHandler}
                 type="email"
@@ -188,7 +188,7 @@ const Login = () => {
                 placeholder="Enter your email"
               />
             </div>
-            <div className="flex flex-col items-start w-full mb-6">
+            <div className="flex flex-col items-start w-full mb-1">
               <label
                 className="text-gray1 text-lg font-medium mb-2"
                 htmlFor="password"
@@ -196,7 +196,7 @@ const Login = () => {
                 Password <span className="text-red-600">*</span>
               </label>
               <input
-                className="focus:outline-none text-base pt-4 pb-4 pl-4 pr-8 rounded-4xl w-full "
+                className="focus:outline-none bg-green9 text-base pt-2.5 pb-2.5 pl-4 pr-8 rounded-4xl w-full "
                 value={formData.password}
                 onChange={onChangeHandler}
                 type="password"
@@ -206,12 +206,12 @@ const Login = () => {
               />
               <p
                 onClick={onOpen}
-                className="cursor-pointer text-font_blue1 self-end text-sm mb-6 mt-1 border-b border-b-font_blue1 border-b-solid"
+                className="cursor-pointer text-purple1 self-end text-sm mb-6 mt-1 border-b border-b-purple1 border-b-solid"
               >
                 Forgot Password?
               </p>
             </div>
-            <button className="bg-font_blue1 w-full text-white rounded-md py-2.5 px-11 esm:mb-10 md:mb-0">
+            <button className="bg-purple1 w-full text-white rounded-full py-2 px-11 esm:mb-10 md:mb-0">
               {loading ? (
                 <div className="flex justify-center items-center gap-5 m-0 text-base">
                   Loading...
@@ -224,8 +224,8 @@ const Login = () => {
           </form>
         </div>
       </div>
-      <div className="esm:hidden sm:block sm:w-3/5 sm:min-h-screen sm:h-full bg-bg_Dark relative">
-        <img
+      <div className="esm:hidden sm:block sm:w-3/5 sm:min-h-screen sm:h-full bg-purple1 relative">
+        {/* <img
           src={vector}
           alt="vector"
           className="sm:h-12 sm:w-16 absolute top-24 right-80"
@@ -234,7 +234,7 @@ const Login = () => {
           src={vector}
           alt="vector"
           className="sm:h-12 sm:w-16 absolute bottom-20 left-32"
-        />
+        /> */}
 
         <div
           className={`relative sm:right-0 w-11/12 m-auto h-full  ${style.imageBox}`}
@@ -242,12 +242,12 @@ const Login = () => {
           <img
             src={TradingPlatform}
             alt="account-overview"
-            className="max-w-full sm:w-1/2 h-auto z-20 absolute sm:bottom-40 sm:right-40 md:bottom-56 lg:bottom-60 md:right-60 lg:right-80"
+            className="max-w-full sm:w-1/2 h-auto z-10 absolute sm:bottom-40 sm:right-40 md:bottom-56 lg:bottom-60 md:right-60 lg:right-80"
           />
           <img
             src={AccountOverview}
             alt="trading-platform"
-            className="max-w-full sm:w-1/2 h-auto z-10 absolute sm:bottom-0 sm:right-0"
+            className="max-w-full sm:w-1/2 h-auto z-20 absolute sm:bottom-0 sm:right-0"
           />
         </div>
         <img

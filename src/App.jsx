@@ -1,4 +1,4 @@
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+// import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import Login from "./pages/Login";
 import Landing from "./pages/Landing";
 import Kyc_ from "./pages/Kyc_";
@@ -33,13 +33,13 @@ const queryClient = new QueryClient({
   }
 })
 import { Route, Routes } from "react-router-dom";
-
+import Faqs from './pages/faq';
 function App() {
   return (
    <>
    <Provider store={store}>
    <QueryClientProvider client={queryClient}>
-   <ReactQueryDevtools initialIsOpen={false} />
+   {/* <ReactQueryDevtools initialIsOpen={false} /> */}
     <Routes>
       {/* <Route path="/landing" element={<Landing />} /> */}
       <Route path="/login" element={<Login />} />
@@ -58,6 +58,8 @@ function App() {
       <Route path='/trading-platform-detail' element={<Trading_Platform_Detail/>}/>
       <Route path='/news-calender' element={<News_Calender/>}/>
       <Route path='/news-calender-details' element={<News_Calender_Details/>}/>
+      <Route path='/faqs' element={<Faqs/>}/>
+
 
 
     </Routes>

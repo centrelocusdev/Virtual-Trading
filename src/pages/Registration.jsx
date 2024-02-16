@@ -488,7 +488,7 @@ const Registration = () => {
         alt="vector"
         className="esm:h-0 esm:w-0 md:h-12 md:w-16 absolute bottom-10 left-10"
       /> */}
-      <p className="text-font_blue1  esm:text-4xl md:text-5.1xl font-bold text-center font-sans mb-20">
+      <p className="text-purple1  esm:text-4xl md:text-5.1xl font-bold text-center font-sans mb-20">
         Registration
       </p>
       <div className="esm:w-11/12 md:w-0.87 esm:flex-col md:flex-row flex h-fit gap-x-5">
@@ -498,7 +498,7 @@ const Registration = () => {
           </p>
           <div className=" w-full flex flex-col items-start h-fit bg-white px-6 py-7 rounded-2lg border border-solid border-bg_Dark">
             <form className="flex flex-col items-start w-full h-fit">
-              <p className="text-font_blue1 font-bold text-xl esm:self-center  esm:mb-10 md:mb-4">
+              <p className="text-purple1 font-bold text-xl esm:self-center  esm:mb-10 md:mb-4">
                 Personal Information
               </p>
               <div className="esm:flex-col flex lg:flex-row w-full gap-x-4 mb-4">
@@ -511,7 +511,7 @@ const Registration = () => {
                     <span className="text-red-600 text-lg">*</span>
                   </label>
                   <input
-                    className="focus:outline-none rounded-4xl bg-blue10 pt-1.5 pr-8 pb-1.5 pl-4 text-base font-bold text-gray3"
+                    className="focus:outline-none rounded-4xl bg-green9 pt-1.5 pr-8 pb-1.5 pl-4 text-base font-bold text-gray3"
                     value={formData.first_name}
                     onChange={onChangeHandler}
                     type="text"
@@ -534,12 +534,12 @@ const Registration = () => {
                         name="country_code"
                         value={formData.country_code}
                         onChange={onChangeHandler}
-                        className="font-bold bg-blue10 text-gray3 focus:outline-none rounded-l-4xl h-full pt-1.5  pb-1.5 pl-4"
+                        className="font-bold bg-green9 text-gray3 focus:outline-none rounded-l-4xl h-full pt-1.5  pb-1.5 pl-4"
                       >
                         {countryCodes.map((item, i) => {
                           return (
                             <option
-                              className="bg-blue10"
+                              className="bg-green9"
                               value={item.numeric}
                               key={i}
                             >
@@ -550,7 +550,7 @@ const Registration = () => {
                       </select>
                     </div>
                     <input
-                      className="font-bold bg-blue10 focus:outline-none w-full rounded-r-4xl pt-1.5 pr-8 pb-1.5 pl-4 text-gray3"
+                      className="font-bold bg-green9 focus:outline-none w-full rounded-r-4xl pt-1.5 pr-8 pb-1.5 pl-4 text-gray3"
                       value={formData.phone_number}
                       onChange={onChangeHandler}
                       type="number"
@@ -572,7 +572,7 @@ const Registration = () => {
                     Email Address<span className="text-red-600">*</span>
                   </label>
                   <input
-                    className=" font-bold bg-blue10 focus:outline-none rounded-4xl pt-1.5 pr-8 pb-1.5 pl-4 text-gray3"
+                    className=" font-bold bg-green9 focus:outline-none rounded-4xl pt-1.5 pr-8 pb-1.5 pl-4 text-gray3"
                     value={formData.email}
                     onChange={onChangeHandler}
                     type="email"
@@ -615,13 +615,13 @@ const Registration = () => {
                       name="country"
                       onChange={onChangeHandler}
                       value={formData.country}
-                      className="font-bold bg-blue10 focus:outline-none w-full appearance-none rounded-4xl pt-1.5 pr-8 pb-1.5 pl-4 text-gray3"
+                      className="font-bold bg-green9 focus:outline-none w-full appearance-none rounded-4xl pt-1.5 pr-8 pb-1.5 pl-4 text-gray3"
                     >
                       {country.map((item) => {
                         return (
                           <option
                             value={item}
-                            className="bg-blue10 rounded-4xl pt-1.5 pr-8 pb-1.5 pl-4 text-gray3"
+                            className="bg-green9 rounded-4xl pt-1.5 pr-8 pb-1.5 pl-4 text-gray3"
                             key={item}
                           >
                             {item}
@@ -711,7 +711,7 @@ const Registration = () => {
                     Password<span className="text-red-600">*</span>
                   </label>
                   <input
-                    className=" font-bold bg-blue10 focus:outline-none rounded-4xl pt-1.5 pr-8 pb-1.5 pl-4 text-gray3"
+                    className=" font-bold bg-green9 focus:outline-none rounded-4xl pt-1.5 pr-8 pb-1.5 pl-4 text-gray3"
                     value={formData.password}
                     onChange={onChangeHandler}
                     type="password"
@@ -724,7 +724,7 @@ const Registration = () => {
                   <p className="text-base text-red-600">{state.password}</p>
                   <div className="flex items-center mt-2 gap-2">
                     <input
-                      className="bg-blue10 cursor-pointer"
+                      className="bg-green9 cursor-pointer"
                       type="checkbox"
                       name="password-visibility"
                       onChange={handlePasswordVisibility}
@@ -740,7 +740,7 @@ const Registration = () => {
                     Confirm Password<span className="text-red-600">*</span>
                   </label>
                   <input
-                    className="font-bold bg-blue10 focus:outline-none rounded-4xl pt-1.5 pr-8 pb-1.5 pl-4 text-gray3"
+                    className="font-bold bg-green9 focus:outline-none rounded-4xl pt-1.5 pr-8 pb-1.5 pl-4 text-gray3"
                     value={formData.confirm_password}
                     onChange={onChangeHandler}
                     type="password"
@@ -762,7 +762,7 @@ const Registration = () => {
           </p>
           {/* divider */}
           <div className="flex w-full flex-col mb-5  p-5 bg-white px-7 rounded-2lg border border-solid border-bg_Dark">
-            {/* <p className="text-font_blue1 font-bold esm:text-2xl md:text-2xl.1 self-center mb-4">
+            {/* <p className="text-purple1 font-bold esm:text-2xl md:text-2xl.1 self-center mb-4">
               Total Amount to be Paid
             </p> */}
             <div className="flex justify-between w-full border-b-2 border-b-solid border-b-gray4 mb-4 pb-4">
@@ -796,18 +796,18 @@ const Registration = () => {
                 <p className="esm:text-sm sm:text-base font-bold text-gray4">
                   ₹ {plan.fees}
                 </p>
-                <div className="rounded-2lg bg-white py-1 px-2.5 flex items-center border border-solid border-font_blue1 ">
+                <div className="rounded-2lg bg-white py-1 px-2.5 flex items-center border border-solid border-purple1 ">
                   <input
                     onChange={(e) => {
                       setEnteredCoupon(e.target.value);
                     }}
                     placeholder="Coupon Code"
                     type="text"
-                    className="focus:outline-none border-none text-xs font-bold placeholder:text-font_blue1 w-28 mr-1"
+                    className="focus:outline-none border-none text-xs font-bold placeholder:text-purple1 w-28 mr-1"
                   ></input>
                   <span
                     onClick={verifyCoupon}
-                    className="flex items-center justify-center text-center bg-font_blue1 text-white rounded-md py-0.5 px-2.5 text-xs cursor-pointer"
+                    className="flex items-center justify-center text-center bg-purple1 text-white rounded-full py-0.5 px-2.5 text-xs cursor-pointer"
                   >
                     Apply
                   </span>
@@ -878,11 +878,11 @@ const Registration = () => {
           />
           <span className=" font-sm font-medium text-black">
             I have read and agree to the,{" "}
-            <Link className="text-link_active underline" href="#">
+            <Link className="text-purple1 underline" href="#">
               terms and conditions
             </Link>{" "}
             and{" "}
-            <Link className="text-link_active underline" href="#">
+            <Link className="text-purple1 underline" href="#">
               privacy policy
             </Link>
             .
@@ -890,7 +890,7 @@ const Registration = () => {
         </div>
       </div>
       <button
-        className="px-11 esm:py-4 md:py-4 esm:text-sm sm:text-lg bg-font_blue1 text-white rounded-md self-center"
+        className="px-11 esm:py-4 md:py-4 esm:text-sm sm:text-lg bg-purple1 text-white rounded-full self-center"
         onClick={onSubmitHandler}
         
       >
