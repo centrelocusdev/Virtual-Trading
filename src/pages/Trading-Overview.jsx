@@ -204,14 +204,15 @@ const TradingOverview = () => {
           title={"Trading Overview"}
         />
         <div className="w-full p-10 h-fit">
-          <div className="bg-white w-full flex justify-center items-center h-80 mb-10 py-5">
+          {/* <div className="bg-white w-full flex justify-center items-center h-80 mb-10 py-5"> */}
             {/* {isLoading ? (
               <ClipLoader size={20} color="black" />
             ) : (         
               <p>NO graph</p>  
               // <Line data={performance_history} options={options}/>
             )} */}
-          </div>
+            {/* <p>No Data</p> */}
+          {/* </div> */}
           <table className="w-full">
             <thead className="w-full">
               <tr className="flex w-full py-3 px-7 items-center">
@@ -240,7 +241,7 @@ const TradingOverview = () => {
                   Amount(Rs)
                 </th>
                 <th className="w-11p font-poppins text-xs font-medium text-center">
-                  Action
+                  Stop Loss
                 </th>
               </tr>
             </thead>
@@ -283,9 +284,7 @@ const TradingOverview = () => {
                         {item.price_per_unit * item.quantity}
                       </td>
                       <td className="w-11p font-poppins text-xs font-normal text-center">
-                        <button className="font-poppins text-xs font-normal text-purple1 py-0.5 px-2.5 border border-solid border-purple1">
-                          View
-                        </button>
+                        {item.stop_loss == null ? "0.00": item.stop_loss}
                       </td>
                     </tr>
                   );

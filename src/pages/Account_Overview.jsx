@@ -811,7 +811,7 @@ const Account_Overview = () => {
                   Withdrawal Starts
                 </p>
                 <p className="text-base font-inter font-semibold text-purple1 text-center">
-                  Time: 15:30:59
+                  Time: 15:30:00
                 </p>
                 {/* <p className="text-base font-inter font-semibold text-purple1 text-center">
                   Date: 29/11/2023
