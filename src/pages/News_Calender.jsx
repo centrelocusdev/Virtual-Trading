@@ -6,7 +6,7 @@ import UserNav from "../components/user-nav";
 // import newsNews from '/news-news.png';
 import ClipLoader from "react-spinners/ClipLoader";
 import Error from "../components/error";
-import { userDashbaordData } from "../requests/user-dashbaord";
+import { userDashboardData } from "../requests/user-dashbaord";
 import { useNavigate } from "react-router-dom";
 import Calendar from 'react-calendar';
 import moment from "moment";
@@ -34,7 +34,7 @@ const News_Calender = () => {
     async function fetchNewsData(){
      try{
       setIsLoading(true);
-      const res = await userDashbaordData.newsData();
+      const res = await userDashboardData.newsData();
       if(res.status === 'success'){
         setIsLoading(false);
         

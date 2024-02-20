@@ -2,7 +2,7 @@ import Sidebar2 from "../components/sidebar2";
 import UserNav from "../components/user-nav";
 import Education_Card from "../components/education-card";
 import { useState, useEffect } from "react";
-import { userDashbaordData } from "../requests/user-dashbaord";
+import { userDashboardData } from "../requests/user-dashbaord";
 import {
   useQuery,
 } from "@tanstack/react-query";
@@ -15,7 +15,7 @@ const Education_Blog = () => {
     error,
   } = useQuery({
     queryKey: ["blogs"],
-    queryFn: userDashbaordData.getEducationalBlogs,
+    queryFn: userDashboardData.getEducationalBlogs,
   });
   console.log("query", isLoading, blogs, error);
   const [screenWidth, setScreenWidth] = useState("");
@@ -34,7 +34,7 @@ const Education_Blog = () => {
 
   // async function fetchEducationalBlogs() {
   //   try {
-  //     const data = await userDashbaordData.getEducationalBlogs();
+  //     const data = await userDashboardData.getEducationalBlogs();
   //     console.log(data);
   //     if (data.status === "success" && data && data.data) {
   //       setBlogs(data.data);

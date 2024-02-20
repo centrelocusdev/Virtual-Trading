@@ -4,7 +4,7 @@ import verificationtick from "/edu_verification_green.svg";
 import { useNavigate } from "react-router-dom";
 import { FaHeart } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa";
-import { userDashbaordData } from "../requests/user-dashbaord";
+import { userDashboardData } from "../requests/user-dashbaord";
 import { useLocation } from "react-router-dom";
 import {
   useMutation,
@@ -29,14 +29,14 @@ const Education_Card = ({ data, blogs }) => {
   const date = new Date(created_at).toLocaleDateString();
 
   const { mutate: handleLikeBlog } = useMutation({
-    mutationFn: userDashbaordData.likeBlog,
+    mutationFn: userDashboardData.likeBlog,
     onSuccess: () => {
       // Invalidate and refetch
       queryClient.invalidateQueries({ queryKey: ["blogs"] });
     },
   });
   const { mutate: handleUnlikeBlog } = useMutation({
-    mutationFn: userDashbaordData.unLikeBlog,
+    mutationFn: userDashboardData.unLikeBlog,
     onSuccess: () => {
       // Invalidate and refetch
       queryClient.invalidateQueries({ queryKey: ["blogs"] });
@@ -46,7 +46,7 @@ const Education_Card = ({ data, blogs }) => {
 
   // async function handleLikeBlog() {
   //   try {
-  //     const res = await userDashbaordData.likeBlog(id);
+  //     const res = await userDashboardData.likeBlog(id);
   //     console.log("ui like blog", res);
   //   } catch (err) {
   //     console.log(err);
@@ -54,7 +54,7 @@ const Education_Card = ({ data, blogs }) => {
   // }
   // async function handleUnlikeBlog() {
   //   try {
-  //     const res = await userDashbaordData.unLikeBlog(id);
+  //     const res = await userDashboardData.unLikeBlog(id);
   //     console.log("ui unlike blog", res);
   //   } catch (err) {
   //     console.log(err);

@@ -12,6 +12,7 @@ import BuyModal from "../components/buy-modal";
 import SellModal from "../components/sell-modal";
 import { toast } from "react-toastify";
 
+
 // import Error from "../components/error";
 import { IoMdArrowDropup } from "react-icons/io";
 import moment from "moment";
@@ -88,7 +89,6 @@ const Trading_Platform_Detail = () => {
           stockData.symbol
         );
         if (res.status === "success") {
-          setLastPriceLoading(false);
           console.log("symbol fetched data", res.data);
           const data = {
             last_price: res.data.lastPrice,
@@ -96,6 +96,7 @@ const Trading_Platform_Detail = () => {
           };
           setStockData2(data);
         }
+        setLastPriceLoading(false);
       } catch (err) {
         console.log(err);
         setLastPriceLoading(false);
@@ -167,7 +168,6 @@ const Trading_Platform_Detail = () => {
       try {
         setLiveStockDataLoading(true);
         const res = await stockAPI.getDailyDataOfStock(stockData.symbol);
-        setLiveStockDataLoading(false);
         console.log(
           "live stock price",
           res.data.grapthData[res.data.grapthData.length - 1]
@@ -191,6 +191,8 @@ const Trading_Platform_Detail = () => {
           p: p_change,
           type: pChangeType,
         });
+        setLiveStockDataLoading(false);
+
       } catch (err) {
         console.log(err);
         setLiveStockDataLoading(false);
@@ -394,8 +396,16 @@ const Trading_Platform_Detail = () => {
         sellLimit
       );
       if (res.status === "success") {
-        setIsBuyDone(true);
+        if(transaction_type === 'BUY'){
+          setIsBuyDone(true);
+        }else{
+          setisSellDone(true);
+        }
         console.log("transaction done ui", res);
+        setTimeout(() => {
+          setIsBuyDone(false);
+          setisSellDone(false);
+        } , 3000)
       }
     } catch (err) {
       console.log(err);
@@ -488,7 +498,7 @@ const Trading_Platform_Detail = () => {
                 </div>
 
                 <div className="flex flex-col gap-2">
-                  {lastPriceLoading ? (
+                  {liveStockDataLoading || lastPriceLoading ? (
                     <div className="flex gap-2">
                       <div
                         className={`flex items-center   text-white rounded-full py-0.5 px-2.5`}

@@ -393,6 +393,8 @@ const Trading_Platform = () => {
                           symbol: item.symbol,
                           series: item.series,
                           listingDate: item.listingDate,
+                          previousClose: item.previousClose
+
                         },
                       });
                     }}

@@ -12,7 +12,7 @@ import questionmark from "/dash-questionmark.svg";
 // import greenCircle from "/dash-green-circle.svg";
 import support from "/dash-support.svg";
 import { useState, useEffect } from "react";
-import { userDashbaordData } from "../requests/user-dashbaord";
+import { userDashboardData } from "../requests/user-dashbaord";
 // import ClipLoader from "react-spinners/ClipLoader";
 import Error from "../components/error";
 import { useDisclosure } from "@chakra-ui/react";
@@ -46,6 +46,8 @@ const Account_Overview = () => {
   const [isError, setIsError] = useState(false);
   const [tradingDays, setTradingDays] = useState("");
   const [userData, setUserData] = useState({});
+
+  
   useEffect(() => {
     setScreenWidth(window.innerWidth);
     const handleResize = () => {
@@ -86,7 +88,7 @@ const Account_Overview = () => {
   async function fetchUserDetails() {
     try {
       setIsLoading(true);
-      const res = await userDashbaordData.userData();
+      const res = await userDashboardData.userData();
       if (res.status === "success") {
         console.log("bhavya", res);
         setUserData(res.data);

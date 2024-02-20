@@ -1,7 +1,7 @@
 import AccountOverview from "/Account Overview 1.png";
 import Group from "/Group.png";
 import TradingPlatform from "/Trading platform 1.png";
-import vector from "/Vector.svg";
+// import vector from "/Vector.svg";
 import Eclipse from "/Ellipse 2.svg";
 import { auth } from "../requests/auth";
 import { toast } from "react-toastify";
@@ -131,7 +131,7 @@ const Login = () => {
           toast.success(res.message);
           setTimeout(() => {
             navigate("/account-overview");
-          }, 2000);
+          }, 3000);
         } else if (res && res.status === "error") {
           // console.log("in the login", res);
           toast.error(res.message);
@@ -144,7 +144,7 @@ const Login = () => {
   }
   return (
     <div className="bg-no-repeat bg-cover bg-center bg-[url('/plan_back.png')] min-h-screen h-fit esm:bg-bg_Dark md:bg-white w-screen esm:flex-col esm:justify-between sm:justify-normal  sm:flex-row flex">
-      <div className="sticky h-fit w-full flex flex-col  esm:block sm:hidden mb-5">
+      <div  className="cursor-pointer sticky h-fit w-full flex flex-col  esm:block sm:hidden mb-5">
         <img
           src={TradingPlatform}
           alt="account-overview"
@@ -159,7 +159,7 @@ const Login = () => {
       <div className=" esm:rounded-t-largest sm:rounded-none esm:pt-10 sm:pt-0 esm:w-full sm:w-2/5  esm:h-fit sm:h-fit sm:min-h-screen  flex flex-col justify-center items-center">
         <div className="esm:w-full esm:px-10 md:px-0 md:w-4/5 h-fit flex flex-col items-center">
           <div className="flex items-center justify-center gap-4 mb-10">
-            <img src={Eclipse} alt="logo" className="h-14 w-14" />
+            <img onClick={() => {navigate('/')}} src={Eclipse} alt="logo" className="cursor-pointer h-14 w-14" />
             <p className="esm:text-3xl md:text-4xl font-semibold">
               Virtual Trading
             </p>

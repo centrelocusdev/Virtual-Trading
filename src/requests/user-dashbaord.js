@@ -90,4 +90,4 @@ async function newsData(){
         return {status: "error", message: "Something went wrong!"};
     }
 }
-export const userDashbaordData = {getEducationalBlogs , likeBlog , unLikeBlog , userData, newsData};
+export const userDashboardData = {getEducationalBlogs , likeBlog , unLikeBlog , userData, newsData};
