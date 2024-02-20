@@ -71,18 +71,18 @@ const BuyModal = ({
                   className="focus:outline-none w-28 py-1 border-2 border-solid pl-2 border-black rounded"
                 />
               </div>
-              <div className="flex border-2 border-solid border-gray-200 py-2 gap-2 px-2 items-center rounded">
-                <p>Stoploss:</p>
-                <input
-                  value={stoploss}
-                  onChange={(e) => {
-                    changeStoploss(e.target.value);
-                  }}
-                  type="number"
-                  placeholder="0"
-                  className="focus:outline-none w-28 py-1 border-2 border-solid pl-2 border-black rounded"
-                />
-              </div>
+            {transactionType !== 'limit' && <div className="flex border-2 border-solid border-gray-200 py-2 gap-2 px-2 items-center rounded">
+              <p>Stoploss:</p>
+              <input
+                value={stoploss}
+                onChange={(e) => {
+                  changeStoploss(e.target.value);
+                }}
+                type="number"
+                placeholder="0"
+                className="focus:outline-none w-28 py-1 border-2 border-solid pl-2 border-black rounded"
+              />
+            </div>}
             </div>
             {transactionType === 'market'
             ?
