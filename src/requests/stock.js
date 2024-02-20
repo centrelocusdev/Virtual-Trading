@@ -180,7 +180,7 @@ async function transaction(stock_name, stock_symbol, transaction_type, quantity,
       transaction_type,
       quantity,
       price_per_unit,
-      stop_loss,
+      stop_loss: Number(stop_loss)
     }
   }else{
     obj ={
@@ -189,11 +189,12 @@ async function transaction(stock_name, stock_symbol, transaction_type, quantity,
       transaction_type,
       quantity,
       price_per_unit,
-      stop_loss,
+      stop_loss: Number(stop_loss),
       limit
     }
   }
   try{
+    console.log(typeof(price_per_unit) ,typeof(Number(stop_loss)))
     console.log("name", stock_name ,"symbol", stock_symbol,"type", transaction_type ,"quan", quantity, "price", price_per_unit, "stop", stop_loss)
     const res = await axios.put(`${Backend_URL}/api/stock/transaction/` ,obj , {
       headers: {
