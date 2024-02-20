@@ -347,6 +347,7 @@ const Trading_Platform = () => {
                             symbol: item.symbol,
                             series: item.series,
                             listingDate: item.dateoflisting,
+                            previousClose: "undefined"
                           },
                         });}}
                          key={item.symbol} className="hover:bg-purple2 hover:text-white p-5 cursor-pointer z-30 border-b flex flex-col border-b-solid border-b-l-gray3  font-semibold font-lato">

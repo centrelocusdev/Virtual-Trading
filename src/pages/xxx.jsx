@@ -240,7 +240,7 @@ const Trading_Platform_Detail = () => {
       if (isWithinTimeRange) {
         fetchData();
       }
-    }, 60000); // 5 minutes interval
+    }, 5000); // 5 minutes interval
     return () => clearInterval(interval); // Cleanup interval on unmount
   }, []);
 

@@ -1,4 +1,4 @@
-import logo from "/logo.svg";
+import logo from "/logo.jpg";
 // import accountOverview from "/dash-accountoverview.png";
 // import user from "/dashboard-account.png";
 // import certificate from "/dashboard-certificate.svg";

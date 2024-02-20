@@ -374,22 +374,22 @@ const Account_Overview = () => {
                     Trading Cycle Refreshes on
                   </p>
                   <p className="text-base font-inter font-semibold text-purple1 text-center">
-                    Time: 23:59:59
+                    Time: 09:15:00
                   </p>
-                  <p className="text-base font-inter font-semibold text-purple1 text-center">
+                  {/* <p className="text-base font-inter font-semibold text-purple1 text-center">
                     Date: 29/11/2023
-                  </p>
+                  </p> */}
                 </div>
                 <div className="w-full h-fit flex flex-col items-center">
                   <p className="text-base font-inter font-semibold text-black2  text-center">
                     Withdrawal Starts
                   </p>
                   <p className="text-base font-inter font-semibold text-purple1 text-center">
-                    Time: 23:59:59
+                    Time: 15:30:00
                   </p>
-                  <p className="text-base font-inter font-semibold text-purple1 text-center">
+                  {/* <p className="text-base font-inter font-semibold text-purple1 text-center">
                     Date: 29/11/2023
-                  </p>
+                  </p> */}
                 </div>
               </div>
               <div className="w-full h-fit px-5 py-5 bg-white rounded-2lg items-center">
@@ -514,11 +514,11 @@ const Account_Overview = () => {
                     <p className="text-sm font-inter font-semibold text-black2">
                       Profit/Loss
                     </p>
-                    <p className="text-2xl font-inter font-semibold text-black2">
+                    <p className={`${ userData.user.overall_profit >= userData.user.overall_loss? "text-green4"  : "text-red1" } text-2xl font-inter font-semibold text-black2`}>
                       {Math.max(
                         userData.user.overall_profit,
                         userData.user.overall_loss
-                      )}
+                      )}%
                     </p>
                   </div>
                 </div>
@@ -538,7 +538,7 @@ const Account_Overview = () => {
                       Trading Days
                     </p>
                     <p className="text-2xl font-inter font-semibold text-black2">
-                      {tradingDays} days
+                      {userData.user.minimum_trading_days} {userData.user.minimum_trading_days> 1  ?"days": 'day'}
                     </p>
                   </div>
                 </div>
@@ -568,7 +568,7 @@ const Account_Overview = () => {
                           />
                         </div>
                         <div className=" esm:hidden msm:flex w-fit bg-white py-1 px-5 rounded-2xl.1 gap-x-3.5 items-center justify-center">
-                          {userData.user.today_max_loss_recorded >=
+                          {userData.user.daily_loss >=
                           userData.subscriptions[0].plan.max_daily_loss ? (
                             <div className="w-3 h-3 rounded-full bg-red1"></div>
                           ) : (
@@ -576,7 +576,7 @@ const Account_Overview = () => {
                           )}
 
                           <span className="text-base font-inter font-semibold">
-                            {userData.user.today_max_loss_recorded >=
+                            {userData.user.daily_loss >=
                             userData.subscriptions[0].plan.max_daily_loss
                               ? "Crossed"
                               : "Ongoing"}
@@ -589,10 +589,10 @@ const Account_Overview = () => {
                       </p>
                       <p className="text-gray4 font-inter text-sm font-semibold">
                         Today’s Max Loss Recorded:{" "}
-                        {userData.user.today_max_loss_recorded}
+                        {userData.user.daily_loss}
                       </p>
                       <div className=" esm:flex msm:hidden w-fit bg-white py-1 px-5 rounded-2xl.1 gap-x-3.5 items-center justify-center">
-                        {userData.user.today_max_loss_recorded >=
+                        {userData.user.daily_loss >=
                         userData.subscriptions[0].plan.max_daily_loss ? (
                           <div className="w-3 h-3 rounded-full bg-red1"></div>
                         ) : (
@@ -600,7 +600,7 @@ const Account_Overview = () => {
                         )}
 
                         <span className="text-base font-inter font-semibold">
-                          {userData.user.today_max_loss_recorded >=
+                          {userData.user.daily_loss >=
                           userData.subscriptions[0].plan.max_daily_loss
                             ? "Crossed"
                             : "Ongoing"}
@@ -642,8 +642,8 @@ const Account_Overview = () => {
                         {userData.subscriptions[0].plan.max_overall_loss}%
                       </p>
                       <p className="text-gray4 font-inter text-sm font-semibold">
-                        Today’s Max Loss Recorded:{" "}
-                        {userData.user.today_max_loss_recorded}
+                        Overall Max Loss Recorded:{" "}
+                        {userData.user.overall_loss}
                       </p>
                       <div className=" esm:flex msm:hidden w-fit bg-white py-1 px-5 rounded-2xl.1 gap-x-3.5 items-center justify-center">
                         {userData.user.overall_loss >=
@@ -679,13 +679,13 @@ const Account_Overview = () => {
                           />
                         </div>
                         <div className="esm:hidden msm:flex w-fit bg-white py-1 px-5 rounded-2xl.1 gap-x-3.5 items-center justify-center">
-                        {tradingDays >=
+                        {userData.user.minimum_trading_days >=
                           userData.subscriptions[0].plan.min_trading_day ? (
                             <div className="w-3 h-3 rounded-full bg-green1"></div>
                           ) : (
                             <div className="w-3 h-3 rounded-full bg-purple1"></div>
                           )}
-                          {tradingDays >=
+                          {userData.user.minimum_trading_days >=
                           userData.subscriptions[0].plan.min_trading_day ? (
                             <span className="text-base font-inter text-green1 font-semibold">
                               Passed
@@ -698,16 +698,19 @@ const Account_Overview = () => {
                         </div>
                       </div>
                       <p className="text-gray4 font-inter text-sm font-semibold">
-                        {userData.subscriptions[0].plan.min_trading_day} days
+                        Minimum Trading Days: {userData.subscriptions[0].plan.min_trading_day} days
+                      </p>
+                      <p className="text-gray4 font-inter text-sm font-semibold">
+                        User&apos;s Trading Days: {userData.user.minimum_trading_days} {userData.user.minimum_trading_days> 1  ?"days": 'day'}
                       </p>
                       <div className="esm:flex msm:hidden w-fit bg-white py-1 px-5 rounded-2xl.1 gap-x-3.5 items-center justify-center">
-                      {tradingDays >=
+                      {userData.user.minimum_trading_days >=
                           userData.subscriptions[0].plan.min_trading_day ? (
                             <div className="w-3 h-3 rounded-full bg-green1"></div>
                           ) : (
                             <div className="w-3 h-3 rounded-full bg-purple1"></div>
                           )}
-                          {tradingDays >=
+                          {userData.user.minimum_trading_days >=
                           userData.subscriptions[0].plan.min_trading_day ? (
                             <span className="text-base font-inter text-green1 font-semibold">
                               Passed
@@ -736,15 +739,13 @@ const Account_Overview = () => {
                         </div>
                         <div className="esm:hidden msm:flex w-fit bg-white py-1 px-5 rounded-2xl.1 gap-x-3.5 items-center justify-center">
                           {userData.user.overall_profit >=
-                          userData.subscriptions[0].plan
-                            .phase_1_profit_target ? (
+                          (userData.user.phase === 'PHASE-1' ? userData.subscriptions[0].plan.phase_1_profit_target: userData.subscriptions[0].plan.phase_2_profit_target)  ? (
                               <div className="w-3 h-3 rounded-full bg-green1"></div>
                           ) : (
                             <div className="w-3 h-3 rounded-full bg-purple1"></div>
                           )}
                           {userData.user.overall_profit >=
-                          userData.subscriptions[0].plan
-                            .phase_1_profit_target ? (
+                          (userData.user.phase === 'PHASE-1' ? userData.subscriptions[0].plan.phase_1_profit_target: userData.subscriptions[0].plan.phase_2_profit_target)  ? (
                             <span className="text-base font-inter text-green1 font-semibold">
                               Passed
                             </span>
@@ -757,19 +758,22 @@ const Account_Overview = () => {
                       </div>
                       <p className="text-gray4 font-inter text-sm font-semibold">
                         Profit target is{" "}
-                        {userData.subscriptions[0].plan.phase_1_profit_target}%
+                        {userData.user.phase === 'PHASE-1' ? userData.subscriptions[0].plan.phase_1_profit_target: userData.subscriptions[0].plan.phase_2_profit_target}%
+                      </p>
+                      <p className="text-gray4 font-inter text-sm font-semibold">
+                        User&apos;s Overall Profit:{" "}
+                        {userData.user.overall_profit}%
                       </p>
                       <div className="esm:flex msm:hidden w-fit bg-white py-1 px-5 rounded-2xl.1 gap-x-3.5 items-center justify-center">
-                        {userData.user.overall_profit >=
-                        userData.subscriptions[0].plan.phase_1_profit_target ? (
+                      {userData.user.overall_profit >=
+                          (userData.user.phase === 'PHASE-1' ? userData.subscriptions[0].plan.phase_1_profit_target: userData.subscriptions[0].plan.phase_2_profit_target)  ? (
                           <div className="w-3 h-3 rounded-full bg-green1"></div>
                         ) : (
                           <div className="w-3 h-3 rounded-full bg-purple1"></div>
                         )}
                         <span className="text-base font-inter text-green1 font-semibold">
                         {userData.user.overall_profit >=
-                          userData.subscriptions[0].plan
-                            .phase_1_profit_target ? (
+                          (userData.user.phase === 'PHASE-1' ? userData.subscriptions[0].plan.phase_1_profit_target: userData.subscriptions[0].plan.phase_2_profit_target)  ?(
                             <span className="text-base font-inter text-green1 font-semibold">
                               Passed
                             </span>
@@ -796,22 +800,22 @@ const Account_Overview = () => {
                   Trading Cycle Refreshes on
                 </p>
                 <p className="text-base font-inter font-semibold text-purple1 text-center">
-                  Time: 23:59:59
+                Time: 09:15:00
                 </p>
-                <p className="text-base font-inter font-semibold text-purple1 text-center">
+                {/* <p className="text-base font-inter font-semibold text-purple1 text-center">
                   Date: 29/11/2023
-                </p>
+                </p> */}
               </div>
               <div className="w-full h-fit flex flex-col items-center">
                 <p className="text-base font-inter font-semibold text-black2  text-center">
                   Withdrawal Starts
                 </p>
                 <p className="text-base font-inter font-semibold text-purple1 text-center">
-                  Time: 23:59:59
+                  Time: 15:30:59
                 </p>
-                <p className="text-base font-inter font-semibold text-purple1 text-center">
+                {/* <p className="text-base font-inter font-semibold text-purple1 text-center">
                   Date: 29/11/2023
-                </p>
+                </p> */}
               </div>
             </div>
             <div className="w-full h-fit px-5 py-5 bg-white rounded-2lg items-center">
@@ -865,10 +869,10 @@ const Account_Overview = () => {
                 -{userData.subscriptions[0].plan.phase_1_profit_target}% profit
                 achievability in first demo account
               </p>
-              <p className="text-lg font-inter">
+              {userData.subscriptions[0].plan.phase_2_profit_target && <p className="text-lg font-inter">
                 -{userData.subscriptions[0].plan.phase_2_profit_target}% profit
                 achievability in second demo account (once first one is passed)
-              </p>
+              </p>}
               <p className="text-lg font-inter">
                 -Trailing stoploss (daily and overall loss) -withdraw tab will
                 be available after first challenge is cleared

@@ -1,4 +1,6 @@
 const Backend_URL = "https://trade.thedelvierypointe.com";
+import { toast } from "react-toastify";
+
 import axios from "axios";
 
 async function getAllListedStocks() {
@@ -73,7 +75,7 @@ async function getHistoricalDataOfAnyStock(series, symbol,startDate, endDate) {
 async function getDailyDataOfStock(symbol) {
   try {
     // console.log(localStorage.getItem("token_access"));
-    // console.log(series, symbol, startDate, endDate);
+    console.log("in the api", symbol);
     const res = await axios.post(
       `${Backend_URL}/api/nse/historical-stock-data/`,
       {
@@ -170,9 +172,18 @@ async function getAllTransactionsOfUser2(){
 async function transaction(stock_name, stock_symbol, transaction_type, quantity, price_per_unit, stop_loss , buy_limit, sell_limit){
   let limit=0;
   transaction_type === 'BUY' ? limit = buy_limit : limit = sell_limit;
-  try{
-    console.log("name", stock_name ,"symbol", stock_symbol,"type", transaction_type ,"quan", quantity, "price", price_per_unit, "stop", stop_loss)
-    const res = await axios.put(`${Backend_URL}/api/stock/transaction/` , {
+  let obj = {};
+  if(limit == 0){
+    obj = {
+      stock_name,
+      stock_symbol,
+      transaction_type,
+      quantity,
+      price_per_unit,
+      stop_loss,
+    }
+  }else{
+    obj ={
       stock_name,
       stock_symbol,
       transaction_type,
@@ -180,7 +191,11 @@ async function transaction(stock_name, stock_symbol, transaction_type, quantity,
       price_per_unit,
       stop_loss,
       limit
-    } , {
+    }
+  }
+  try{
+    console.log("name", stock_name ,"symbol", stock_symbol,"type", transaction_type ,"quan", quantity, "price", price_per_unit, "stop", stop_loss)
+    const res = await axios.put(`${Backend_URL}/api/stock/transaction/` ,obj , {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${localStorage.getItem("token_access")}`,
@@ -191,6 +206,7 @@ async function transaction(stock_name, stock_symbol, transaction_type, quantity,
     return { status: "success", data: res.data };
   }catch(err){
     console.log(err);
+    err.response && err.response.data && err.response.data.detail && toast.error(err.response.data.detail);
     return { status: "error", message: "Something went wrong!" };
   }
 

@@ -3,6 +3,7 @@ import Group from "/Group.png";
 import TradingPlatform from "/Trading platform 1.png";
 // import vector from "/Vector.svg";
 import Eclipse from "/Ellipse 2.svg";
+import logo from '/logo.jpg';
 import { auth } from "../requests/auth";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
@@ -159,7 +160,7 @@ const Login = () => {
       <div className=" esm:rounded-t-largest sm:rounded-none esm:pt-10 sm:pt-0 esm:w-full sm:w-2/5  esm:h-fit sm:h-fit sm:min-h-screen  flex flex-col justify-center items-center">
         <div className="esm:w-full esm:px-10 md:px-0 md:w-4/5 h-fit flex flex-col items-center">
           <div className="flex items-center justify-center gap-4 mb-10">
-            <img onClick={() => {navigate('/')}} src={Eclipse} alt="logo" className="cursor-pointer h-14 w-14" />
+            <img onClick={() => {navigate('/')}} src={logo} alt="logo" className="rounded-full cursor-pointer h-14 w-14" />
             <p className="esm:text-3xl md:text-4xl font-semibold">
               Virtual Trading
             </p>

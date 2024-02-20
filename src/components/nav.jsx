@@ -5,8 +5,11 @@ import { useNavigate } from 'react-router-dom';
 import { auth } from '../requests/auth';
 import { toast } from 'react-toastify';
 import { Link } from "react-scroll";
+
+
 const Nav = () => {
   
+
   const [openOptions, setOpenOptions] = useState(false);
   const [Isauth, setIsAuth] = useState(false);
   useEffect(() => {
@@ -28,10 +31,12 @@ const Nav = () => {
       console.log(err);
     }
   }
+
+
   return (
     <div id="navbar" className="w-full bg-green5 h-fit flex justify-between items-center px-20 py-2 ">
       <div onClick={() => {navigate("/")}} className='cursor-pointer flex justify-between items-center gap-2'>
-        <img className='h-10 w-10' src={logo} alt='logo'/>
+        <img className='h-10 w-10 rounded-full' src={logo} alt='logo'/>
         <p className='font-inter font-base font-semibold text-black'>TradesLO</p>
       </div>
       <div className='flex gap-10 items-center'>

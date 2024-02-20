@@ -1,4 +1,4 @@
-import logo from "/logo.svg";
+import logo from "/logo.jpg";
 // import user from '/dashboard-account.png';
 // import educationBlog from '/dashboard-educationblog.svg';
 // import help from '/dashboard-help.svg';

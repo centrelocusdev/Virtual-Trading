@@ -1,7 +1,7 @@
 import arrowB from "/dash-arrowB.svg";
 import be from "/da-bell.png";
 import sett from "/da-setting.png";
-import logo from "/logo.svg";
+import logo from "/logo.jpg";
 import { FiMenu } from "react-icons/fi";
 import { useEffect, useState } from "react";
 import { MdOutlineCancel } from "react-icons/md";
@@ -33,6 +33,7 @@ import { Link } from "react-router-dom";
 import { auth } from "../requests/auth";
 import { toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
+import { userDashboardData } from "../requests/user-dashbaord";
 const UserNav = ({ title, sidebarType, active }) => {
   const navigate = useNavigate();
   // console.log(active , sidebarType);
@@ -40,6 +41,11 @@ const UserNav = ({ title, sidebarType, active }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("");
   const [openOptions, setOpenOptions] = useState(false);
+
+  const [userData, setUserData] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
+  const [tradingDays, setTradingDays] = useState("");
 
   useEffect(() => {
     setActiveTab(active);
@@ -71,6 +77,57 @@ const UserNav = ({ title, sidebarType, active }) => {
   useEffect(() => {
     // console.log(screenWidth);
   }, []);
+
+  function dateDifference(startDate, endDate) {
+    // Convert the dates to milliseconds
+    const startMillis = startDate.getTime();
+    const endMillis = endDate.getTime();
+
+    // Calculate the difference in milliseconds
+    const differenceMillis = endMillis - startMillis;
+
+    // Convert the difference to days, hours, minutes, and seconds
+    const days = Math.floor(differenceMillis / (1000 * 60 * 60 * 24));
+    const hours = Math.floor(
+      (differenceMillis % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+    );
+    const minutes = Math.floor(
+      (differenceMillis % (1000 * 60 * 60)) / (1000 * 60)
+    );
+    const seconds = Math.floor((differenceMillis % (1000 * 60)) / 1000);
+
+    // Return an object with the differences
+    return {
+      days,
+      hours,
+      minutes,
+      seconds,
+      totalMillis: differenceMillis,
+    };
+  }
+  async function fetchUserDetails() {
+    try {
+      setIsLoading(true);
+      const res = await userDashboardData.userData();
+      if (res.status === "success") {
+        console.log("bhavya", res);
+        setUserData(res.data);
+
+        const startDate = new Date(res.data.subscriptions[0].order.date);
+        const currentDate = new Date();
+        const diffDate = dateDifference(startDate, currentDate);
+        setTradingDays(diffDate.days);
+        setIsLoading(false);
+      }
+    } catch (err) {
+      setIsLoading(false);
+      setIsError(true);
+      console.log(err);
+    }
+  }
+  useEffect(() => {
+    fetchUserDetails();
+  }, []);
   return (
     <>
       <div className="w-full h-fit bg-white rounded-2xl.1 esm:px-5 esm:py-2 md:py-5 md:px-12 flex justify-between">
@@ -90,7 +147,12 @@ const UserNav = ({ title, sidebarType, active }) => {
             {title}
           </span>
           <span className="esm:hidden md:block text-2xl font-bold font-lato">
-            #account_id
+           {isError?
+           ""
+            :
+            isLoading ? "": "#"+userData.user.id
+             }
+            
           </span>
         </div>
         <div className="flex gap-x-14 items-center">

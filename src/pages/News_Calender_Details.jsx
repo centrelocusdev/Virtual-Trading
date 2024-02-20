@@ -19,7 +19,9 @@ const News_Calender_Details = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [screenWidth, setScreenWidth] = useState("");
-  const [dateState, setDateState] = useState(new Date(location.state.data.created_at));
+  const [dateState, setDateState] = useState(
+    new Date(location.state.data.created_at)
+  );
 
   // console.log(location.state);
   const data = location.state.data;
@@ -50,16 +52,26 @@ const News_Calender_Details = () => {
           title={"News Calender"}
         />
         <div className="w-full flex esm:flex-col md:flex-row h-fit min-h-screen py-7 gap-x-10 ">
-          <div className="w-4/5 p-7 flex flex-col gap-y-7  text-black font-poppins text-xl.1 font-semibold">
+          <div className="w-full p-7 flex flex-col gap-y-7  text-black font-poppins text-xl.1 font-semibold">
             <div className="flex gap-5 justify-between">
               <div className="flex gap-5 items-start">
-              <BiArrowBack className="cursor-pointer" onClick={() => {navigate('/news-calender')}} size={30} />
-              <p>{data.title}</p>
+                <BiArrowBack
+                  className="cursor-pointer"
+                  onClick={() => {
+                    navigate("/news-calender");
+                  }}
+                  size={30}
+                />
+                <p>{data.title}</p>
               </div>
               <div className="flex gap-2">
-                <div className="h-12 w-12 flex justify-center items-center rounded-2xl.1 border border-solid border-font_blue1">
-                  <img className="h-6 w-6 cursor-pointer" src={share} alt="heart" />
-                </div>
+                {/* <div className="h-12 w-12 flex justify-center items-center rounded-2xl.1 border border-solid border-font_blue1">
+                  <img
+                    className="h-6 w-6 cursor-pointer"
+                    src={share}
+                    alt="heart"
+                  />
+                </div> */}
               </div>
             </div>
             <div className="flex">
@@ -103,13 +115,13 @@ const News_Calender_Details = () => {
                 })}
             </div>
           </div>
-          <div className="w-2/5">
-            <Calendar
+          <div>
+            {/* <Calendar
               onChange={(e) => {
                 setDateState(e);
               }}
               value={dateState}
-            />
+            /> */}
             <div />
           </div>
         </div>
