@@ -371,7 +371,7 @@ const Account_Overview = () => {
                 </p>
                 <div className="w-full h-fit flex flex-col items-center">
                   <p className="text-base font-inter font-semibold text-black2  text-center">
-                    Trading Cycle Refreshes on
+                    Trading Cycle Refreshes at
                   </p>
                   <p className="text-base font-inter font-semibold text-purple1 text-center">
                     Time: 09:15:00
@@ -797,7 +797,7 @@ const Account_Overview = () => {
               </p>
               <div className="w-full h-fit flex flex-col items-center">
                 <p className="text-base font-inter font-semibold text-black2  text-center">
-                  Trading Cycle Refreshes on
+                  Trading Cycle Refreshes at
                 </p>
                 <p className="text-base font-inter font-semibold text-purple1 text-center">
                 Time: 09:15:00
