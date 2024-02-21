@@ -97,7 +97,7 @@ const News_Calender_Details = () => {
             </div>
             <img
               className="h-h-30 rounded-2xl.2 w-full"
-              src={`https://trade.thedelvierypointe.com${data.images}`}
+              src={`${data.images}`}
               alt="blog_image"
             />
             <div>

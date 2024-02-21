@@ -122,7 +122,7 @@ const News_Calender = () => {
                   {`${item.content.slice(0,200)}...`}
                 </p>
               </div>
-              <img className="w-40  h-40 self-center" src={`https://trade.thedelvierypointe.com${item.images}`} alt="news"/>
+              <img className="w-40  h-40 self-center" src={`${item.images}`} alt="news"/>
             </div>
             )
            })
