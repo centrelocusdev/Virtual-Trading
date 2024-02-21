@@ -4,6 +4,8 @@ import UserNav from "../components/user-nav";
 import { stockAPI } from "../requests/stock";
 import { userDashboardData } from "../requests/user-dashbaord";
 import Error from "../components/error";
+import ReactApexChart from 'react-apexcharts';
+
 // import {
 //   LineChart,
 //   Line,
@@ -69,6 +71,42 @@ const TradingOverview = () => {
   const [isError, setIsError] = useState(false);
   const [performance_history, setPerformanceHistory] = useState({});
 
+  const [chartData, setChartData] = useState({});
+  // {
+  //   series: [{
+  //     name: "Portfolio",
+  //     data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
+  //   }],
+
+  //   options: {
+  //     chart: {
+  //       height: 350,
+  //       type: 'line',
+  //       zoom: {
+  //         enabled: false
+  //       }
+  //     },
+  //     dataLabels: {
+  //       enabled: false
+  //     },
+  //     stroke: {
+  //       curve: 'straight'
+  //     },
+  //     title: {
+  //       text: 'Product Trends by Month',
+  //       align: 'left'
+  //     },
+  //     grid: {
+  //       row: {
+  //         colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
+  //         opacity: 0.5
+  //       },
+  //     },
+  //     xaxis: {
+  //       categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
+  //     }
+  //   }
+  // }
   useEffect(() => {
     setScreenWidth(window.innerWidth);
     const handleResize = () => {
@@ -86,30 +124,59 @@ const TradingOverview = () => {
       setIsLoading(true);
       const res = await userDashboardData.userData();
       if (res.status === "success") {
-        console.log("bhavya", res);
+        console.log("p h", res.data.performance_history);
         const ph = res.data.performance_history;
-        let data = [];
-        let labels = [];
-        for(let i = 0;i<ph.length;i++){
-          data.push(ph[i].value);
-          labels.push(ph[i].date);
-        }
+        let data =[];
+        let categories =[];
+        if(ph.length>0){
+          for(let i = 0;i<ph.length;i++){
+              data.push(Number(ph[i].value));
+              categories.push(ph[i].date);
+          }
 
-        const newData = {
-          labels: labels,
-          datasets: [
-            {
-              labels: "First dataset",
-              data: data,
-              backgoundColor: 'yellow',
-              borderColor: 'black',
-            pointBorderColor: "aqua"
+          let series=  [{
+            name: "Portfolio",
+            data: data
+          }]
+
+          let options= {
+            chart: {
+              height: 350,
+              type: 'line',
+              zoom: {
+                enabled: false
+              }
+            },
+            dataLabels: {
+              enabled: false
+            },
+            stroke: {
+              curve: 'straight'
+            },
+            title: {
+              text: 'Portfolio Analysis',
+              align: 'left'
+            },
+            grid: {
+              row: {
+                colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
+                opacity: 0.5
+              },
+            },
+            xaxis: {
+              categories: categories,
+            },
+            yaxis: {
+              tickAmount: 10
             }
-          ]
+          }
+          let finalData = {
+            series: series,
+            options:options
+          }
+          console.log("final data" , finalData);
+          setChartData(finalData)
         }
-
-        console.log("new data", newData);
-        setPerformanceHistory(newData);
       }
       setIsLoading(false);
      
@@ -161,27 +228,9 @@ const TradingOverview = () => {
     fetchUserTransactionHistory();
   }, []);
 
-  const data = {
-    labels: ['mon' , 'tue' , 'wed'],
-    datasets: [{
-      labels: 'Sales of the week',
-      data: [3,6,1],
-      backgoundColor: 'aqua',
-      borderColor: 'black',
-      pointBorderColor: "aqua"
-    }]
-  }
-  const options= {
-    plugins: {
-      legend: true
-    },
-    scales: {
-      y: {
-        // min:3,  
-        // max:100
-      }
-    }
-  }
+ useEffect(() => {
+  console.log("chart data" , chartData);
+ } ,[chartData])
 
   if ( isError) {
     return (
@@ -204,15 +253,16 @@ const TradingOverview = () => {
           title={"Trading Overview"}
         />
         <div className="w-full p-10 h-fit">
-          {/* <div className="bg-white w-full flex justify-center items-center h-80 mb-10 py-5"> */}
-            {/* {isLoading ? (
+          <div className="bg-white w-full flex justify-center items-center h-80 mb-10 py-5">
+            {isLoading ? (
               <ClipLoader size={20} color="black" />
             ) : (         
-              <p>NO graph</p>  
+              // <p>NO graph</p>  
               // <Line data={performance_history} options={options}/>
-            )} */}
+              chartData && chartData.series && chartData.options && <ReactApexChart options={chartData.options} series={chartData.series} type="line" height={350} width={1000} />
+            )}
             {/* <p>No Data</p> */}
-          {/* </div> */}
+          </div>
           <table className="w-full">
             <thead className="w-full">
               <tr className="flex w-full py-3 px-7 items-center">
@@ -251,8 +301,9 @@ const TradingOverview = () => {
                 <ClipLoader size={20} color="black" />
               </div>
                :
-               transactions &&
-                transactions.length > 0 &&
+              ( transactions &&
+                transactions.length) > 0 ?
+
                 transactions.map((item) => {
                   return (
                     <tr
@@ -289,6 +340,10 @@ const TradingOverview = () => {
                     </tr>
                   );
                 })
+                :
+                <p className="text-center  mt-40">No Data Available!</p>
+                
+                
                }
               
             </tbody>

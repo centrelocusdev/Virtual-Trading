@@ -3,18 +3,24 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import rightFrame from "/learn-vector-left.png";
 import leftFrame from "/learn-vector-right.png";
 import { IoIosArrowForward } from "react-icons/io";
-import { IoIosArrowBack } from "react-icons/io";
+// import { IoIosArrowBack } from "react-icons/io";
+import { useState } from "react";
+
 
 
 const Landing10 = () => {
- 
+  // const [currentVideo , setCurrentVideo] = useState("");
+  const [count, setCount] = useState(0);
+  function handleOpenVideo(){
+    window.open(videos[count].url);
+  }
 
   const customNextArrow = (onClickHandler) => (
-    <IoIosArrowForward size={30}  className="absolute right-0 bottom-40 cursor-pointer"  onClick={(e)=> {e.preventDefault();onClickHandler(e); console.log("after")}} />
+    <IoIosArrowForward size={30}  className="absolute right-0 bottom-40 cursor-pointer"  onClick={(e)=> {e.preventDefault(); setCount(count+1); onClickHandler(e); console.log(e)}} />
   );
-  const customPrevArrow = (onClickHandler) => (
-    <IoIosArrowBack size={30} className="absolute bottom-40 left-0 cursor-pointer" onClick={(e)=> {e.preventDefault();onClickHandler(e); console.log("before")}} />
-  );
+  // const customPrevArrow = (onClickHandler) => (
+  //   <IoIosArrowBack size={30} className="absolute bottom-40 left-0 cursor-pointer" onClick={(e)=> {e.preventDefault();onClickHandler(e); console.log("before")}} />
+  // );
   const videos = [
     {
       id: 1,
@@ -63,7 +69,7 @@ const Landing10 = () => {
         <span className="leading-tight text-5.1xl font-bold text-black">Learn how </span>
         <span className="leading-tight text-5.1xl font-bold text-black">to use</span>
         <span className="leading-tight text-5.1xl mb-5 font-bold text-black">TradesLo.</span>
-        <button className="bg-purple1 text-xl font-medium py-2 text-white rounded-full w-48 flex justify-center items-center">
+        <button onClick={() => {handleOpenVideo()}}  className="bg-purple1 text-xl font-medium py-2 text-white rounded-full w-48 flex justify-center items-center">
           Learn
         </button>
       </div>

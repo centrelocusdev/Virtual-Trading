@@ -36,7 +36,8 @@ import Faqs from "./pages/faq";
 
 function useAuth() {
   let auth = localStorage.getItem("token_access");
-  const isAuthenticated = auth !== null && auth !== "undefined";
+  console.log(auth);
+  const isAuthenticated = auth !== null && auth !== "undefined" && auth!== "";
   return isAuthenticated;
 }
 

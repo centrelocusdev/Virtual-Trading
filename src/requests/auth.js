@@ -130,6 +130,18 @@ async function registrationOtpVerification(formData) {
     }
   }
   
+  async function resetAccount(formData) {
+    try {
+      const res = await axios.post(`${Backend_URL}/api/reset-account/`, formData);
+      console.log("in the reset account", res);
+      if(res && res.data){
+          return {status: "success", data: res.data};
+      }
+    } catch (err) {
+      console.log("Error", err.message);
+      return {status: "error", message: "Something went wrong!"};
+    }
+  }
 
 export const auth = { 
   registration ,
@@ -139,6 +151,7 @@ export const auth = {
      getCouponData,
      forgotPassword,
      resetPassword,
-     logout
+     logout,
+     resetAccount
     
     };
