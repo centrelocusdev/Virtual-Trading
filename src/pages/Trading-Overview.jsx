@@ -259,9 +259,11 @@ const TradingOverview = () => {
             ) : (         
               // <p>NO graph</p>  
               // <Line data={performance_history} options={options}/>
-              chartData && chartData.series && chartData.options && <ReactApexChart options={chartData.options} series={chartData.series} type="line" height={350} width={1000} />
+              (chartData && chartData.series && chartData.options) ? <ReactApexChart options={chartData.options} series={chartData.series} type="line" height={220} width={800} />
+              :
+              <p>No Data</p>
+
             )}
-            {/* <p>No Data</p> */}
           </div>
           <table className="w-full">
             <thead className="w-full">
