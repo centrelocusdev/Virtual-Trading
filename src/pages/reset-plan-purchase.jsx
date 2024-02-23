@@ -9,7 +9,7 @@ const ResetPlanPurchase = () => {
   const [plans, setPlans] = useState([]);
   const [loading, setLoading] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState("Stellar");
-  const [selectedPlanId, setSelectedPlanId] = useState("");
+  const [selectedPlanId, setSelectedPlanId] = useState(1);
   const [selectedAmount, setSelectedAmount] = useState("30000.00");
   const [selectedFees, setSelectedFees] = useState(1800);
   const navigate = useNavigate();
