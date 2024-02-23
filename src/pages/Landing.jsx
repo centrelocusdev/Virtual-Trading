@@ -59,6 +59,7 @@ const Landing = () => {
     }
     fetchHeaderData();
   }, [headerPage]);
+  
   useEffect(() => {
 console.log(isErrorHeader);
   } , [isErrorHeader])
@@ -74,18 +75,20 @@ console.log(isErrorHeader);
       ) }
 
       {!isErrorHeader && (
-        <div className=" w-full flex gap-x-5 h-fit  justify-between bg-purple4 py-5">
-          <IoIosArrowDropleft
+        <div className=" w-full flex gap-x-5 h-fit px-20  justify-between bg-purple4 py-5">
+          {/* <IoIosArrowDropleft
             color="white"
             onClick={() => {
               headerPage != 1 && setHeaderPage(headerPage - 1);
             }}
             size={40}
             className="self-center cursor-pointer"
-          />
+          /> */}
 
           {isLoadingHeader ? (
-            <ClipLoader className="ml-50" size={20} color="white" />
+            <div className="w-full m-auto flex justify-center items-center">
+              <ClipLoader size={20} color="white" />
+            </div>
           ) : (
             headerStockData &&
             headerStockData.length > 0 &&
@@ -144,12 +147,12 @@ console.log(isErrorHeader);
             })
           )}
 
-          <IoIosArrowDropright
+          {/* <IoIosArrowDropright
             color="white"
             onClick={handleHeaderNextPage}
             size={40}
             className="self-center cursor-pointer"
-          />
+          /> */}
         </div>
       )}
 

@@ -90,4 +90,59 @@ async function newsData(){
         return {status: "error", message: "Something went wrong!"};
     }
 }
-export const userDashboardData = {getEducationalBlogs , likeBlog , unLikeBlog , userData, newsData};
+
+async function updateProfile(formData){
+    console.log("in api form data" , formData);
+    const formDataNew = new FormData();
+    
+    formDataNew.append('first_name', formData.first_name);
+    formDataNew.append('country_code', formData.country_code);
+    formDataNew.append('country', formData.country);
+    formDataNew.append('phone_number', formData.phone_number);
+    formDataNew.append('emailNotification', formData.emailNotification);
+    formDataNew.append('pushNotification', formData.pushNotification);
+    formDataNew.append('profile_picture', formData.profile_image);
+   
+    for (const entry of formDataNew.entries()) {
+        console.log(entry[0], entry[1]);
+    }
+    try{
+        const res = await axios.patch(`${Backend_URL}/api/profile/` , formDataNew, 
+        {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token_access")}`,
+            },
+          }
+        );
+        console.log("in api update profile" , res.data);
+        if(res && res.data){
+            return {status: "success" , data: res.data};
+        }
+
+    }catch(err){
+        console.log("Error", err);
+        return {status: "error", message: "Something went wrong!"};
+    }
+}
+
+async function leaderboardData(){
+    try{
+        const res = await axios.get(`${Backend_URL}/api/leaderboard/` , 
+        {
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${localStorage.getItem("token_access")}`,
+            },
+          }
+          );
+        console.log("in api" , res.data);
+        if(res && res.data){
+            return {status: "success" , data: res.data};
+        }
+
+    }catch(err){
+        console.log("Error", err);
+        return {status: "error", message: "Something went wrong!"};
+    }
+}
+export const userDashboardData = {getEducationalBlogs , likeBlog , updateProfile, unLikeBlog , userData, newsData, leaderboardData};

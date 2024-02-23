@@ -712,13 +712,13 @@ const Trading_Platform_Detail = () => {
           <div className="w-full flex justify-center gap-x-12">
             <button
               onClick={() => setOpenBuyModal(!openBuyModal)}
-              className="hover:bg-purple1 hover:text-white cursor-pointer rounded-3xl border-4 border-solid border-purple1 py-5 px-11 text-lg font-bold font-inter text-purple1 w-80"
+              className="hover:bg-green13 hover:text-white cursor-pointer rounded-3xl bg-green1 py-5 px-11 text-lg font-bold font-inter text-white w-80"
             >
               Buy
             </button>
             <button
               onClick={() => setOpenSellModal(!openSellModal)}
-              className="hover:bg-purple1 hover:text-white cursor-pointer rounded-3xl border-4 border-solid border-purple1 py-5 px-11 text-lg font-bold font-inter text-purple1 w-80"
+              className="hover:bg-red3 hover:text-white cursor-pointer rounded-3xl  py-5 px-11 bg-red2 text-lg font-bold font-inter text-white w-80"
             >
               Sell
             </button>

@@ -74,6 +74,7 @@ const Nav = () => {
         >
           FAQ
         </span>
+        <div>
         <div
           onClick={() => {
             setOpenOptions(!openOptions);
@@ -89,7 +90,7 @@ const Nav = () => {
           <ul
             className={`${
               Isauth ? "top-16 right-60 " : "top-16 right-20"
-            }flex z-50 flex-col w-fit h-fit gap-2 absolute `}
+            } flex z-50 flex-col w-fit h-fit gap-2 absolute `}
           >
             <Link
               to="about-us"
@@ -102,11 +103,13 @@ const Nav = () => {
                 About Us
               </li>}
             </Link>
-            <li className=" text-black font-medium font-inter cursor-pointer font-base bg-white rounded-md flex items-center justify-center drop-shadow-lg py-2 px-20">
+            <li onClick={() => {navigate("/hall-of-fame")}} className=" text-black font-medium font-inter cursor-pointer font-base bg-white rounded-md flex items-center justify-center drop-shadow-lg py-2 px-20">
               Hall of Fame
             </li>
           </ul>
         )}
+        </div>
+        
         {Isauth ? (
           <>
             <span

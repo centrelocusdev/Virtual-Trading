@@ -2,7 +2,25 @@ import facebook from '/ic_round-facebook.svg';
 import twitter from '/devicon_twitter.svg';
 import youtube from '/mdi_youtube.svg';
 import instagram from '/bi_instagram.svg';
+import { auth } from '../requests/auth';
+import { toast } from "react-toastify";
+import { useState } from 'react';
+
 const Footer = () => {
+  const [email ,setEmail] = useState("");
+  async function handleSubscribe(){
+    try{
+    const res = await auth.subscribe(email);
+    if(res.status === 'success'){
+    console.log(res);
+    toast.success(res.data.message);
+    }
+
+    }catch(err){
+      console.log(err);
+      toast.error("Something went wrong!");
+    }
+  }
   return (
     <div className="w-full h-fit bg-green5 flex  justify-center items-center gap-y-10 py-5 px-16">
      <div className="w-full h-fit bg-green5  flex flex-col py-6 px-16 gap-y-10">
@@ -11,10 +29,9 @@ const Footer = () => {
           <p className="text-2xl font-bold font-poppins">Stay Updated!</p>
           <p className="text-sm font-poppins">Subscribe to get all the exclusive updates about the trading industry from the industry veterans. We will even rush our selective podcasts and top-notch ebooks to your mailbox.</p>
           <div className="flex justify-between gap-x-2">
-            <input className="pl-2.5 pt-2.5 pb-2.5 pr-20 border-none rounded-md placeholder:text-xs font-semibold" type="email" name="email" placeholder="Enter Your Email"/>
-            <button className="py-1.5 px-4 bg-purple1 text-white rounded-full">Subscribe</button>
+            <input onChange={(e) => {setEmail(e.target.value)}} className="pl-2.5 pt-2.5 pb-2.5 pr-20 border-none rounded-md placeholder:text-xs font-semibold" type="email" name="email" placeholder="Enter Your Email"/>
+            <button onClick={handleSubscribe}   className="py-1.5 px-4 bg-purple1 text-white rounded-full">Subscribe</button>
           </div>
-
         </div>
         <div className="flex flex-col w-1/6 items-start gap-y-4">
           <div className="flex flex-col gap-y-2">

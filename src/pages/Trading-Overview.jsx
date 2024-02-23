@@ -284,7 +284,7 @@ const TradingOverview = () => {
                   Quantity
                 </th>
                 <th className="w-11p font-poppins text-xs font-medium text-center">
-                  Profit/Loss
+                  Transaction Status
                 </th>
                 <th className="w-11p font-poppins text-xs font-medium text-center">
                   Price(Rs)
@@ -327,8 +327,8 @@ const TradingOverview = () => {
                       <td className="w-11p font-poppins text-xs font-normal text-center">
                         {item.quantity}
                       </td>
-                      <td className="w-11p font-poppins text-xs font-normal text-green3 text-center">
-                        -
+                      <td className={`${item.transaction_status ==='SUCCESS' ? "text-green3" : "text-red2"} w-11p font-poppins text-xs font-normal  text-center`}>
+                        {item.transaction_status}
                       </td>
                       <td className="w-11p font-poppins text-xs font-normal text-center">
                         {item.price_per_unit}

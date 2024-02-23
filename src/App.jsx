@@ -20,10 +20,15 @@ import News_Calender from "./pages/News_Calender";
 import News_Calender_Details from "./pages/News_Calender_Details";
 import { Provider } from "react-redux";
 import store from "./store/store";
+import ResetPlanPurchase from "./pages/reset-plan-purchase";
+import ResetPlanPurchase2 from "./pages/reset-plan-purchase2";
 // import PrivateRoute from "./PrivateRoute";
 import { Outlet, Navigate } from "react-router-dom";
+import Leadboard from "./pages/leadboard";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-
+import Settings from "./pages/setting";
+import Certificates from "./pages/certificates";
+import Hall_of_fame from "./pages/hall_of_fame";
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -62,9 +67,15 @@ function App() {
                 path="/trading-platform-detail"
                 element={<Trading_Platform_Detail />}
               />
+              <Route path="/reset-plan-purchase" element={<ResetPlanPurchase />} />
+              <Route path="/reset-plan-purchase2" element={<ResetPlanPurchase2 />} />
+              <Route path="/settings" element={<Settings />} />
+              <Route path="/leaderboard" element={<Leadboard />} />
+              <Route path="/certificates" element={<Certificates />} />
             </Route>
             {/* <PrivateRoute path="/user-dashboard" element={<UserDashboard/>} /> */}
             <Route path="/login" element={<Login />} />
+            <Route path="/hall-of-fame" element={<Hall_of_fame />} />
             <Route path="/kyc" element={<Kyc_ />} />
             <Route path="/plan" element={<Plan_Purchase />} />
             <Route path="/" element={<Landing />} />

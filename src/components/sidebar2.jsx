@@ -247,13 +247,13 @@ const Sidebar2 = ({ active }) => {
                 </li>
               </Link>
 
-              <Link to={"/leadboard"}>
+              <Link to={"/leaderboard"}>
                 <li
                   onClick={() => {
-                    setActiveTab("leadboard");
+                    setActiveTab("leaderboard");
                   }}
                   className={`${
-                    activeTab === "leadboard"
+                    activeTab === "leaderboard"
                       ? "bg-purple1 text-white"
                       : "text-purple1"
                   } hover:bg-purple2 hover:text-white rounded-4xl gap-x-7 flex justify-start items-center px-4 py-2`}
@@ -261,9 +261,9 @@ const Sidebar2 = ({ active }) => {
                   {/* <img className="w-7 h-7" src={leadboard} alt="help" /> */}
                   <MdLeaderboard
                     size={20}
-                    color={`${activeTab === "leadboard" ? "white" : "#683AB5"}`}
+                    color={`${activeTab === "leaderboard" ? "white" : "#683AB5"}`}
                   />
-                  <span>Leadboard</span>
+                  <span>Leaderboard</span>
                 </li>
               </Link>
 

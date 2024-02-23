@@ -17,6 +17,7 @@ import { MdOutlineCancel } from "react-icons/md";
 // import billing from "/billing.png";
 // import leadboard from "/dash-leadboard.png";
 // import topup from "/dashboard-topup.svg";
+import NotificationModal from "./notificationModal";
 import { FaRegCircleUser } from "react-icons/fa6";
 import { FaRegNewspaper } from "react-icons/fa";
 import { FaBook } from "react-icons/fa";
@@ -46,6 +47,7 @@ const UserNav = ({ title, sidebarType, active }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
   const [tradingDays, setTradingDays] = useState("");
+  const [isNotificationModalOpen, setIsNotificationModalOpen] = useState(false);
 
   useEffect(() => {
     setActiveTab(active);
@@ -130,6 +132,7 @@ const UserNav = ({ title, sidebarType, active }) => {
   }, []);
   return (
     <>
+    {isNotificationModalOpen && <NotificationModal/>}
       <div className="w-full h-fit bg-white rounded-2xl.1 esm:px-5 esm:py-2 md:py-5 md:px-12 flex justify-between">
         <div className="flex items-center w-fit gap-x-2">
           {screenWidth < 1024 ? (
@@ -156,8 +159,8 @@ const UserNav = ({ title, sidebarType, active }) => {
           </span>
         </div>
         <div className="flex gap-x-14 items-center">
-          <img className="esm:hidden md:block w-12 h-12" src={be} />
-          <img className="esm:hidden md:block w-12 h-12" src={sett} />
+          <img onClick={() => {setIsNotificationModalOpen(!isNotificationModalOpen)}} className="esm:hidden md:block w-12 h-12 cursor-pointer" src={be} />
+          <img onClick={() => {navigate('/settings')}} className="esm:hidden md:block w-12 h-12 cursor-pointer" src={sett} />
           <div className="flex items-center">
             <img className="w-12 h-12" src={logo} />
             <img onClick={() => {setOpenOptions(!openOptions)}} className="cursor-pointer w-6 h-6" src={arrowB} />
@@ -469,13 +472,13 @@ const UserNav = ({ title, sidebarType, active }) => {
                     </li>
                   </Link>
 
-                  <Link to={"/leadboard"}>
+                  <Link to={"/leaderboard"}>
                     <li
                       onClick={() => {
-                        setActiveTab("leadboard");
+                        setActiveTab("leaderboard");
                       }}
                       className={`${
-                        activeTab === "leadboard"
+                        activeTab === "leaderboard"
                           ? "bg-purple1 text-white"
                           : "text-purple1"
                       } hover:bg-purple2 hover:text-white rounded-4xl gap-x-7 flex justify-start items-center px-4 py-2`}
@@ -484,10 +487,10 @@ const UserNav = ({ title, sidebarType, active }) => {
                       <MdLeaderboard
                         size={20}
                         color={`${
-                          activeTab === "leadboard" ? "white" : "#683AB5"
+                          activeTab === "leaderboard" ? "white" : "#683AB5"
                         }`}
                       />
-                      <span>Leadboard</span>
+                      <span>Leaderboard</span>
                     </li>
                   </Link>
 

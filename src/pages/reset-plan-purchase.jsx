@@ -4,11 +4,12 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import { FaRupeeSign } from "react-icons/fa";
-const Plan_Purchase = () => {
+
+const ResetPlanPurchase = () => {
   const [plans, setPlans] = useState([]);
   const [loading, setLoading] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState("Stellar");
-  const [selectedPlanId, setSelectedPlanId] = useState(1);
+  const [selectedPlanId, setSelectedPlanId] = useState("");
   const [selectedAmount, setSelectedAmount] = useState("30000.00");
   const [selectedFees, setSelectedFees] = useState(1800);
   const navigate = useNavigate();
@@ -28,7 +29,7 @@ const Plan_Purchase = () => {
       toast.warning("Kindly select any of these plans!");
       return;
     }
-    navigate("/registration", {
+    navigate("/reset-plan-purchase2", {
       state: {
         selectedPlan: selectedPlan,
         selectedFees: selectedFees,
@@ -336,4 +337,4 @@ const Plan_Purchase = () => {
   );
 };
 
-export default Plan_Purchase;
+export default ResetPlanPurchase;

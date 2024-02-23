@@ -175,7 +175,7 @@ const Account_Overview = () => {
                   </div>
                 </div>
               </div>
-              <div className="w-full h-fit flex flex-col py-5 px-3.5 bg-white rounded-2lg gap-6">
+              <div className="w-full min-h-12 h-fit flex flex-col py-5 px-3.5 bg-white rounded-2lg gap-6">
                 <div className="w-full p-5 flex gap-7 items-center border-b-2 border-b-gray4 border-b-solid">
                   <img className="w-12 h-12" src={stastics} alt="stastics" />
                   <p className="text-3xl font-inter text-gray4 font-semibold">
@@ -423,7 +423,7 @@ const Account_Overview = () => {
               {isNewsLoading?
                <ClipLoader className="ml-20" size={20} color="#683AB5" />
               :
-              <div className="w-full h-fit px-5 py-5  rounded-2lg items-center">
+              <div className="w-full h-fit min-h-12 px-5 py-5 bg-white  rounded-2lg items-center">
               {news && news.length>0 && <p className="underline text-xl mb-5 font-poppins text-center font-bold">News</p>}
                 <div className="w-full h-fit flex flex-col gap-y-8 items-center">
                   {news && news.length > 0 && (
@@ -436,7 +436,7 @@ const Account_Overview = () => {
                             });
                           }}
                           key={item.id}
-                          className="bg-white cursor-pointer w-full  rounded-2xl.1 px-5 flex items-center p-2"
+                          className="bg-purple2 text-white cursor-pointer w-full  rounded-2xl.1 px-5 flex items-center p-2"
                         >
                           {/* <img className="w-8 h-8 mr-7 self-start mt-10" src={`https://trade.thedelvierypointe.com${item.user_profile_picture}`} alt="user"  /> */}
                           <div className="flex flex-col mr-2.5 ">
@@ -448,7 +448,7 @@ const Account_Overview = () => {
                             {moment(item.created_at).format("DD-MMM-YYYY")}
                           </span>
                             </div> */}
-                            <p className="font-inter text-xs font-bold text-gray13">
+                            <p className="font-inter text-xs font-bold text-white">
                               {item.title.slice(0,40)}...
                             </p>
                             {/* <p className="font-inter text-sm font-normal text-gray13">
@@ -553,7 +553,7 @@ const Account_Overview = () => {
                 </div>
               </div>
             </div>
-            <div className="w-full h-fit flex flex-col py-5 px-3.5 bg-white rounded-2lg gap-6">
+            <div className="w-full min-h-12 h-fit flex flex-col py-5 px-3.5 bg-white rounded-2lg gap-6">
               <div className="w-full p-5 flex gap-7 items-center border-b-2 border-b-gray4 border-b-solid">
                 <img className="w-12 h-12" src={stastics} alt="stastics" />
                 <p className="text-3xl font-inter text-gray4 font-semibold">
@@ -884,7 +884,7 @@ const Account_Overview = () => {
             </div>
           </div>
           <div className="esm:w-full md:w-1/5 h-fit flex flex-col gap-y-5">
-            <div className="w-full h-fit flex flex-col items-center bg-white p-2.5 gap-y-2.5 rounded-2lg">
+            <div className="w-full min-h-11 h-fit flex flex-col items-center bg-white p-2.5 gap-y-2.5 rounded-2lg">
               <p className="text-2xl font-lato font-bold text-black2 border-b-solid border-b border-b-black">
                 Trading Cycle
               </p>
@@ -914,9 +914,9 @@ const Account_Overview = () => {
             {isNewsLoading?
                <ClipLoader className="ml-20" size={20} color="#683AB5" />
               :
-              <div className="w-full h-fit px-5 py-5  rounded-2lg items-center">
+              <div className="w-full h-fit min-h-12 bg-white px-5 py-5  rounded-2lg items-center">
               {news && news.length>0 && <p className="underline text-xl mb-5 font-poppins text-center font-bold">News</p>}
-                <div className="w-full h-fit flex flex-col gap-y-8 items-center">
+                <div className="w-full h-fit flex flex-col  gap-y-8 items-center">
                   {news && news.length > 0 && (
                     news.map((item) => {
                       return (
@@ -927,7 +927,7 @@ const Account_Overview = () => {
                             });
                           }}
                           key={item.id}
-                          className="bg-white cursor-pointer w-full  rounded-2xl.1 px-5 flex items-center p-2"
+                          className="bg-purple2 text-white cursor-pointer w-full  rounded-2xl.1 px-5 flex items-center p-2"
                         >
                           {/* <img className="w-8 h-8 mr-7 self-start mt-10" src={`https://trade.thedelvierypointe.com${item.user_profile_picture}`} alt="user"  /> */}
                           <div className="flex flex-col mr-2.5 ">
@@ -939,7 +939,7 @@ const Account_Overview = () => {
                             {moment(item.created_at).format("DD-MMM-YYYY")}
                           </span>
                             </div> */}
-                            <p className="font-inter text-xs font-bold text-gray13">
+                            <p className="font-inter text-xs font-bold text-white">
                             {item.title.slice(0,40)}...
                             </p>
                             {/* <p className="font-inter text-sm font-normal text-gray13">

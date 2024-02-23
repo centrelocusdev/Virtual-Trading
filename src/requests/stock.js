@@ -174,24 +174,47 @@ async function transaction(stock_name, stock_symbol, transaction_type, quantity,
   transaction_type === 'BUY' ? limit = buy_limit : limit = sell_limit;
   let obj = {};
   if(limit == 0){
-    obj = {
-      stock_name,
-      stock_symbol,
-      transaction_type,
-      quantity,
-      price_per_unit,
-      stop_loss: Number(stop_loss)
+    if(stop_loss == 0){
+      obj = {
+        stock_name,
+        stock_symbol,
+        transaction_type,
+        quantity,
+        price_per_unit,
+      }
+    }else{
+      obj = {
+        stock_name,
+        stock_symbol,
+        transaction_type,
+        quantity,
+        price_per_unit,
+        stop_loss: Number(stop_loss)
+      }
     }
+   
   }else{
-    obj ={
-      stock_name,
-      stock_symbol,
-      transaction_type,
-      quantity,
-      price_per_unit,
-      stop_loss: Number(stop_loss),
-      limit
+    if(stop_loss == 0){
+      obj ={
+        stock_name,
+        stock_symbol,
+        transaction_type,
+        quantity,
+        price_per_unit,
+        limit
+      }
+    }else{
+      obj ={
+        stock_name,
+        stock_symbol,
+        transaction_type,
+        quantity,
+        price_per_unit,
+        stop_loss: Number(stop_loss),
+        limit
+      }
     }
+    
   }
   try{
     console.log(typeof(price_per_unit) ,typeof(Number(stop_loss)))

@@ -14,6 +14,7 @@ export default {
     minHeight: {
       "24": "24rem",
       '11': "11rem",
+      '12': "12rem",
       'h-118': "138px",
       'h-71': "91px",
       'h-150': "150px",
@@ -21,11 +22,21 @@ export default {
       'h-400': "400px",
     },
     minWidth:{
-      '260': "260px"
+      '260': "260px",
+      '273': "273px",
+      '327': "327px",
+      '351': "351px",
+      '450': "450px"
     },
       maxWidth: {
         '306': "306px",
-        '260': "260px"
+        '260': "260px",
+        '273': "273px",
+        '351': "351px",
+        '450': "450px"
+      },
+      maxHeight: {
+        '350': "350px",
       },
       height:{
         "3p": "12px",
@@ -55,6 +66,7 @@ export default {
         "0.87": "80%",
         "w-128": "8rem",
         "w-160": "10rem",
+        'w-35': "34rem",
         "306": "306px",
         '260': "260px",
         '270': "270px",
@@ -123,9 +135,13 @@ export default {
         'brown1': "#5B5B5B",
         'red1': "#B53759",
         'red2': "#D34645",
+        'red3': "#f56462",
         'green1': "#3DA864",
         'yellow1': '#FFD12E',
         'yellow2': "#E1AB20",
+        'yellow3': "#FFDA45",
+        'yellow4': "#E8AE1A",
+        'yellow5': "#FAF9CE",
         'purple1': "#683AB5",
         'purple2': "#ab7ff5",
         'purple3': "#C19CFF",
@@ -154,11 +170,13 @@ export default {
       montserrat: ['Montserrat' , 'sans-serif'],
       amiko: ['Amiko', 'sans-serif'],
       lato: ['Lato' , 'sans-serif'],
-      manrope: ['Manrope' , 'san-serif']
+      manrope: ['Manrope' , 'san-serif'],
+      dancing_script: ["Dancing Script", "cursive"]
     },
     boxShadow: {
       box: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
-      box2: "0px 20px 95px 0px #3DA86499"
+      box2: "0px 20px 95px 0px #3DA86499",
+      box3: "0px 10px 20px 0px #C19CFF"
     }
   },
   plugins: [],

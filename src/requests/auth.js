@@ -143,6 +143,27 @@ async function registrationOtpVerification(formData) {
     }
   }
 
+  async function subscribe(email) {
+    try {
+      console.log(email);
+      const res = await axios.post(`${Backend_URL}/api/subscribe/`, {email} ,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem("token_access")}`,
+        },
+      }
+      );
+      console.log("in the subscribe api", res);
+      if(res && res.data){
+          return {status: "success", data: res.data};
+      }
+    } catch (err) {
+      console.log("Error", err.message);
+      return {status: "error", message: "Something went wrong!"};
+    }
+  }
+
 export const auth = { 
   registration ,
    registrationOtpVerification ,
@@ -152,6 +173,7 @@ export const auth = {
      forgotPassword,
      resetPassword,
      logout,
-     resetAccount
+     resetAccount,
+     subscribe
     
     };

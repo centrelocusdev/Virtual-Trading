@@ -321,7 +321,7 @@ const Trading_Platform = () => {
         />
         <div className="w-full p-10 h-fit">
           <div className="w-full flex flex-col justify-between mb-12 relative">
-            <div className="flex w-2/3 justify-between p-3 bg-white rounded-2xl.1 text-black">
+            <div className="flex w-1/3 justify-between self-end p-3 bg-white rounded-2xl.1 text-black">
               <input
               onChange={(e) => {handleSearchChange(e)}}
                 id="input-box"
@@ -335,7 +335,7 @@ const Trading_Platform = () => {
               <MdOutlineSearch style={{ cursor: "pointer" }} size={25} />
             </div>
             {openSearchedOptions && (
-              <div className="w-2/3 bg-white mt-2 h-96 overflow-y-scroll rounded-2xl.1 absolute top-14 ">
+              <div className="w-1/3 bg-white mt-2 h-96 overflow-y-scroll self-end rounded-2xl.1 absolute top-14 ">
                 <ul className="w-full">
                   {searchedStocks &&
                     searchedStocks.length > 0 &&

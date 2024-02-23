@@ -3,6 +3,7 @@ import UserNav from "../components/user-nav";
 import Education_Card from "../components/education-card";
 import { useState, useEffect } from "react";
 import { userDashboardData } from "../requests/user-dashbaord";
+import { ClipLoader } from "react-spinners";
 import {
   useQuery,
 } from "@tanstack/react-query";
@@ -56,7 +57,7 @@ const Education_Blog = () => {
           active={"educational-blogs"}
         />
         <div className="w-full flex flex-wrap esm:justify-center md:justify-start esm:gap-x-10 2xl:gap-x-20 gap-y-12 h-fit md:p-2.5 mt-7">
-          {isLoading ? <p>Loading...</p> 
+          {isLoading ? <ClipLoader size={20} color="purple" className="ml-60 mt-60"/>
           :
           (blogs.data &&
             blogs.data.length > 0 )&&
@@ -64,7 +65,6 @@ const Education_Blog = () => {
               return <Education_Card data={item} blogs={blogs.data} key={item.id} />;
             })
           }
-          
         </div>
       </div>
     </div>

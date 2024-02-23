@@ -159,7 +159,7 @@ const ResetAccountModal = ({closeResetModal , phase, plan , planId, planAmount})
         <p className="text-xl font-poppins font-bold underline">Reset Account Plan</p>
         <p className="text-xl text-purple1 font-poppins font-bold">Restart Your Challenge</p>
         <p className="text-sm font-medium font-inter">For {plan} Challenge {phase}</p>
-        <button onClick={() => {displayRazorpay()}} className="w-5/6  py-2 bg-purple1 text-white rounded-4xl text-lg font-inter">
+        <button onClick={() => {navigate("/reset-plan-purchase")}} className="w-5/6  py-2 bg-purple1 text-white rounded-4xl text-lg font-inter">
           {loading?
            <ClipLoader size={20} color="white"/>
            :
