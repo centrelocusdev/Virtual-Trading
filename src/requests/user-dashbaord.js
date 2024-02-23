@@ -145,4 +145,16 @@ async function leaderboardData(){
         return {status: "error", message: "Something went wrong!"};
     }
 }
-export const userDashboardData = {getEducationalBlogs , likeBlog , updateProfile, unLikeBlog , userData, newsData, leaderboardData};
+async function differentTypesOfTraders(){
+    try{
+        const res = await axios.get(`${Backend_URL}/api/certificate/` );
+        console.log("in api traders" , res.data);
+        if(res && res.data){
+            return {status: "success" , data: res.data};
+        }
+    }catch(err){
+        console.log("Error", err);
+        return {status: "error", message: "Something went wrong!"};
+    }
+}
+export const userDashboardData = {getEducationalBlogs , likeBlog , updateProfile, unLikeBlog , userData, newsData, leaderboardData , differentTypesOfTraders};
