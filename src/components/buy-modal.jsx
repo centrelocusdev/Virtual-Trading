@@ -2,6 +2,8 @@ import ModalCreate from "/modal-create.png";
 import ModalConfirm from "/modal-confirm.png";
 import buyTick from '/buy-tick.png';
 import { useState } from "react";
+import { ClipLoader } from "react-spinners";
+
 const BuyModal = ({
   closeBuyModal,
   quantity,
@@ -11,6 +13,7 @@ const BuyModal = ({
   isBuyDone,
   livePrice,
   stockTransaction,
+  isLoadingTransaction,
   changeBuyLimit,
   buyLimit,
   buyLimitError
@@ -29,9 +32,9 @@ const BuyModal = ({
   let date = formatDate(new Date());
   return (
     <div
-      className={`flex  top-0 w-screen z-200 h-screen bg-[rgba(0,0,0,0.2)] backdrop-blur justify-center items-center fixed`}
+      className={`flex top-0 w-screen z-200 h-screen bg-[rgba(0,0,0,0.2)] backdrop-blur justify-center items-center fixed`}
     >
-      <div className={`w-fit h-fit bg-white flex flex-col mx-auto `}>
+      <div className={`w-1/2 h-fit bg-white flex flex-col mx-auto `}>
         <div className="w-full h-fit flex">
           <div className={`w-1/2 flex justify-center gap-5 py-4 ${isBuyDone? "bg-gray17" : "bg-green4"} `}>
             <img src={ModalCreate} alt="create" />
@@ -123,7 +126,7 @@ const BuyModal = ({
               <span className="self-start w-1/2 pl-2">As On: {date} </span>
             </div>
             <button onClick={() => {stockTransaction('BUY' , transactionType2 === 'intraday'? true: false)}} className="self-center mb-1 text-lg text-center text-white bg-green4 font-semibold rounded-4xl w-60 py-2 mt-10">
-              Place Order
+            {isLoadingTransaction ? <ClipLoader size={20} color="white" />: "Place Order"}
             </button>
             <p
               onClick={() => closeBuyModal()}

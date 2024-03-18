@@ -37,6 +37,7 @@ const Trading_Platform_Detail = () => {
   const [sellLimit, setSellLimit] = useState(0);
   const [buyLimitError, setBuyLimitError] = useState(null);
   const [sellLimitError, setSellLimitError] = useState(null);
+  const [isLoadingTransaction, setIsLoadingTransaction] = useState(false);
   const [liveStockData, setLiveStockData] = useState({
     price: null,
     time: null,
@@ -404,8 +405,10 @@ const Trading_Platform_Detail = () => {
 
   async function stockTransaction(transaction_type, is_intraday) {
     try {
+      setIsLoadingTransaction(true);
       if (buyLimitError != null || sellLimitError != null) {
         toast.error("Limit value is invalid!");
+        setIsLoadingTransaction(false);
         return;
       }
       const res = await stockAPI.transaction(
@@ -431,8 +434,10 @@ const Trading_Platform_Detail = () => {
           setisSellDone(false);
         }, 3000);
       }
+      setIsLoadingTransaction(false);
     } catch (err) {
       console.log(err);
+      setIsLoadingTransaction(false);
     }
   }
 
@@ -732,6 +737,7 @@ const Trading_Platform_Detail = () => {
           changeBuyLimit={changeBuyLimit}
           buyLimit={buyLimit}
           stockTransaction={stockTransaction}
+          isLoadingTransaction={isLoadingTransaction}
           isBuyDone={isBuyDone}
           closeBuyModal={closeBuyModal}
           livePrice={liveStockData.price}
@@ -747,6 +753,7 @@ const Trading_Platform_Detail = () => {
           changeSellLimit={changeSellLimit}
           sellLimit={sellLimit}
           stockTransaction={stockTransaction}
+          isLoadingTransaction={isLoadingTransaction}
           isSellDone={isSellDone}
           closeSellModal={closeSellModal}
           livePrice={liveStockData.price}

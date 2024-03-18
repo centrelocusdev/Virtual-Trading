@@ -2,6 +2,8 @@ import ModalCreate from "/modal-create.png";
 import ModalConfirm from "/modal-confirm.png";
 import sellTick from '/sell-tick.png';
 import { useState } from "react";
+import { ClipLoader } from "react-spinners";
+
 // import { useState } from "react";
 const SellModal = ({
   closeSellModal,
@@ -10,6 +12,7 @@ const SellModal = ({
   livePrice,
   isSellDone,
   stockTransaction,
+  isLoadingTransaction,
   changeSellLimit,
   sellLimit,
   sellLimitError
@@ -109,7 +112,7 @@ const SellModal = ({
               <span className="self-start w-1/2 pl-2">As On: {date} </span>
             </div>
             <button onClick={() => { stockTransaction('SELL' , transactionType2 === 'intraday'? true: false)}} className="self-center mb-1 text-lg text-center text-white bg-red2 font-semibold rounded-4xl w-60 py-2 mt-10">
-              Place Order
+              {isLoadingTransaction ? <ClipLoader size={20} color="white" />: "Place Order"}
             </button>
             <p
               onClick={() => closeSellModal()}
