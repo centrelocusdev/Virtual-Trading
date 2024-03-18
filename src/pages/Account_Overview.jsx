@@ -516,7 +516,7 @@ const Account_Overview = () => {
                     Hello! {userData.user.name}
                   </p>
                   <p className="text-xl esm:text-center lg:text-start font-lato font-semibold text-gray4">
-                    Currently you are in {userData.user.phase}
+                    Currently you are in {userData.user.phase} ({userData.subscriptions[userData.subscriptions.length-1].plan.name})
                   </p>
                   <div className="flex esm:items-center msm:items-start esm:flex-col msm:flex-row esm:justify-center lg:justify-start gap-2.5">
                     <img className="h-6 w-6" src={dollar} alt="dolalr" />
@@ -528,6 +528,18 @@ const Account_Overview = () => {
                     <img className="h-6 w-6" src={dollar} alt="dolalr" />
                     <span className="text-xl esm:text-center msm:text-start font-lato font-bold text-gray4">
                       Current balance: Rs. {userData.user.account_balance}
+                    </span>
+                  </div>
+                  <div className="flex esm:items-center msm:items-start esm:flex-col msm:flex-row esm:justify-center lg:justify-start gap-2.5">
+                    <img className="h-6 w-6" src={dollar} alt="dolalr" />
+                    <span className="text-xl esm:text-center msm:text-start font-lato font-bold text-gray4">
+                      Live Portfolio Value: Rs. {userData.live_portfolio_value.toFixed(2)}
+                    </span>
+                  </div>
+                  <div className="flex esm:items-center msm:items-start esm:flex-col msm:flex-row esm:justify-center lg:justify-start gap-2.5">
+                    <img className="h-6 w-6" src={dollar} alt="dolalr" />
+                    <span className="text-xl esm:text-center msm:text-start font-lato font-bold text-gray4">
+                      Total balance: Rs. {userData.total_balance}
                     </span>
                   </div>
                 </div>

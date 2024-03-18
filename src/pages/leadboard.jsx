@@ -1,6 +1,6 @@
 import Sidebar2 from "../components/sidebar2";
 import UserNav from "../components/user-nav";
-import Education_Card from "../components/education-card";
+// import Education_Card from "../components/education-card";
 import { useState, useEffect } from "react";
 import { userDashboardData } from "../requests/user-dashbaord";
 import { ClipLoader } from "react-spinners";
@@ -8,7 +8,7 @@ import first from "/1st.png";
 import second from "/2nd.png";
 import third from "/3rd.png";
 import trophy from "/trophy.png";
-import { useQuery } from "@tanstack/react-query";
+// import { useQuery } from "@tanstack/react-query";
 
 const Leadboard = () => {
   const [screenWidth, setScreenWidth] = useState("");
@@ -59,12 +59,12 @@ const Leadboard = () => {
           sidebarType={"sidebar2"}
           active={"leaderboard"}
         />
-        <div className="w-full flex flex-wrap esm:justify-center md:justify-start esm:gap-x-10 2xl:gap-x-20 gap-y-12 h-fit md:p-2.5 mt-7">
-          <p className="text-3xl text-purple1 font-lato font-extrabold ">
+        <div className="w-full flex flex-col esm:items-center md:items-start esm:justify-center md:justify-start esm:gap-x-10 2xl:gap-x-20 gap-y-12 h-fit md:p-2.5 mt-7">
+          <p className="text-3xl text-purple1 font-lato font-extrabold esm:text-center md:text-start ">
             Top Performers of the Week
           </p>
-          <div className="flex w-5/6 justify-start gap-20">
-            <div className="w-1/3 max-w-260 rounded-2xl  bg-white flex flex-col items-center justify-between pt-10 gap-8">
+          <div className="flex flex-wrap esm:w-full esm:justify-center lg:w-5/6 md:justify-start gap-10">
+            <div className="w-w-35 max-w-260 rounded-2xl  bg-white flex flex-col items-center justify-between pt-10 gap-8">
               <div className="flex flex-col items-center">
                 <img className="h-5 w-8" src={second} alt="second" />
                 {isLoading ?
@@ -99,7 +99,7 @@ const Leadboard = () => {
                 </>
               )}
             </div>
-            <div className="w-1/3 max-w-260 rounded-2xl  bg-white flex flex-col items-center justify-between pt-10 gap-8">
+            <div className="w-w-35 max-w-260 rounded-2xl  bg-white flex flex-col items-center justify-between pt-10 gap-8">
               <div className="flex flex-col items-center">
                 <img className="h-5 w-8" src={first} alt="first" />
                 {isLoading?
@@ -133,7 +133,7 @@ const Leadboard = () => {
                 </>
               )}
             </div>
-            <div className="w-1/3 max-w-260 rounded-2xl  bg-white flex flex-col items-center justify-between pt-10 gap-8">
+            <div className="w-w-35 max-w-260 rounded-2xl  bg-white flex flex-col items-center justify-between pt-10 gap-8">
               <div className="flex flex-col items-center">
                 <img className="h-5 w-8" src={third} alt="third" />
                 {isLoading?
@@ -168,10 +168,10 @@ const Leadboard = () => {
               )}
             </div>
           </div>
-          <p className="text-3xl text-purple1 font-lato font-extrabold mt-2">
+          <p className="text-3xl esm:text-center md:text-start text-purple1 font-lato font-extrabold mt-2">
             Leadboard
           </p>
-          <table className="w-full flex flex-col  gap-5">
+          <table className="w-full esm:items-center md:items-start flex flex-col  gap-5">
             <tr className="w-5/6 flex ">
               <th className="text-xl text-start w-1/3 ">Rank</th>
               <th className="text-xl text-start w-1/3 ">Name</th>

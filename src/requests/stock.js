@@ -169,7 +169,7 @@ async function getAllTransactionsOfUser2(){
     return { status: "error", message: "Something went wrong!" };
   }
 }
-async function transaction(stock_name, stock_symbol, transaction_type, quantity, price_per_unit, stop_loss , buy_limit, sell_limit){
+async function transaction(stock_name, stock_symbol, transaction_type, quantity, price_per_unit, stop_loss , buy_limit, sell_limit , is_intraday){
   let limit=0;
   transaction_type === 'BUY' ? limit = buy_limit : limit = sell_limit;
   let obj = {};
@@ -181,6 +181,7 @@ async function transaction(stock_name, stock_symbol, transaction_type, quantity,
         transaction_type,
         quantity,
         price_per_unit,
+        is_intraday
       }
     }else{
       obj = {
@@ -189,7 +190,8 @@ async function transaction(stock_name, stock_symbol, transaction_type, quantity,
         transaction_type,
         quantity,
         price_per_unit,
-        stop_loss: Number(stop_loss)
+        stop_loss: Number(stop_loss),
+        is_intraday
       }
     }
    
@@ -201,7 +203,8 @@ async function transaction(stock_name, stock_symbol, transaction_type, quantity,
         transaction_type,
         quantity,
         price_per_unit,
-        limit
+        limit,
+        is_intraday
       }
     }else{
       obj ={
@@ -211,14 +214,15 @@ async function transaction(stock_name, stock_symbol, transaction_type, quantity,
         quantity,
         price_per_unit,
         stop_loss: Number(stop_loss),
-        limit
+        limit,
+        is_intraday
       }
     }
     
   }
   try{
     console.log(typeof(price_per_unit) ,typeof(Number(stop_loss)))
-    console.log("name", stock_name ,"symbol", stock_symbol,"type", transaction_type ,"quan", quantity, "price", price_per_unit, "stop", stop_loss)
+    console.log("name", stock_name ,"symbol", stock_symbol,"type", transaction_type ,"quan", quantity, "price", price_per_unit, "stop", stop_loss, "intraday", is_intraday)
     const res = await axios.put(`${Backend_URL}/api/stock/transaction/` ,obj , {
       headers: {
         'Content-Type': 'application/json',

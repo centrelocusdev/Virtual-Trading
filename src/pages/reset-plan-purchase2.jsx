@@ -386,13 +386,13 @@ const [resetDiscount, setResetDiscount] = useState(0);
                 </div>
 
                 <p className="esm:text-sm sm:text-base font-bold text-red2">
-                  {discount === 0 ? "NA" : `₹ ${discount}`}
+                  {discount === 0 ? "NA" : `- ₹ ${discount}`}
                 </p>
                 <p className="esm:text-sm sm:text-base font-bold text-red2">
-                ₹ {resetDiscount}
+                - ₹ {resetDiscount}
                 </p>
                 <p className="esm:text-sm sm:text-base  font-bold text-green1">
-                ₹ {gst}
+                + ₹ {gst}
                 </p>
               </div>
             </div>

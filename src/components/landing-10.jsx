@@ -7,7 +7,6 @@ import { IoIosArrowForward } from "react-icons/io";
 import { useState } from "react";
 
 
-
 const Landing10 = () => {
   // const [currentVideo , setCurrentVideo] = useState("");
   const [count, setCount] = useState(0);
@@ -39,10 +38,10 @@ const Landing10 = () => {
     },
   ];
   return (
-    <div className="flex w-full h-h-98 bg-green6 justify-center">
-      <div className="w-1/2 flex relative ">
-        <img className=" absolute h-28 w-64 right-0 top-10" src={leftFrame} alt="leftframe" />
-        <div className="z-20 carousel-container w-3/4 mt-28 ml-40 relative">
+    <div className="flex w-full esm:h-fit md:h-h-98 bg-green6 justify-center esm:flex-col md:flex-row">
+      <div className="esm:w-full md:w-1/2 flex relative ">
+        <img className="esm:hidden md:block absolute h-28 w-64 right-0 top-10" src={leftFrame} alt="leftframe" />
+        <div className="z-20 carousel-container esm:w-full lg:w-3/4 esm:mt-20 md:mt-28 lg:ml-40 relative">
           <Carousel
             showArrows={true}
             // renderArrowPrev={customPrevArrow}
@@ -63,13 +62,13 @@ const Landing10 = () => {
 
           </Carousel>
         </div>
-        <img className="left-20 absolute w-48 h-28 bottom-20"  src={rightFrame} alt="rightframe" />
+        <img className="esm:hidden md:block left-20 absolute w-48 h-28 bottom-20"  src={rightFrame} alt="rightframe" />
       </div>
-      <div className="w-1/2 pl-40 flex flex-col justify-center">
-        <span className="leading-tight text-5.1xl font-bold text-black">Learn how </span>
-        <span className="leading-tight text-5.1xl font-bold text-black">to use</span>
-        <span className="leading-tight text-5.1xl mb-5 font-bold text-black">TradesLo.</span>
-        <button onClick={() => {handleOpenVideo()}}  className="bg-purple1 text-xl font-medium py-2 text-white rounded-full w-48 flex justify-center items-center">
+      <div className="esm:w-full md:w-1/2 esm:pl-0 md:pl-40 flex flex-col justify-center esm:mb-20 md:mb-0">
+        <span className="leading-tight text-5.1xl esm:text-center md:text-start font-bold text-black">Learn how </span>
+        <span className="leading-tight text-5.1xl esm:text-center md:text-start font-bold text-black">to use</span>
+        <span className="leading-tight text-5.1xl esm:text-center md:text-start mb-5 font-bold text-black">TradesLo.</span>
+        <button onClick={() => {handleOpenVideo()}}  className="bg-purple1 esm:m-auto md:m-0 text-xl font-medium py-2 text-white rounded-full w-48 flex justify-center items-center">
           Learn
         </button>
       </div>

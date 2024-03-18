@@ -262,20 +262,20 @@ const Landing_6 = () => {
     const [activeTab, setActiveTab] = useState("Stellar");
 
     return (
-    <div id="start-challenge" className="w-full h-fit py-28 px-80 bg-gradient-to-b from-white to-green5 ">
-        <div className="w-full h-fit  gap-y-12 flex flex-col">
+    <div id="start-challenge" className="w-full h-fit py-28 sm:px-12  md:px-60 2xl:px-80 bg-gradient-to-b from-white to-green5 ">
+        <div className="w-full h-fit gap-y-12 flex flex-col">
             <p className="text-5xl font-bold text-purple1 text-center w-full">Choose the Best TradersLo Challenge</p>
-            <div className="w-full h-fit gap-y-4 flex flex-col">
-                <div className="w-full px-15 py-8 flex gap-x-24 justify-around">
-                    <p onClick={()=> {setActiveTab("Stellar"); setActiveTable(StellarData)}} className={`${activeTab === 'Stellar' ? "bg-white text-purple1 " : "bg-purple1 text-white"} hover:bg-white hover:text-purple1 hover:border-2 hover:border-purple1 border-2 border-solid border-white py-5 px-15 rounded-full  font-poppins font-bold text-xl.1 flex justify-center items-center cursor-pointer`}>Stellar</p>
-                    <p onClick={()=> {setActiveTab("Evaluation"); setActiveTable(EvaluationData)}} className={`${activeTab === 'Evaluation' ? "bg-white text-purple1 " : "bg-purple1 text-white"} hover:bg-white hover:text-purple1 hover:border-2 hover:border-purple1 border-2 border-solid border-white py-5 px-15 rounded-full font-poppins font-bold text-xl.1 flex justify-center items-center cursor-pointer`}>Evaluation</p>
-                    <p onClick={()=> {setActiveTab("Express"); setActiveTable(ExpressData)}} className={`${activeTab === 'Express' ? "bg-white text-purple1 " : "bg-purple1 text-white"} hover:bg-white hover:text-purple1 hover:border-2 hover:border-purple1 border-2 border-solid border-white py-5 px-15 rounded-full font-poppins font-bold text-xl.1 flex justify-center items-center cursor-pointer`}>Express</p>
+            <div className="w-full h-fit gap-y-4 flex flex-col items-center">
+                <div className="w-full py-8 flex esm:gap-8 md:gap-12 flex-wrap  justify-center">
+                    <p onClick={()=> {setActiveTab("Stellar"); setActiveTable(StellarData)}} className={`${activeTab === 'Stellar' ? " bg-purple1 text-white" : "bg-white text-purple1"} hover:bg-white hover:text-purple1 hover:border-2 hover:border-purple1 border-2 border-solid border-white py-5 px-15 rounded-full  font-poppins font-bold text-xl.1 flex justify-center items-center cursor-pointer`}>Stellar</p>
+                    <p onClick={()=> {setActiveTab("Evaluation"); setActiveTable(EvaluationData)}} className={`${activeTab === 'Evaluation' ? " bg-purple1 text-white" : "bg-white text-purple1"} hover:bg-white hover:text-purple1 hover:border-2 hover:border-purple1 border-2 border-solid border-white py-5 px-15 rounded-full font-poppins font-bold text-xl.1 flex justify-center items-center cursor-pointer`}>Evaluation</p>
+                    <p onClick={()=> {setActiveTab("Express"); setActiveTable(ExpressData)}} className={`${activeTab === 'Express' ? " bg-purple1 text-white" : "bg-white text-purple1"} hover:bg-white hover:text-purple1 hover:border-2 hover:border-purple1 border-2 border-solid border-white py-5 px-15 rounded-full font-poppins font-bold text-xl.1 flex justify-center items-center cursor-pointer`}>Express</p>
                 </div>
-                <table className="w-11/12 m-autocursor-pointer ">
+                <table className="esm:w-full 2xl:w-11/12 m-autocursor-pointer ">
                    {activeTable.map((item ,i) => {
                     return (
                         <tbody key={i}>
-                        <tr className="w-full "  >
+                        <tr className="w-full">
                             <td className={`bg-white text-black py-2.5 px-3 border border-solid border-gray5 w-1/4 text-sm font-inter text-start ${i === 0 ? "font-semibold": ""} `}>{item.title}</td>
                             <td className={`bg-green7 text-black py-2.5 px-3 border border-solid border-gray5 w-1/4 text-sm font-inter text-start ${i === 0 ? "font-semibold": ""} `}>{item.p1}</td>
                             <td className={`bg-purple3 text-black py-2.5 px-3 border border-solid border-gray5 w-1/4 text-sm  font-inter text-start ${i === 0 ? "font-semibold": ""} `}>{item.p2}</td>

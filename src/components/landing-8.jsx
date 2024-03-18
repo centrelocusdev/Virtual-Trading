@@ -4,7 +4,7 @@ const Landing_8 = () => {
   return (
     <div id="about-us"  className='w-full h-h-99.1 flex relative bg-white items-center justify-center'>
       <img className='w-full absolute bottom-0' src={aboutFrame} alt='frame'/>
-      <div className='flex flex-col absolute right-20 top-40 w-2/5 gap-5'>
+      <div className='flex flex-col absolute esm:right-10 md:right-20 top-40 esm:w-4/5 md:w-2/5 gap-5'>
         <p className='text-5xl font-poppins font-extrabold  text-purple1'>About Us</p>
         <p className='text-lg font-poppins font-medium'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam dictum aliquet accumsan porta lectus ridiculus in mattis. Netus sodales in volutpat ullamcorper amet adipiscing fermentum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam dictum aliquet accumsan porta lectus ridiculus in mattis. Netus sodales in volutpat ullamcorper amet adipiscing fermentum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam dictum aliquet accumsan porta lectus ridiculus in mattis. Netus sodales in volutpat ullamcorper amet adipiscing fermentum.</p>
       </div>

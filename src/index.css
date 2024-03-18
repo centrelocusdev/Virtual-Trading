@@ -187,3 +187,15 @@ html{
   }
   
   
+  @keyframes scrollUp {
+    from {
+      transform: translateY(100%);
+    }
+    to {
+      transform: translateY(0%);
+    }
+  }
+  
+  .number {
+    animation: scrollUp 1s ease-in-out;
+  }

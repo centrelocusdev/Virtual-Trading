@@ -294,7 +294,7 @@ const Trading_Platform_Detail = () => {
           startTime.setHours(9);
           startTime.setMinutes(30);
           const endTime = new Date();
-          endTime.setHours(15);
+          endTime.setHours(15); 
           endTime.setMinutes(30);
           return currentTime >= startTime && currentTime <= endTime;
         };
@@ -402,7 +402,7 @@ const Trading_Platform_Detail = () => {
     fetchStockData();
   }, [timePeriod, stockData]);
 
-  async function stockTransaction(transaction_type) {
+  async function stockTransaction(transaction_type, is_intraday) {
     try {
       if (buyLimitError != null || sellLimitError != null) {
         toast.error("Limit value is invalid!");
@@ -416,7 +416,8 @@ const Trading_Platform_Detail = () => {
         liveStockData.price,
         stoploss,
         buyLimit,
-        sellLimit
+        sellLimit,
+        is_intraday
       );
       if (res.status === "success") {
         if (transaction_type === "BUY") {
@@ -567,7 +568,7 @@ const Trading_Platform_Detail = () => {
                   </p>
                 </div>
               </div>
-              <div className="w-full flex gap-x-8 items-center justify-center mt-5">
+              <div className="w-full flex flex-wrap gap-8 items-center justify-center mt-5">
                 <button
                   onClick={() => {
                     setTimePeriod("1Day");

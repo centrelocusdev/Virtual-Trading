@@ -153,7 +153,7 @@ const ResetAccountModal = ({closeResetModal , phase, plan , planId, planAmount})
       }
   return (
     <div
-    className={`flex  top-0 w-screen z-200 h-screen bg-[rgba(0,0,0,0.2)] backdrop-blur justify-center items-center fixed`}
+    className={`flex  top-0 w-screen z-50 h-screen bg-[rgba(0,0,0,0.2)] backdrop-blur justify-center items-center fixed`}
   >
     <div className="h-72 w-96 rounded-md bg-green2 flex flex-col items-center gap-5 justify-center">
         <p className="text-xl font-poppins font-bold underline">Reset Account Plan</p>

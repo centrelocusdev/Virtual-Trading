@@ -66,8 +66,8 @@ async function userData(){
             'Authorization': `Bearer ${localStorage.getItem("token_access")}`
           }}
         );
-        console.log(res);
-        if(res.status === 204 || res.status === 201 || res.status === 200){
+        console.log("dash data", res);
+        if(res){
             return {status: "success" , data: res.data};
         }
 

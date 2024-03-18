@@ -13,6 +13,7 @@ export default {
     },
     minHeight: {
       "24": "24rem",
+      'h-30': "30rem",
       '11': "11rem",
       '12': "12rem",
       'h-118': "138px",
@@ -20,6 +21,7 @@ export default {
       'h-150': "150px",
       'h-170': "170px",
       'h-400': "400px",
+      
     },
     minWidth:{
       '260': "260px",
@@ -37,6 +39,7 @@ export default {
       },
       maxHeight: {
         '350': "350px",
+        'h-1000': "500px"
       },
       height:{
         "3p": "12px",
@@ -57,6 +60,8 @@ export default {
         'h-68': "68rem",
         'little-screen': "94vh",
         '163': "163px",
+        'h-1000': "600px"
+       
       },
       top:{
         "top_42": "42rem"
@@ -66,11 +71,13 @@ export default {
         "0.87": "80%",
         "w-128": "8rem",
         "w-160": "10rem",
+        'w-26': "26rem",
         'w-35': "34rem",
         "306": "306px",
-        '260': "260px",
+        '260': "250px",
         '270': "270px",
-        '11p': "11%"
+        '11p': "11%",
+        '327': "327px",
       },
       screens: {
         'esm': '200px',

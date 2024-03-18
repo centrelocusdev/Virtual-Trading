@@ -1,9 +1,9 @@
 import Sidebar2 from "../components/sidebar2";
 import UserNav from "../components/user-nav";
-import Education_Card from "../components/education-card";
+// import Education_Card from "../components/education-card";
 import { useState, useEffect } from "react";
 import { userDashboardData } from "../requests/user-dashbaord";
-import { ClipLoader } from "react-spinners";
+// import { ClipLoader } from "react-spinners";
 import crownTraders from "/crown-traders.png";
 import eliteTraders from "/elite-traders.png";
 import lifetimePayout from "/lifetime-payout.png";
@@ -60,7 +60,7 @@ const Certificates = () => {
           active={"certificates"}
         />
         <div className="w-full flex flex-wrap esm:justify-center md:justify-start esm:gap-x-10 2xl:gap-x-20 gap-y-12 h-fit md:px-8 mt-7">
-          <div className=" gap-y-5 shadow-box min-w-327 rounded-xl flex flex-col items-center py-5 bg-white">
+          <div className=" gap-y-5 shadow-box w-327 rounded-xl flex flex-col items-center py-5 bg-white">
             <img className="w-16 h-16" src={eliteTraders} alt="elite-traders" />
             <p className="text-2xl font-bold font-inter">Elite Traders</p>
             <p className="text-xs text-yellow4 bg-yellow5 rounded-full px-5 py-1">
@@ -75,7 +75,7 @@ const Certificates = () => {
               <p className="">Profit Earned:</p>
             </div>
           </div>
-          <div className=" gap-y-5 shadow-box min-w-327 rounded-xl flex flex-col items-center py-5 bg-white">
+          <div className=" gap-y-5 shadow-box w-327 rounded-xl flex flex-col items-center py-5 bg-white">
             <img className="w-16 h-16" src={crownTraders} alt="elite-traders" />
             <p className="text-2xl font-bold font-inter">Crown Traders</p>
             <p className="text-xs text-yellow4 bg-yellow5 rounded-full px-5 py-1">
@@ -90,7 +90,7 @@ const Certificates = () => {
               <p className="">Profit Earned:</p>
             </div>
           </div>
-          <div className=" gap-y-5 shadow-box min-w-327 rounded-xl flex flex-col items-center py-5 bg-white">
+          <div className=" gap-y-5 shadow-box w-327 rounded-xl flex flex-col items-center py-5 bg-white">
             <img className="w-16 h-16" src={profitSplit} alt="elite-traders" />
             <p className="text-2xl font-bold font-inter">Profit Split 1</p>
             <p className="text-xs text-yellow4 bg-yellow5 rounded-full px-5 py-1">
@@ -105,7 +105,7 @@ const Certificates = () => {
               <p className="">Profit Earned:</p>
             </div>
           </div>
-          <div className=" gap-y-5 shadow-box min-w-327 rounded-xl flex flex-col items-center py-5 bg-white">
+          <div className=" gap-y-5 shadow-box w-327 rounded-xl flex flex-col items-center py-5 bg-white">
             <img className="w-16 h-16" src={profitSplit} alt="elite-traders" />
             <p className="text-2xl font-bold font-inter">Profit Split 2</p>
             <p className="text-xs text-yellow4 bg-yellow5 rounded-full px-5 py-1">
@@ -120,7 +120,7 @@ const Certificates = () => {
               <p className="">Profit Earned:</p>
             </div>
           </div>
-          <div className=" gap-y-5 shadow-box min-w-327 rounded-xl flex flex-col items-center py-5 bg-white">
+          <div className=" gap-y-5 shadow-box w-327 rounded-xl flex flex-col items-center py-5 bg-white">
             <img className="w-16 h-16" src={maxAllocation} alt="elite-traders" />
             <p className="text-2xl font-bold font-inter">Max Allocation</p>
             <p className="text-xs text-yellow4 bg-yellow5 rounded-full px-5 py-1">
@@ -135,7 +135,7 @@ const Certificates = () => {
               <p className="">Profit Earned:</p>
             </div>
           </div>
-          <div className=" gap-y-5 shadow-box min-w-327 rounded-xl flex flex-col items-center py-5 bg-white">
+          <div className=" gap-y-5 shadow-box w-327 rounded-xl flex flex-col items-center py-5 bg-white">
             <img className="w-16 h-16" src={lifetimePayout} alt="elite-traders" />
             <p className="text-2xl font-bold font-inter">Lifetime Payout</p>
             <p className="text-xs text-yellow4 bg-yellow5 rounded-full px-5 py-1">

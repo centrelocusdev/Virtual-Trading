@@ -15,6 +15,7 @@ const SellModal = ({
   sellLimitError
 }) => {
   const [transactionType, setTransactionType] = useState('market');
+  const [transactionType2, setTransactionType2] = useState('delivery');
 
   function formatDate(date) {
     const day = date.getDate();
@@ -52,10 +53,17 @@ const SellModal = ({
               Sell
             </p>
             <div className="flex gap-5 justify-center items-center mt-10 px-5">
+            <div className="flex flex-col gap-2">
+              <select value={transactionType2} onChange={(e)=> {setTransactionType2(e.target.value)} } className="w-60 pl-2 border-2 border-solid border-black rounded py-1 cursor-pointer">
+                <option value={"delivery"}>Delivery</option>
+                <option value={"intraday"}>Intraday</option>
+              </select>
               <select value={transactionType} onChange={(e)=> {setTransactionType(e.target.value)} } className="w-60 pl-2 border-2 border-solid border-black rounded py-1 cursor-pointer">
-              <option value={"market"}>Market</option>
+                <option value={"market"}>Market</option>
                 <option value={"limit"}>Limit</option>
               </select>
+
+              </div>
               <div className="flex border-2 border-solid border-gray-200 py-2 gap-2 px-2 items-center rounded">
                 <p>Quantity:</p>
                 <input
@@ -100,7 +108,7 @@ const SellModal = ({
               </span>
               <span className="self-start w-1/2 pl-2">As On: {date} </span>
             </div>
-            <button onClick={() => { stockTransaction('SELL')}} className="self-center mb-1 text-lg text-center text-white bg-red2 font-semibold rounded-4xl w-60 py-2 mt-10">
+            <button onClick={() => { stockTransaction('SELL' , transactionType2 === 'intraday'? true: false)}} className="self-center mb-1 text-lg text-center text-white bg-red2 font-semibold rounded-4xl w-60 py-2 mt-10">
               Place Order
             </button>
             <p

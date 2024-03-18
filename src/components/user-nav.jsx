@@ -35,9 +35,13 @@ import { auth } from "../requests/auth";
 import { toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
 import { userDashboardData } from "../requests/user-dashbaord";
+import ResetAccountModal from "./resetAccountModal";
+
+
 const UserNav = ({ title, sidebarType, active }) => {
   const navigate = useNavigate();
   // console.log(active , sidebarType);
+  const [isResetModalOpen, setIsResetModalOpen] = useState(false);
   const [screenWidth, setScreenWidth] = useState("");
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("");
@@ -48,6 +52,10 @@ const UserNav = ({ title, sidebarType, active }) => {
   const [isError, setIsError] = useState(false);
   const [tradingDays, setTradingDays] = useState("");
   const [isNotificationModalOpen, setIsNotificationModalOpen] = useState(false);
+
+  function closeResetModal() {
+    setIsResetModalOpen(false);
+  }
 
   useEffect(() => {
     setActiveTab(active);
@@ -286,6 +294,7 @@ const UserNav = ({ title, sidebarType, active }) => {
             </div>
           )
         : isSidebarOpen && (
+          <>
             <div className="fixed z-10 rounded-md top-5 esm:w-screen sm:w-4/5 overflow-y-scroll min-h-screen h-fit shadow-box bg-white  py-16 px-9 flex flex-col items-center gap-y-12">
               <MdOutlineCancel
                 onClick={() => {
@@ -384,11 +393,13 @@ const UserNav = ({ title, sidebarType, active }) => {
                       <span>Trading Platform</span>
                     </li>
                   </Link>
-                  <Link to={"/top-up-reset"}>
+                  <Link >
                     <li
+
                       onClick={() => {
-                        setActiveTab("top-up-reset");
-                      }}
+                  setActiveTab("top-up-reset");
+                  setIsResetModalOpen(!isResetModalOpen);
+                }}
                       className={`${
                         activeTab === "top-up-reset"
                           ? "bg-purple1 text-white"
@@ -559,6 +570,14 @@ const UserNav = ({ title, sidebarType, active }) => {
                 </ul>
               </div>
             </div>
+            {isResetModalOpen && (
+              isError ?
+                <ResetAccountModal closeResetModal={closeResetModal} phase={""} plan={""} />
+                :
+                <ResetAccountModal planAmount={userData.subscriptions[0].plan.fees} planId={userData.subscriptions[0].plan.id} closeResetModal={closeResetModal} phase={userData.user.phase} plan={userData.subscriptions[0].plan.name} />
+            )}
+
+          </>
           )}
     </>
   );

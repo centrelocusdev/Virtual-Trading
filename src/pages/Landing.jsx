@@ -15,8 +15,8 @@ import Landing12 from "../components/landing-12";
 import Landing13 from "../components/landing-13";
 import backToTop from "/back-to-top.png";
 import { Link } from "react-scroll";
-import { IoIosArrowDropright } from "react-icons/io";
-import { IoIosArrowDropleft } from "react-icons/io";
+// import { IoIosArrowDropright } from "react-icons/io";
+// import { IoIosArrowDropleft } from "react-icons/io";
 import { useState, useEffect } from "react";
 import ClipLoader from "react-spinners/ClipLoader";
 import { useNavigate } from "react-router-dom";
@@ -32,11 +32,11 @@ const Landing = () => {
 
   const navigate = useNavigate();
   //Header Pagination
-  function handleHeaderNextPage() {
-    if (headerPage != 300) {
-      setHeaderPage(headerPage + 1);
-    }
-  }
+  // function handleHeaderNextPage() {
+  //   if (headerPage != 300) {
+  //     setHeaderPage(headerPage + 1);
+  //   }
+  // }
   //Fetch header data
   useEffect(() => {
     async function fetchHeaderData() {
@@ -75,7 +75,7 @@ console.log(isErrorHeader);
       ) }
 
       {!isErrorHeader && (
-        <div className=" w-full flex gap-x-5 h-fit px-20  justify-between bg-purple4 py-5">
+        <div className=" w-full flex gap-5 h-fit px-20 flex-wrap  justify-center bg-purple4 py-5">
           {/* <IoIosArrowDropleft
             color="white"
             onClick={() => {
@@ -167,7 +167,7 @@ console.log(isErrorHeader);
       <Landing13 />
       <Footer />
       <Link to="navbar" spy={true} smooth={true} offset={0} duration={500}>
-        <div className="cursor-pointer fixed bottom-0 right-0 flex justify-center items-center flex-col">
+        <div className="cursor-pointer z-50 fixed bottom-0 right-0 flex justify-center items-center flex-col">
           <img src={backToTop} alt="backtotop" />
           <p className="text-purple1 font-inter text-base">Back to top</p>
         </div>

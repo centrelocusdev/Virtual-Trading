@@ -8,7 +8,7 @@ import { countryCodes } from "../data/countryCode";
 import { Switch } from "@chakra-ui/react";
 import { parsePhoneNumber, isValidPhoneNumber } from "libphonenumber-js/mobile";
 import { toast } from "react-toastify";
-import logo from "/logo.jpg";
+// import logo from "/logo.jpg";
 import {FcEditImage} from 'react-icons/fc';
 
 function reducer(state, action) {
@@ -255,7 +255,7 @@ console.log(formData.profile_image, isImagePreset);
                 onChange={onChangeHandler} 
                 />
             </div>
-          <div className="w-full px-40 gap-y-16">
+          <div className="w-full esm:px-10 md:px-40 gap-y-16">
             <div className="esm:flex-col flex lg:flex-row w-full gap-x-4 mb-4">
               <div className="flex flex-col esm:w-full lg:w-1/2 esm:mb-4 lg:mb-0">
                 <label className="text-lg font-bold text-gray1 mb-2">

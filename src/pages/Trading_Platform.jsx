@@ -311,7 +311,7 @@ const Trading_Platform = () => {
     );
   }
   return (
-    <div className="w-screen min-h-screen h-fit py-5 pl-5 pr-9 bg-green2 flex gap-x-6">
+    <div className="esm:w-fit md:w-screen min-h-screen h-fit py-5 esm:px-2 sm:px-0 sm:pl-5 sm:pr-9 bg-green2 flex gap-x-6">
       {screenWidth > 1023 ? <Sidebar2 active={"trading-platform"} /> : ""}
       <div className="esm:w-full lg:w-4/5">
         <UserNav
@@ -319,23 +319,23 @@ const Trading_Platform = () => {
           active={"trading-platform"}
           title={"Trading Platform"}
         />
-        <div className="w-full p-10 h-fit">
-          <div className="w-full flex flex-col justify-between mb-12 relative">
-            <div className="flex w-1/3 justify-between self-end p-3 bg-white rounded-2xl.1 text-black">
+        <div className="w-full sm:px-10 py-10 h-fit flex flex-col">
+          <div className=" esm:w-full sm:w-1/3 flex self-end flex-col justify-between mb-12 relative">
+            <div className="flex esm:w-full  justify-between  p-3 bg-white rounded-2xl.1 text-black">
               <input
               onChange={(e) => {handleSearchChange(e)}}
                 id="input-box"
                 onClick={() => {
                   handleSearch();
                 }}
-                className="focus:outline-none"
+                className="focus:outline-none rounded-2xl.1"
                 type="text"
                 placeholder="Search"
               />
               <MdOutlineSearch style={{ cursor: "pointer" }} size={25} />
             </div>
             {openSearchedOptions && (
-              <div className="w-1/3 bg-white mt-2 h-96 overflow-y-scroll self-end rounded-2xl.1 absolute top-14 ">
+              <div className="w-full bg-white mt-2 h-96 overflow-y-scroll self-end rounded-2xl.1 absolute top-14 ">
                 <ul className="w-full">
                   {searchedStocks &&
                     searchedStocks.length > 0 &&
@@ -376,7 +376,7 @@ const Trading_Platform = () => {
               size={40}
               className="self-center"
             />
-
+            <div className="flex w-full flex-wrap gap-1 justify-center">
             {isLoadingHeader ? (
               <ClipLoader className="ml-60" size={20} color="#683AB5" />
             ) : (
@@ -400,7 +400,7 @@ const Trading_Platform = () => {
                       });
                     }}
                     key={item.symbol}
-                    className="w-260 cursor-pointer px-4 min-h-170 flex flex-col  py-5 gap-y-4  bg-white border border-solid border-purple1 rounded-2lg"
+                    className="esm:w-full sm:w-260 cursor-pointer px-4 min-h-170 flex flex-col  py-5 gap-y-4  bg-white border border-solid border-purple1 rounded-2lg"
                   >
                     <p className="text-black  font-manrope text-2xl font-extrabold">
                       {item.name}
@@ -438,6 +438,9 @@ const Trading_Platform = () => {
                 );
               })
             )}
+            </div>
+
+           
 
             <IoIosArrowDropright
               onClick={handleHeaderNextPage}
@@ -468,7 +471,8 @@ const Trading_Platform = () => {
               </option>
             </select>
           </div>
-          <table className="w-full">
+         
+          <table className="w-full ">
             <thead className="w-full">
               <tr className="flex w-full py-3 px-7 items-center">
                 {/* <th className="w-10 font-poppins text-xs font-medium text-start">
@@ -503,7 +507,8 @@ const Trading_Platform = () => {
                 </th>
               </tr>
             </thead>
-            <tbody className="w-full">
+            <div className="w-full overflow-y-scroll h-h-1000">
+            
               {isLoading ? (
                 <ClipLoader className="ml-60 mt-20" size={20} color="#683AB5" />
               ) : (
@@ -584,8 +589,11 @@ const Trading_Platform = () => {
                   );
                 })
               )}
-            </tbody>
+            </div>
+           
           </table>
+         
+          
           <div className="w-full flex gap-5 justify-center items-center mt-10">
             <button
               onClick={() => {

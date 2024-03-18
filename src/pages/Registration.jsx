@@ -814,10 +814,10 @@ const Registration = () => {
                 </div>
 
                 <p className="esm:text-sm sm:text-base font-bold text-gray4">
-                  {discount === 0 ? "NA" : `₹ ${discount}`}
+                  {discount === 0 ? "NA" : `- ₹ ${discount}`}
                 </p>
                 <p className="esm:text-sm sm:text-base font-bold text-gray4">
-                  ₹ {gst}
+                 + ₹ {gst}
                 </p>
               </div>
             </div>

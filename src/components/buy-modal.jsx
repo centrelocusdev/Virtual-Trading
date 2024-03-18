@@ -16,6 +16,7 @@ const BuyModal = ({
   buyLimitError
 }) => {
   const [transactionType, setTransactionType] = useState('market');
+  const [transactionType2, setTransactionType2] = useState('delivery');
   
   
   function formatDate(date) {
@@ -30,7 +31,7 @@ const BuyModal = ({
     <div
       className={`flex  top-0 w-screen z-200 h-screen bg-[rgba(0,0,0,0.2)] backdrop-blur justify-center items-center fixed`}
     >
-      <div className={`w-1/2 h-fit bg-white flex flex-col mx-auto `}>
+      <div className={`w-fit h-fit bg-white flex flex-col mx-auto `}>
         <div className="w-full h-fit flex">
           <div className={`w-1/2 flex justify-center gap-5 py-4 ${isBuyDone? "bg-gray17" : "bg-green4"} `}>
             <img src={ModalCreate} alt="create" />
@@ -55,10 +56,18 @@ const BuyModal = ({
               Buy
             </p>
             <div className="flex gap-5 justify-center items-center mt-10 px-5">
+              <div className="flex flex-col gap-2">
+              <select value={transactionType2} onChange={(e)=> {setTransactionType2(e.target.value)} } className="w-60 pl-2 border-2 border-solid border-black rounded py-1 cursor-pointer">
+                <option value={"delivery"}>Delivery</option>
+                <option value={"intraday"}>Intraday</option>
+              </select>
               <select value={transactionType} onChange={(e)=> {setTransactionType(e.target.value)} } className="w-60 pl-2 border-2 border-solid border-black rounded py-1 cursor-pointer">
                 <option value={"market"}>Market</option>
                 <option value={"limit"}>Limit</option>
               </select>
+
+              </div>
+           
               <div className="flex border-2 border-solid border-gray-200 py-2 gap-2 px-2 items-center rounded">
                 <p>Quantity:</p>
                 <input
@@ -72,7 +81,7 @@ const BuyModal = ({
                 />
               </div>
             {transactionType !== 'limit' && <div className="flex border-2 border-solid border-gray-200 py-2 gap-2 px-2 items-center rounded">
-              <p>Stoploss:</p>
+              <p>Stoploss (in %):</p>
               <input
                 value={stoploss}
                 onChange={(e) => {
@@ -84,12 +93,12 @@ const BuyModal = ({
               />
             </div>}
             </div>
-            {transactionType === 'market'
-            ?
             <p className="mt-5 bg-green4 rounded-md text-white py-3 w-80 mb-5 px-10 text-center m-auto">
               {(livePrice * quantity).toFixed(2)}/-
             </p>
-            :
+            {transactionType !== 'market'
+           &&
+           
             <div className="flex flex-col self-center mt-5 mb-5 gap-2 items-center bg-green4 py-2  w-80 rounded-md px-2 ">
               <div className="flex gap-10">
               <p className="w-1/3 text-white">Limit:</p>
@@ -113,7 +122,7 @@ const BuyModal = ({
               </span>
               <span className="self-start w-1/2 pl-2">As On: {date} </span>
             </div>
-            <button onClick={() => { stockTransaction('BUY')}} className="self-center mb-1 text-lg text-center text-white bg-green4 font-semibold rounded-4xl w-60 py-2 mt-10">
+            <button onClick={() => {stockTransaction('BUY' , transactionType2 === 'intraday'? true: false)}} className="self-center mb-1 text-lg text-center text-white bg-green4 font-semibold rounded-4xl w-60 py-2 mt-10">
               Place Order
             </button>
             <p

@@ -4,7 +4,8 @@ import UserNav from "../components/user-nav";
 import { stockAPI } from "../requests/stock";
 import { userDashboardData } from "../requests/user-dashbaord";
 import Error from "../components/error";
-import ReactApexChart from 'react-apexcharts';
+import ReactApexChart from "react-apexcharts";
+import { useNavigate } from "react-router-dom";
 
 // import {
 //   LineChart,
@@ -19,7 +20,7 @@ import ReactApexChart from 'react-apexcharts';
 // import {Line} from 'react-chartjs-2';
 // import {Chart as ChartJS, Title, Tooltip, LineElement, Legend, CategoryScale, LinearScale, PointElement} from 'chart.js';
 // ChartJS.register(
-  // Title, Tooltip, LineElement, CategoryScale, LinearScale, Legend, PointElement
+// Title, Tooltip, LineElement, CategoryScale, LinearScale, Legend, PointElement
 // )
 import { ClipLoader } from "react-spinners";
 
@@ -72,6 +73,7 @@ const TradingOverview = () => {
   const [performance_history, setPerformanceHistory] = useState({});
 
   const [chartData, setChartData] = useState({});
+  const navigate = useNavigate();
   // {
   //   series: [{
   //     name: "Portfolio",
@@ -126,60 +128,61 @@ const TradingOverview = () => {
       if (res.status === "success") {
         console.log("p h", res.data.performance_history);
         const ph = res.data.performance_history;
-        let data =[];
-        let categories =[];
-        if(ph.length>0){
-          for(let i = 0;i<ph.length;i++){
-              data.push(Number(ph[i].value));
-              categories.push(ph[i].date);
+        let data = [];
+        let categories = [];
+        if (ph.length > 0) {
+          for (let i = 0; i < ph.length; i++) {
+            data.push(Number(ph[i].value));
+            categories.push(ph[i].date);
           }
 
-          let series=  [{
-            name: "Portfolio",
-            data: data
-          }]
+          let series = [
+            {
+              name: "Portfolio",
+              data: data,
+            },
+          ];
 
-          let options= {
+          let options = {
             chart: {
               height: 350,
-              type: 'line',
+              type: "line",
               zoom: {
-                enabled: false
-              }
+                enabled: false,
+              },
             },
             dataLabels: {
-              enabled: false
+              enabled: false,
             },
             stroke: {
-              curve: 'straight'
+              curve: "straight",
             },
             title: {
-              text: 'Portfolio Analysis',
-              align: 'left'
+              text: "Portfolio Analysis",
+              align: "left",
             },
             grid: {
               row: {
-                colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
-                opacity: 0.5
+                colors: ["#f3f3f3", "transparent"], // takes an array which will be repeated on columns
+                opacity: 0.5,
               },
             },
             xaxis: {
               categories: categories,
             },
             yaxis: {
-              tickAmount: 10
-            }
-          }
+              tickAmount: 10,
+            },
+          };
           let finalData = {
             series: series,
-            options:options
-          }
-          console.log("final data" , finalData);
-          setChartData(finalData)
+            options: options,
+          };
+          console.log("final data", finalData);
+          setChartData(finalData);
         }
       }
       setIsLoading(false);
-     
     } catch (err) {
       setIsLoading(false);
       setIsError(true);
@@ -216,7 +219,7 @@ const TradingOverview = () => {
           console.log(data);
           data = data.reverse();
           setTransactions(data);
-        }else if(res.status === 'error'){
+        } else if (res.status === "error") {
           throw new Error("Somehting went wrong");
         }
       } catch (err) {
@@ -228,11 +231,11 @@ const TradingOverview = () => {
     fetchUserTransactionHistory();
   }, []);
 
- useEffect(() => {
-  console.log("chart data" , chartData);
- } ,[chartData])
+  useEffect(() => {
+    console.log("chart data", chartData);
+  }, [chartData]);
 
-  if ( isError) {
+  if (isError) {
     return (
       <Error
         title={"Trading Overview"}
@@ -242,7 +245,6 @@ const TradingOverview = () => {
     );
   }
 
-  
   return (
     <div className="w-screen min-h-screen h-fit py-5 pl-5 pr-9 bg-green2 flex gap-x-6">
       {screenWidth > 1023 ? <Sidebar2 active={"trading-overview"} /> : ""}
@@ -256,13 +258,18 @@ const TradingOverview = () => {
           <div className="bg-white w-full flex justify-center items-center h-80 mb-10 py-5">
             {isLoading ? (
               <ClipLoader size={20} color="black" />
-            ) : (         
-              // <p>NO graph</p>  
-              // <Line data={performance_history} options={options}/>
-              (chartData && chartData.series && chartData.options) ? <ReactApexChart options={chartData.options} series={chartData.series} type="line" height={220} width={800} />
-              :
+            ) : // <p>NO graph</p>
+            // <Line data={performance_history} options={options}/>
+            chartData && chartData.series && chartData.options ? (
+              <ReactApexChart
+                options={chartData.options}
+                series={chartData.series}
+                type="line"
+                height={220}
+                width={800}
+              />
+            ) : (
               <p>No Data</p>
-
             )}
           </div>
           <table className="w-full">
@@ -295,17 +302,17 @@ const TradingOverview = () => {
                 <th className="w-11p font-poppins text-xs font-medium text-center">
                   Stop Loss
                 </th>
+                <th className="w-11p font-poppins text-xs font-medium text-center">
+                  Live Price
+                </th>
               </tr>
             </thead>
             <tbody className="w-full ">
-              {isLoading2 ?
-              <div className="w-full flex justify-center items-center pt-60">
-                <ClipLoader size={20} color="black" />
-              </div>
-               :
-              ( transactions &&
-                transactions.length) > 0 ?
-
+              {isLoading2 ? (
+                <div className="w-full flex justify-center items-center pt-60">
+                  <ClipLoader size={20} color="black" />
+                </div>
+              ) : (transactions && transactions.length) > 0 ? (
                 transactions.map((item) => {
                   return (
                     <tr
@@ -327,7 +334,13 @@ const TradingOverview = () => {
                       <td className="w-11p font-poppins text-xs font-normal text-center">
                         {item.quantity}
                       </td>
-                      <td className={`${item.transaction_status ==='SUCCESS' ? "text-green3" : "text-red2"} w-11p font-poppins text-xs font-normal  text-center`}>
+                      <td
+                        className={`${
+                          item.transaction_status === "SUCCESS"
+                            ? "text-green3"
+                            : "text-red2"
+                        } w-11p font-poppins text-xs font-normal  text-center`}
+                      >
                         {item.transaction_status}
                       </td>
                       <td className="w-11p font-poppins text-xs font-normal text-center">
@@ -337,17 +350,34 @@ const TradingOverview = () => {
                         {item.price_per_unit * item.quantity}
                       </td>
                       <td className="w-11p font-poppins text-xs font-normal text-center">
-                        {item.stop_loss == null ? "0.00": item.stop_loss}
+                        {item.stop_loss == null ? "0.00" : item.stop_loss}
+                      </td>
+                      <td
+                        onClick={() => {
+                          navigate("/trading-platform-detail", {
+                            state: {
+                              name: item.stock_data.name,
+                              pChange:
+                                item.stock_data.percentage_Change,
+                              lastPrice: item.stock_data.lastPrice,
+                              symbol: item.stock_data.symbol,
+                              series: item.stock_data.series,
+                              listingDate: item.stock_data.listingDate,
+                              previousClose:
+                                item.stock_data.previousClose,
+                            },
+                          });
+                        }}
+                        className="w-11p text-center font-poppins text-xs font-normal underline cursor-pointer"
+                      >
+                        View
                       </td>
                     </tr>
                   );
                 })
-                :
+              ) : (
                 <p className="text-center  mt-40">No Data Available!</p>
-                
-                
-               }
-              
+              )}
             </tbody>
           </table>
         </div>
