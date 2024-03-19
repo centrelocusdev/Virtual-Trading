@@ -222,7 +222,7 @@ async function transaction(stock_name, stock_symbol, transaction_type, quantity,
   }
   try{
     console.log(typeof(price_per_unit) ,typeof(Number(stop_loss)))
-    console.log("name", stock_name ,"symbol", stock_symbol,"type", transaction_type ,"quan", quantity, "price", price_per_unit, "stop", stop_loss, "intraday", is_intraday)
+    console.log(obj);
     const res = await axios.put(`${Backend_URL}/api/stock/transaction/` ,obj , {
       headers: {
         'Content-Type': 'application/json',
