@@ -539,7 +539,7 @@ const Account_Overview = () => {
                   <div className="flex esm:items-center msm:items-start esm:flex-col msm:flex-row esm:justify-center lg:justify-start gap-2.5">
                     <img className="h-6 w-6" src={dollar} alt="dolalr" />
                     <span className="text-xl esm:text-center msm:text-start font-lato font-bold text-gray4">
-                      Total balance: Rs. {userData.total_balance}
+                      Live balance: Rs. {userData.total_balance}
                     </span>
                   </div>
                 </div>

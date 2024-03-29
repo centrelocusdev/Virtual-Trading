@@ -368,7 +368,7 @@ const Trading_Platform = () => {
             </select> */}
           </div>
 
-          <div className=" w-full flex gap-x-5 h-fit mb-12 justify-between">
+          <div className=" w-full flex h-fit mb-12 justify-between">
             <IoIosArrowDropleft
               onClick={() => {
                 headerPage != 1 && setHeaderPage(headerPage - 1);
@@ -376,7 +376,7 @@ const Trading_Platform = () => {
               size={40}
               className="self-center"
             />
-            <div className="flex w-full flex-wrap gap-1 justify-center">
+            <div className="flex w-full flex-wrap gap-5  justify-center">
             {isLoadingHeader ? (
               <ClipLoader className="ml-60" size={20} color="#683AB5" />
             ) : (
@@ -400,7 +400,7 @@ const Trading_Platform = () => {
                       });
                     }}
                     key={item.symbol}
-                    className="esm:w-full sm:w-260 cursor-pointer px-4 min-h-170 flex flex-col  py-5 gap-y-4  bg-white border border-solid border-purple1 rounded-2lg"
+                    className="esm:w-full sm:w-1/5 cursor-pointer px-4 min-h-170 flex flex-col  py-5 gap-y-4  bg-white border border-solid border-purple1 rounded-2lg"
                   >
                     <p className="text-black  font-manrope text-2xl font-extrabold">
                       {item.name}
