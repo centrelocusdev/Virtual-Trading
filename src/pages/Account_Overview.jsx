@@ -20,7 +20,7 @@ import { useDisclosure } from "@chakra-ui/react";
 // import { UseDispatch } from "react-redux";
 // import { addProfilePicture } from "../store/userSlice";
 // import { FaCircle } from "react-icons/fa6";
-import moment from "moment";
+// import moment from "moment";
 import { useNavigate } from "react-router-dom";
 
 import {
@@ -74,7 +74,7 @@ const Account_Overview = () => {
         const res = await userDashboardData.newsData();
         if (res.status === "success") {
           console.log("new res", res.data);
-          let data = res.data.slice(0,3);
+          let data = res.data.slice(0, 3);
           setNews(data);
         }
         setIsNewsLoading(false);
@@ -121,7 +121,9 @@ const Account_Overview = () => {
         console.log("bhavya", res);
         setUserData(res.data);
 
-        const startDate = new Date(res.data.subscriptions[res.data.subscriptions.length-1].order.date);
+        const startDate = new Date(
+          res.data.subscriptions[res.data.subscriptions.length - 1].order.date
+        );
         const currentDate = new Date();
         const diffDate = dateDifference(startDate, currentDate);
         setTradingDays(diffDate.days);
@@ -137,11 +139,11 @@ const Account_Overview = () => {
     fetchUserDetails();
   }, []);
   useEffect(() => {
-    console.log("loading", isLoading ,isNewsLoading);
+    console.log("loading", isLoading, isNewsLoading);
     console.log(isError);
   });
 
-  if ((isLoading ) && !isError) {
+  if (isLoading && !isError) {
     return (
       <div className="w-screen min-h-screen h-fit py-5 pl-5 esm:px-5 lg:px-0 lg:pr-9 bg-green2 flex gap-x-6">
         {screenWidth > 1023 ? <Sidebar2 active={"account-overview"} /> : ""}
@@ -153,33 +155,11 @@ const Account_Overview = () => {
           />
           <div className="w-full h-fit pt-7 gap-5 flex esm:flex-col md:flex-row">
             <div className="esm:w-full md:w-4/5 h-fit flex flex-col gap-y-6">
-              <div className="w-full h-fit flex esm:flex-col msm:flex-row gap-6">
-                <div className="esm:w-full msm:w-1/2 min-h-11 h-fit flex esm:flex-col lg:flex-row gap-2.5 esm:items-center lg:items-start p-2.5 bg-white rounded-2lg">
-                  <img className="h-24 w-24" src={user} alt="user" />
-                  <div className="h-full w-full flex justify-center items-center ">
-                    <ClipLoader size={20} color="#683AB5" />
-                  </div>
-                </div>
-                <div className="esm:w-full msm:w-1/2 min-h-11 h-fit flex esm:flex-col lg:flex-row gap-2.5 esm:items-center lg:items-start p-2.5 bg-white rounded-2lg">
-                  <img src={rulebook} alt="rule-book" />
-                  <div className="flex flex-col gap-2.5">
-                    <p className="text-2xl text-black2 esm:text-center lg:text-start font-lato font-bold">
-                      Rules
-                    </p>
-                    <button className="disabled rounded-4xl py-2 px-11 bg-purple1 text-white text-lg font-inter cursor-not-allowed opacity-50">
-                      Demo Account
-                    </button>
-                    <button className="rounded-4xl py-2 px-11 bg-purple1 text-white text-lg font-inter cursor-not-allowed opacity-50">
-                      Account Closure
-                    </button>
-                  </div>
-                </div>
-              </div>
               <div className="w-full min-h-12 h-fit flex flex-col py-5 px-3.5 bg-white rounded-2lg gap-6">
                 <div className="w-full p-5 flex gap-7 items-center border-b-2 border-b-gray4 border-b-solid">
                   <img className="w-12 h-12" src={stastics} alt="stastics" />
                   <p className="text-3xl font-inter text-gray4 font-semibold">
-                  Statistics
+                    Statistics
                   </p>
                 </div>
                 <div className="flex esm:flex-col msm:flex-row gap-5 w-full ">
@@ -187,7 +167,49 @@ const Account_Overview = () => {
                     <div className="py-2.5 px-6 gap-y-2 flex flex-col w-1/2 bg-gray10 rounded-2xl">
                       <img className="w-6 h-6" src={dollar} alt="dollar" />
                       <p className="text-sm font-inter font-semibold text-black2">
-                        Balance
+                        Initial Balance
+                      </p>
+                      <p className="text-2xl font-inter font-semibold text-black2">
+                        <ClipLoader size={20} color="#683AB5" />
+                      </p>
+                    </div>
+                    <div className="py-2.5 px-6 gap-y-2 flex flex-col w-1/2 bg-gray10 rounded-2xl">
+                      <img className="w-6 h-6" src={dollar} alt="dollar" />
+                      <p className="text-sm font-inter font-semibold text-black2">
+                        Current Balance
+                      </p>
+                      <p className="text-2xl font-inter font-semibold text-black2">
+                        <ClipLoader size={20} color="#683AB5" />
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex w-full gap-5">
+                    <div className="py-2.5 px-6 gap-y-2 flex flex-col w-1/2 bg-gray10 rounded-2xl">
+                      <img className="w-6 h-6" src={dollar} alt="dollar" />
+                      <p className="text-sm font-inter font-semibold text-black2">
+                        Invested Amount
+                      </p>
+                      <p className="text-2xl font-inter font-semibold text-black2">
+                        <ClipLoader size={20} color="#683AB5" />
+                      </p>
+                    </div>
+                    <div className="py-2.5 px-6 gap-y-2 flex flex-col w-1/2 bg-gray10 rounded-2xl">
+                      <img className="w-6 h-6" src={dollar} alt="dollar" />
+                      <p className="text-sm font-inter font-semibold text-black2">
+                        Live Portfolio Value
+                      </p>
+                      <p className="text-2xl font-inter font-semibold text-black2">
+                        <ClipLoader size={20} color="#683AB5" />
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div className="flex esm:flex-col msm:flex-row gap-5 w-full ">
+                  <div className="flex w-full gap-5">
+                    <div className="py-2.5 px-6 gap-y-2 flex flex-col w-1/2 bg-gray10 rounded-2xl">
+                      <img className="w-6 h-6" src={dollar} alt="dollar" />
+                      <p className="text-sm font-inter font-semibold text-black2">
+                        Live Balance
                       </p>
                       <p className="text-2xl font-inter font-semibold text-black2">
                         <ClipLoader size={20} color="#683AB5" />
@@ -393,6 +415,32 @@ const Account_Overview = () => {
               </div>
             </div>
             <div className="esm:w-full md:w-1/5 h-fit flex flex-col gap-y-5">
+            <div className="w-full min-h-11 h-fit flex esm:flex-row lg:flex-col items-center  gap-2.5  p-2.5 bg-white rounded-2lg">
+              <img className="w-14 h-18" src={user} alt="user" />
+              <ClipLoader size={20} color="#683AB5" />
+            </div>
+              <div className="w-full min-h-11 h-fit flex esm:flex-row lg:flex-col gap-2.5 esm:items-center lg:items-start p-2.5 bg-white rounded-2lg">
+                <div className="flex items-center gap-2 w-full justify-center">
+                  <img className="w-14 h-18" src={rulebook} alt="rule-book" />
+                  <p className="text-2xl text-black2 esm:text-center lg:text-start font-lato font-bold">
+                    Rules
+                  </p>
+                </div>
+                <div className="flex flex-col gap-2.5 w-full">
+                  <button
+                    onClick={openRules}
+                    className="rounded-4xl w-full py-2 px-11 bg-purple1 text-white text-lg font-inter"
+                  >
+                    Demo Account
+                  </button>
+                  <button
+                    onClick={openAccountClosure}
+                    className="rounded-4xl w-full py-2 px-11 bg-purple1 text-white text-lg font-inter"
+                  >
+                    Account Closure
+                  </button>
+                </div>
+              </div>
               <div className="w-full h-fit flex flex-col items-center bg-white p-2.5 gap-y-2.5 rounded-2lg">
                 <p className="text-2xl font-lato font-bold text-black2 border-b-solid border-b border-b-black">
                   Trading Cycle
@@ -420,27 +468,32 @@ const Account_Overview = () => {
                   </p> */}
                 </div>
               </div>
-              {isNewsLoading?
-               <ClipLoader className="ml-20" size={20} color="#683AB5" />
-              :
-              <div className="w-full h-fit min-h-12 px-5 py-5 bg-white  rounded-2lg items-center">
-              {news && news.length>0 && <p className="underline text-xl mb-5 font-poppins text-center font-bold">News</p>}
-                <div className="w-full h-fit flex flex-col gap-y-8 items-center">
+              {isNewsLoading ? (
+                <ClipLoader className="ml-20" size={20} color="#683AB5" />
+              ) : (
+                <div className="w-full h-fit min-h-12 px-5 py-5 bg-white  rounded-2lg items-center">
                   {news && news.length > 0 && (
-                    news.map((item) => {
-                      return (
-                        <div
-                          onClick={() => {
-                            navigate("/news-calender-details", {
-                              state: { data: item },
-                            });
-                          }}
-                          key={item.id}
-                          className="bg-purple2 text-white cursor-pointer w-full  rounded-2xl.1 px-5 flex items-center p-2"
-                        >
-                          {/* <img className="w-8 h-8 mr-7 self-start mt-10" src={`https://trade.thedelvierypointe.com${item.user_profile_picture}`} alt="user"  /> */}
-                          <div className="flex flex-col mr-2.5 ">
-                            {/* <div className="flex justify-between">
+                    <p className="underline text-xl mb-5 font-poppins text-center font-bold">
+                      News
+                    </p>
+                  )}
+                  <div className="w-full h-fit flex flex-col gap-y-8 items-center">
+                    {news &&
+                      news.length > 0 &&
+                      news.map((item) => {
+                        return (
+                          <div
+                            onClick={() => {
+                              navigate("/news-calender-details", {
+                                state: { data: item },
+                              });
+                            }}
+                            key={item.id}
+                            className="bg-purple2 text-white cursor-pointer w-full  rounded-2xl.1 px-5 flex items-center p-2"
+                          >
+                            {/* <img className="w-8 h-8 mr-7 self-start mt-10" src={`https://trade.thedelvierypointe.com${item.user_profile_picture}`} alt="user"  /> */}
+                            <div className="flex flex-col mr-2.5 ">
+                              {/* <div className="flex justify-between">
                           <span className="font-inter text-sm font-bold text-gray13 mr-4">
                             {item.user_full_name}
                           </span>
@@ -448,27 +501,25 @@ const Account_Overview = () => {
                             {moment(item.created_at).format("DD-MMM-YYYY")}
                           </span>
                             </div> */}
-                            <p className="font-inter text-xs font-bold text-white">
-                              {item.title.slice(0,40)}...
-                            </p>
-                            {/* <p className="font-inter text-sm font-normal text-gray13">
+                              <p className="font-inter text-xs font-bold text-white">
+                                {item.title.slice(0, 40)}...
+                              </p>
+                              {/* <p className="font-inter text-sm font-normal text-gray13">
                   {`${item.content.slice(0,200)}...`}
                 </p> */}
+                            </div>
+                            <img
+                              className="w-12  h-12 self-center"
+                              src={`${item.images}`}
+                              alt="news"
+                            />
                           </div>
-                          <img
-                            className="w-12  h-12 self-center"
-                            src={`${item.images}`}
-                            alt="news"
-                          />
-                        </div>
-                      );
-                    })
-                  ) }
+                        );
+                      })}
+                  </div>
                 </div>
-              </div>
-              
-              }
-             
+              )}
+
               <div className="w-full h-fit rounded-2lg bg-white flex flex-col items-center p-2.5 gap-y-2.5">
                 <p className="text-2xl text-black2 font-lato font-bold border-b border-b-solid border-b-black2">
                   Support
@@ -508,68 +559,11 @@ const Account_Overview = () => {
         />
         <div className="w-full h-fit pt-7 gap-5 flex esm:flex-col md:flex-row">
           <div className="esm:w-full md:w-4/5 h-fit flex flex-col gap-y-6">
-            <div className="w-full h-fit flex esm:flex-col msm:flex-row gap-6">
-              <div className="esm:w-full msm:w-1/2 min-h-11 h-fit flex esm:flex-col lg:flex-row gap-2.5 esm:items-center lg:items-start p-2.5 bg-white rounded-2lg">
-                <img className="h-24 w-24" src={user} alt="user" />
-                <div className="h-fit w-full flex flex-col gap-2.5">
-                  <p className="text-2xl esm:text-center lg:text-start text-black2 font-lato font-bold">
-                    Hello! {userData.user.name}
-                  </p>
-                  <p className="text-xl esm:text-center lg:text-start font-lato font-semibold text-gray4">
-                    Currently you are in {userData.user.phase} ({userData.subscriptions[userData.subscriptions.length-1].plan.name})
-                  </p>
-                  <div className="flex esm:items-center msm:items-start esm:flex-col msm:flex-row esm:justify-center lg:justify-start gap-2.5">
-                    <img className="h-6 w-6" src={dollar} alt="dolalr" />
-                    <span className="text-xl esm:text-center msm:text-start font-lato font-semibold text-gray4">
-                      Initial balance: Rs. {userData.user.virtual_money}
-                    </span>
-                  </div>
-                  <div className="flex esm:items-center msm:items-start esm:flex-col msm:flex-row esm:justify-center lg:justify-start gap-2.5">
-                    <img className="h-6 w-6" src={dollar} alt="dolalr" />
-                    <span className="text-xl esm:text-center msm:text-start font-lato font-bold text-gray4">
-                      Current balance: Rs. {userData.user.account_balance}
-                    </span>
-                  </div>
-                  <div className="flex esm:items-center msm:items-start esm:flex-col msm:flex-row esm:justify-center lg:justify-start gap-2.5">
-                    <img className="h-6 w-6" src={dollar} alt="dolalr" />
-                    <span className="text-xl esm:text-center msm:text-start font-lato font-bold text-gray4">
-                      Live Portfolio Value: Rs. {userData.live_portfolio_value.toFixed(2)}
-                    </span>
-                  </div>
-                  <div className="flex esm:items-center msm:items-start esm:flex-col msm:flex-row esm:justify-center lg:justify-start gap-2.5">
-                    <img className="h-6 w-6" src={dollar} alt="dolalr" />
-                    <span className="text-xl esm:text-center msm:text-start font-lato font-bold text-gray4">
-                      Live balance: Rs. {userData.total_balance}
-                    </span>
-                  </div>
-                </div>
-              </div>
-              <div className="esm:w-full msm:w-1/2 min-h-11 h-fit flex esm:flex-col lg:flex-row gap-2.5 esm:items-center lg:items-start p-2.5 bg-white rounded-2lg">
-                <img src={rulebook} alt="rule-book" />
-                <div className="flex flex-col gap-2.5">
-                  <p className="text-2xl text-black2 esm:text-center lg:text-start font-lato font-bold">
-                    Rules
-                  </p>
-                  <button
-                    onClick={openRules}
-                    className="rounded-4xl py-2 px-11 bg-purple1 text-white text-lg font-inter"
-                  >
-                    Demo Account
-                  </button>
-                  <button
-                    onClick={openAccountClosure}
-                    className="rounded-4xl py-2 px-11 bg-purple1 text-white text-lg font-inter"
-                  >
-                    Account Closure
-                  </button>
-                </div>
-              </div>
-            </div>
             <div className="w-full min-h-12 h-fit flex flex-col py-5 px-3.5 bg-white rounded-2lg gap-6">
               <div className="w-full p-5 flex gap-7 items-center border-b-2 border-b-gray4 border-b-solid">
                 <img className="w-12 h-12" src={stastics} alt="stastics" />
                 <p className="text-3xl font-inter text-gray4 font-semibold">
-                Statistics
+                  Statistics
                 </p>
               </div>
               <div className="flex esm:flex-col msm:flex-row gap-5 w-full ">
@@ -577,7 +571,49 @@ const Account_Overview = () => {
                   <div className="py-2.5 px-6 gap-y-2 flex flex-col w-1/2 bg-gray10 rounded-2xl">
                     <img className="w-6 h-6" src={dollar} alt="dollar" />
                     <p className="text-sm font-inter font-semibold text-black2">
-                      Balance
+                      Initial Balance
+                    </p>
+                    <p className="text-2xl font-inter font-semibold text-black2">
+                      {userData.user.virtual_money}/-
+                    </p>
+                  </div>
+                  <div className="py-2.5 px-6 gap-y-2 flex flex-col w-1/2 bg-gray10 rounded-2xl">
+                    <img className="w-6 h-6" src={dollar} alt="dollar" />
+                    <p className="text-sm font-inter font-semibold text-black2">
+                      Current Balance
+                    </p>
+                    <p className="text-2xl font-inter font-semibold text-black2">
+                      {userData.user.account_balance}
+                    </p>
+                  </div>
+                </div>
+                <div className="flex w-full gap-5">
+                  <div className="py-2.5 px-6 gap-y-2 flex flex-col w-1/2 bg-gray10 rounded-2xl">
+                    <img className="w-6 h-6" src={dollar} alt="dollar" />
+                    <p className="text-sm font-inter font-semibold text-black2">
+                      Invested Amount
+                    </p>
+                    <p className="text-2xl font-inter font-semibold text-black2">
+                      {userData.live_portfolio_value.toFixed(2)}
+                    </p>
+                  </div>
+                  <div className="py-2.5 px-6 gap-y-2 flex flex-col w-1/2 bg-gray10 rounded-2xl">
+                    <img className="w-6 h-6" src={dollar} alt="dollar" />
+                    <p className="text-sm font-inter font-semibold text-black2">
+                      Live Portfolio Value
+                    </p>
+                    <p className="text-2xl font-inter font-semibold text-black2">
+                      {userData.total_balance.toFixed(2)}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div className="flex esm:flex-col msm:flex-row gap-5 w-full ">
+                <div className="flex w-full gap-5">
+                  <div className="py-2.5 px-6 gap-y-2 flex flex-col w-1/2 bg-gray10 rounded-2xl">
+                    <img className="w-6 h-6" src={dollar} alt="dollar" />
+                    <p className="text-sm font-inter font-semibold text-black2">
+                      Live Balance
                     </p>
                     <p className="text-2xl font-inter font-semibold text-black2">
                       {userData.user.account_balance}/-
@@ -611,7 +647,11 @@ const Account_Overview = () => {
                       Drawdown
                     </p>
                     <p className="text-2xl font-inter font-semibold text-black2">
-                      {userData.subscriptions[userData.subscriptions.length-1].plan.drawdown_type}
+                      {
+                        userData.subscriptions[
+                          userData.subscriptions.length - 1
+                        ].plan.drawdown_type
+                      }
                     </p>
                   </div>
                   <div className="py-2.5 px-6 gap-y-2 flex flex-col w-1/2 bg-gray10 rounded-2xl">
@@ -652,7 +692,9 @@ const Account_Overview = () => {
                         </div>
                         <div className=" esm:hidden msm:flex w-fit bg-white py-1 px-5 rounded-2xl.1 gap-x-3.5 items-center justify-center">
                           {userData.user.daily_loss >=
-                          userData.subscriptions[userData.subscriptions.length-1].plan.max_daily_loss ? (
+                          userData.subscriptions[
+                            userData.subscriptions.length - 1
+                          ].plan.max_daily_loss ? (
                             <div className="w-3 h-3 rounded-full bg-red1"></div>
                           ) : (
                             <div className="w-3 h-3 rounded-full bg-purple1"></div>
@@ -660,7 +702,9 @@ const Account_Overview = () => {
 
                           <span className="text-base font-inter font-semibold">
                             {userData.user.daily_loss >=
-                            userData.subscriptions[userData.subscriptions.length-1].plan.max_daily_loss
+                            userData.subscriptions[
+                              userData.subscriptions.length - 1
+                            ].plan.max_daily_loss
                               ? "Crossed"
                               : "Ongoing"}
                           </span>
@@ -668,14 +712,21 @@ const Account_Overview = () => {
                       </div>
                       <p className="text-gray4 font-inter text-sm font-semibold">
                         Max Loss Limit:{" "}
-                        {userData.subscriptions[userData.subscriptions.length-1].plan.max_daily_loss}%
+                        {
+                          userData.subscriptions[
+                            userData.subscriptions.length - 1
+                          ].plan.max_daily_loss
+                        }
+                        %
                       </p>
                       <p className="text-gray4 font-inter text-sm font-semibold">
                         Today’s Max Loss Recorded: {userData.user.daily_loss}
                       </p>
                       <div className=" esm:flex msm:hidden w-fit bg-white py-1 px-5 rounded-2xl.1 gap-x-3.5 items-center justify-center">
                         {userData.user.daily_loss >=
-                        userData.subscriptions[userData.subscriptions.length-1].plan.max_daily_loss ? (
+                        userData.subscriptions[
+                          userData.subscriptions.length - 1
+                        ].plan.max_daily_loss ? (
                           <div className="w-3 h-3 rounded-full bg-red1"></div>
                         ) : (
                           <div className="w-3 h-3 rounded-full bg-purple1"></div>
@@ -683,7 +734,9 @@ const Account_Overview = () => {
 
                         <span className="text-base font-inter font-semibold">
                           {userData.user.daily_loss >=
-                          userData.subscriptions[userData.subscriptions.length-1].plan.max_daily_loss
+                          userData.subscriptions[
+                            userData.subscriptions.length - 1
+                          ].plan.max_daily_loss
                             ? "Crossed"
                             : "Ongoing"}
                         </span>
@@ -706,14 +759,18 @@ const Account_Overview = () => {
                         </div>
                         <div className="esm:hidden msm:flex w-fit bg-white py-1 px-5 rounded-2xl.1 gap-x-3.5 items-center justify-center">
                           {userData.user.overall_loss >=
-                          userData.subscriptions[userData.subscriptions.length-1].plan.max_overall_loss ? (
+                          userData.subscriptions[
+                            userData.subscriptions.length - 1
+                          ].plan.max_overall_loss ? (
                             <div className="w-3 h-3 rounded-full bg-red1"></div>
                           ) : (
                             <div className="w-3 h-3 rounded-full bg-purple1"></div>
                           )}
                           <span className="text-base font-inter font-semibold">
                             {userData.user.overall_loss >=
-                            userData.subscriptions[userData.subscriptions.length-1].plan.max_overall_loss
+                            userData.subscriptions[
+                              userData.subscriptions.length - 1
+                            ].plan.max_overall_loss
                               ? "Crossed"
                               : "Ongoing"}
                           </span>
@@ -721,14 +778,21 @@ const Account_Overview = () => {
                       </div>
                       <p className="text-gray4 font-inter text-sm font-semibold">
                         Max Loss Limit:{" "}
-                        {userData.subscriptions[userData.subscriptions.length-1].plan.max_overall_loss}%
+                        {
+                          userData.subscriptions[
+                            userData.subscriptions.length - 1
+                          ].plan.max_overall_loss
+                        }
+                        %
                       </p>
                       <p className="text-gray4 font-inter text-sm font-semibold">
                         Overall Max Loss Recorded: {userData.user.overall_loss}
                       </p>
                       <div className=" esm:flex msm:hidden w-fit bg-white py-1 px-5 rounded-2xl.1 gap-x-3.5 items-center justify-center">
                         {userData.user.overall_loss >=
-                        userData.subscriptions[userData.subscriptions.length-1].plan.max_overall_loss ? (
+                        userData.subscriptions[
+                          userData.subscriptions.length - 1
+                        ].plan.max_overall_loss ? (
                           <div className="w-3 h-3 rounded-full bg-red1"></div>
                         ) : (
                           <div className="w-3 h-3 rounded-full bg-purple1"></div>
@@ -736,7 +800,9 @@ const Account_Overview = () => {
 
                         <span className="text-base font-inter font-semibold">
                           {userData.user.overall_loss >=
-                          userData.subscriptions[userData.subscriptions.length-1].plan.max_overall_loss
+                          userData.subscriptions[
+                            userData.subscriptions.length - 1
+                          ].plan.max_overall_loss
                             ? "Crossed"
                             : "Ongoing"}
                         </span>
@@ -761,13 +827,17 @@ const Account_Overview = () => {
                         </div>
                         <div className="esm:hidden msm:flex w-fit bg-white py-1 px-5 rounded-2xl.1 gap-x-3.5 items-center justify-center">
                           {userData.user.minimum_trading_days >=
-                          userData.subscriptions[userData.subscriptions.length-1].plan.min_trading_day ? (
+                          userData.subscriptions[
+                            userData.subscriptions.length - 1
+                          ].plan.min_trading_day ? (
                             <div className="w-3 h-3 rounded-full bg-green1"></div>
                           ) : (
                             <div className="w-3 h-3 rounded-full bg-purple1"></div>
                           )}
                           {userData.user.minimum_trading_days >=
-                          userData.subscriptions[userData.subscriptions.length-1].plan.min_trading_day ? (
+                          userData.subscriptions[
+                            userData.subscriptions.length - 1
+                          ].plan.min_trading_day ? (
                             <span className="text-base font-inter text-green1 font-semibold">
                               Passed
                             </span>
@@ -780,7 +850,12 @@ const Account_Overview = () => {
                       </div>
                       <p className="text-gray4 font-inter text-sm font-semibold">
                         Minimum Trading Days:{" "}
-                        {userData.subscriptions[userData.subscriptions.length-1].plan.min_trading_day} days
+                        {
+                          userData.subscriptions[
+                            userData.subscriptions.length - 1
+                          ].plan.min_trading_day
+                        }{" "}
+                        days
                       </p>
                       <p className="text-gray4 font-inter text-sm font-semibold">
                         User&apos;s Trading Days:{" "}
@@ -791,13 +866,17 @@ const Account_Overview = () => {
                       </p>
                       <div className="esm:flex msm:hidden w-fit bg-white py-1 px-5 rounded-2xl.1 gap-x-3.5 items-center justify-center">
                         {userData.user.minimum_trading_days >=
-                        userData.subscriptions[userData.subscriptions.length-1].plan.min_trading_day ? (
+                        userData.subscriptions[
+                          userData.subscriptions.length - 1
+                        ].plan.min_trading_day ? (
                           <div className="w-3 h-3 rounded-full bg-green1"></div>
                         ) : (
                           <div className="w-3 h-3 rounded-full bg-purple1"></div>
                         )}
                         {userData.user.minimum_trading_days >=
-                        userData.subscriptions[userData.subscriptions.length-1].plan.min_trading_day ? (
+                        userData.subscriptions[
+                          userData.subscriptions.length - 1
+                        ].plan.min_trading_day ? (
                           <span className="text-base font-inter text-green1 font-semibold">
                             Passed
                           </span>
@@ -826,20 +905,24 @@ const Account_Overview = () => {
                         <div className="esm:hidden msm:flex w-fit bg-white py-1 px-5 rounded-2xl.1 gap-x-3.5 items-center justify-center">
                           {userData.user.overall_profit >=
                           (userData.user.phase === "PHASE-1"
-                            ? userData.subscriptions[userData.subscriptions.length-1].plan
-                                .phase_1_profit_target
-                            : userData.subscriptions[userData.subscriptions.length-1].plan
-                                .phase_2_profit_target) ? (
+                            ? userData.subscriptions[
+                                userData.subscriptions.length - 1
+                              ].plan.phase_1_profit_target
+                            : userData.subscriptions[
+                                userData.subscriptions.length - 1
+                              ].plan.phase_2_profit_target) ? (
                             <div className="w-3 h-3 rounded-full bg-green1"></div>
                           ) : (
                             <div className="w-3 h-3 rounded-full bg-purple1"></div>
                           )}
                           {userData.user.overall_profit >=
                           (userData.user.phase === "PHASE-1"
-                            ? userData.subscriptions[userData.subscriptions.length-1].plan
-                                .phase_1_profit_target
-                            : userData.subscriptions[userData.subscriptions.length-1].plan
-                                .phase_2_profit_target) ? (
+                            ? userData.subscriptions[
+                                userData.subscriptions.length - 1
+                              ].plan.phase_1_profit_target
+                            : userData.subscriptions[
+                                userData.subscriptions.length - 1
+                              ].plan.phase_2_profit_target) ? (
                             <span className="text-base font-inter text-green1 font-semibold">
                               Passed
                             </span>
@@ -853,9 +936,12 @@ const Account_Overview = () => {
                       <p className="text-gray4 font-inter text-sm font-semibold">
                         Profit target is{" "}
                         {userData.user.phase === "PHASE-1"
-                          ? userData.subscriptions[userData.subscriptions.length-1].plan.phase_1_profit_target
-                          : userData.subscriptions[userData.subscriptions.length-1].plan
-                              .phase_2_profit_target}
+                          ? userData.subscriptions[
+                              userData.subscriptions.length - 1
+                            ].plan.phase_1_profit_target
+                          : userData.subscriptions[
+                              userData.subscriptions.length - 1
+                            ].plan.phase_2_profit_target}
                         %
                       </p>
                       <p className="text-gray4 font-inter text-sm font-semibold">
@@ -865,9 +951,12 @@ const Account_Overview = () => {
                       <div className="esm:flex msm:hidden w-fit bg-white py-1 px-5 rounded-2xl.1 gap-x-3.5 items-center justify-center">
                         {userData.user.overall_profit >=
                         (userData.user.phase === "PHASE-1"
-                          ? userData.subscriptions[userData.subscriptions.length-1].plan.phase_1_profit_target
-                          : userData.subscriptions[userData.subscriptions.length-1].plan
-                              .phase_2_profit_target) ? (
+                          ? userData.subscriptions[
+                              userData.subscriptions.length - 1
+                            ].plan.phase_1_profit_target
+                          : userData.subscriptions[
+                              userData.subscriptions.length - 1
+                            ].plan.phase_2_profit_target) ? (
                           <div className="w-3 h-3 rounded-full bg-green1"></div>
                         ) : (
                           <div className="w-3 h-3 rounded-full bg-purple1"></div>
@@ -875,10 +964,12 @@ const Account_Overview = () => {
                         <span className="text-base font-inter text-green1 font-semibold">
                           {userData.user.overall_profit >=
                           (userData.user.phase === "PHASE-1"
-                            ? userData.subscriptions[userData.subscriptions.length-1].plan
-                                .phase_1_profit_target
-                            : userData.subscriptions[userData.subscriptions.length-1].plan
-                                .phase_2_profit_target) ? (
+                            ? userData.subscriptions[
+                                userData.subscriptions.length - 1
+                              ].plan.phase_1_profit_target
+                            : userData.subscriptions[
+                                userData.subscriptions.length - 1
+                              ].plan.phase_2_profit_target) ? (
                             <span className="text-base font-inter text-green1 font-semibold">
                               Passed
                             </span>
@@ -896,6 +987,44 @@ const Account_Overview = () => {
             </div>
           </div>
           <div className="esm:w-full md:w-1/5 h-fit flex flex-col gap-y-5">
+            <div className="w-full min-h-11 h-fit flex esm:flex-row lg:flex-col items-center justify-center gap-2.5  p-2.5 bg-white rounded-2lg">
+              <img className="w-14 h-18" src={user} alt="user" />
+              <div className="h-fit w-full flex flex-col gap-2.5">
+                <p className="text-2xl esm:text-center text-black2 font-lato font-bold">
+                  Hello! {userData.user.name}
+                </p>
+                <p className="text-xl esm:text-center font-lato font-semibold text-gray4">
+                  Currently you are in {userData.user.phase} (
+                  {
+                    userData.subscriptions[userData.subscriptions.length - 1]
+                      .plan.name
+                  }
+                  )
+                </p>
+              </div>
+            </div>
+            <div className="w-full min-h-11 h-fit flex esm:flex-row lg:flex-col gap-2.5 esm:items-center lg:items-start p-2.5 bg-white rounded-2lg">
+              <div className="flex items-center gap-2 w-full justify-center">
+                <img className="w-14 h-18" src={rulebook} alt="rule-book" />
+                <p className="text-2xl text-black2 esm:text-center lg:text-start font-lato font-bold">
+                  Rules
+                </p>
+              </div>
+              <div className="flex flex-col gap-2.5 w-full">
+                <button
+                  onClick={openRules}
+                  className="rounded-4xl w-full py-2 px-11 bg-purple1 text-white text-lg font-inter"
+                >
+                  Demo Account
+                </button>
+                <button
+                  onClick={openAccountClosure}
+                  className="rounded-4xl w-full py-2 px-11 bg-purple1 text-white text-lg font-inter"
+                >
+                  Account Closure
+                </button>
+              </div>
+            </div>
             <div className="w-full min-h-11 h-fit flex flex-col items-center bg-white p-2.5 gap-y-2.5 rounded-2lg">
               <p className="text-2xl font-lato font-bold text-black2 border-b-solid border-b border-b-black">
                 Trading Cycle
@@ -923,13 +1052,18 @@ const Account_Overview = () => {
                 </p> */}
               </div>
             </div>
-            {isNewsLoading?
-               <ClipLoader className="ml-20" size={20} color="#683AB5" />
-              :
+            {isNewsLoading ? (
+              <ClipLoader className="ml-20" size={20} color="#683AB5" />
+            ) : (
               <div className="w-full h-fit min-h-12 bg-white px-5 py-5  rounded-2lg items-center">
-              {news && news.length>0 && <p className="underline text-xl mb-5 font-poppins text-center font-bold">News</p>}
+                {news && news.length > 0 && (
+                  <p className="underline text-xl mb-5 font-poppins text-center font-bold">
+                    News
+                  </p>
+                )}
                 <div className="w-full h-fit flex flex-col  gap-y-8 items-center">
-                  {news && news.length > 0 && (
+                  {news &&
+                    news.length > 0 &&
                     news.map((item) => {
                       return (
                         <div
@@ -952,7 +1086,7 @@ const Account_Overview = () => {
                           </span>
                             </div> */}
                             <p className="font-inter text-xs font-bold text-white">
-                            {item.title.slice(0,40)}...
+                              {item.title.slice(0, 40)}...
                             </p>
                             {/* <p className="font-inter text-sm font-normal text-gray13">
                   {`${item.content.slice(0,200)}...`}
@@ -965,12 +1099,10 @@ const Account_Overview = () => {
                           />
                         </div>
                       );
-                    })
-                  ) }
+                    })}
                 </div>
               </div>
-              
-              }
+            )}
             <div className="w-full h-fit rounded-2lg bg-white flex flex-col items-center p-2.5 gap-y-2.5">
               <p className="text-2xl text-black2 font-lato font-bold border-b border-b-solid border-b-black2">
                 Support
@@ -996,22 +1128,39 @@ const Account_Overview = () => {
                 Demo Account Rules
               </p>
               <p className="text-lg font-inter">
-                -{userData.subscriptions[userData.subscriptions.length-1].plan.max_daily_loss}% daily loss
-                limit
+                -
+                {
+                  userData.subscriptions[userData.subscriptions.length - 1].plan
+                    .max_daily_loss
+                }
+                % daily loss limit
               </p>
               <p className="text-lg font-inter">
-                -{userData.subscriptions[userData.subscriptions.length-1].plan.max_overall_loss}% overall loss
-                limit
+                -
+                {
+                  userData.subscriptions[userData.subscriptions.length - 1].plan
+                    .max_overall_loss
+                }
+                % overall loss limit
               </p>
               <p className="text-lg font-inter">
-                -{userData.subscriptions[userData.subscriptions.length-1].plan.phase_1_profit_target}% profit
-                achievability in first demo account
+                -
+                {
+                  userData.subscriptions[userData.subscriptions.length - 1].plan
+                    .phase_1_profit_target
+                }
+                % profit achievability in first demo account
               </p>
-              {userData.subscriptions[userData.subscriptions.length-1].plan.phase_2_profit_target && (
+              {userData.subscriptions[userData.subscriptions.length - 1].plan
+                .phase_2_profit_target && (
                 <p className="text-lg font-inter">
-                  -{userData.subscriptions[userData.subscriptions.length-1].plan.phase_2_profit_target}%
-                  profit achievability in second demo account (once first one is
-                  passed)
+                  -
+                  {
+                    userData.subscriptions[userData.subscriptions.length - 1]
+                      .plan.phase_2_profit_target
+                  }
+                  % profit achievability in second demo account (once first one
+                  is passed)
                 </p>
               )}
               <p className="text-lg font-inter">
@@ -1032,13 +1181,22 @@ const Account_Overview = () => {
                 options(equity)
               </p>
               <p className="text-lg font-inter">
-                -minimum {userData.subscriptions[userData.subscriptions.length-1].plan.min_trading_day} days
-                to trade to clear first two demo accounts -5 days trading cycle
-                after which 14-20 days for withdrawal in third main account
+                -minimum{" "}
+                {
+                  userData.subscriptions[userData.subscriptions.length - 1].plan
+                    .min_trading_day
+                }{" "}
+                days to trade to clear first two demo accounts -5 days trading
+                cycle after which 14-20 days for withdrawal in third main
+                account
               </p>
               <p className="text-lg font-inter">
-                -minimum {userData.subscriptions[userData.subscriptions.length-1].plan.min_trading_day} days
-                to trade in third account in order to withdraw the overall
+                -minimum{" "}
+                {
+                  userData.subscriptions[userData.subscriptions.length - 1].plan
+                    .min_trading_day
+                }{" "}
+                days to trade in third account in order to withdraw the overall
                 balance according to percentage
               </p>
             </div>
@@ -1084,13 +1242,20 @@ const Account_Overview = () => {
               </p>
               <p className="text-lg font-inter">
                 - If any account stays below{" "}
-                {userData.subscriptions[userData.subscriptions.length-1].plan.max_daily_loss}% daily loss for
-                10 seconds in first two demo accounts, accounted for closure
+                {
+                  userData.subscriptions[userData.subscriptions.length - 1].plan
+                    .max_daily_loss
+                }
+                % daily loss for 10 seconds in first two demo accounts,
+                accounted for closure
               </p>
               <p className="text-lg font-inter">
                 - If any account stays below{" "}
-                {userData.subscriptions[userData.subscriptions.length-1].plan.max_daily_loss}% daily loss for
-                5 seconds in third main account, account closed
+                {
+                  userData.subscriptions[userData.subscriptions.length - 1].plan
+                    .max_daily_loss
+                }
+                % daily loss for 5 seconds in third main account, account closed
               </p>
             </div>
           </ModalBody>

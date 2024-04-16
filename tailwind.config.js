@@ -103,6 +103,9 @@ export default {
         '5.1xl': '56px'
 
       },
+      zIndex: {
+        '1000': 100000
+      },
       colors: {
         'bg_Dark': '#0D1B27;',
         'black2': "#1C1C1C",
@@ -135,6 +138,7 @@ export default {
         'gray15': "#7A7A7A",
         'gray16': "#EBEDEE",
         'gray17': '#C3C5D4',
+        "gray18": "rgba(105, 105, 105, 1)",
         'black1': "#353535",
         'link_active': "#0000EE",
         'link_visited': "#551A8B",

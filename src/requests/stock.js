@@ -72,14 +72,15 @@ async function getHistoricalDataOfAnyStock(series, symbol,startDate, endDate) {
   }
 }
 
-async function getDailyDataOfStock(symbol) {
+async function getDailyDataOfStock(symbol, time_interval) {
   try {
     // console.log(localStorage.getItem("token_access"));
-    console.log("in the api", symbol);
+    // console.log("in the api", symbol);
     const res = await axios.post(
       `${Backend_URL}/api/nse/historical-stock-data/`,
       {
         symbol: symbol,
+        time_interval,
       },
       {
         headers: {
@@ -88,7 +89,7 @@ async function getDailyDataOfStock(symbol) {
         },
       }
     );
-    console.log("daily data api", res);
+    // console.log("daily data api", res);
     return {status: "success" , data: res.data};
   } catch (err) {
     console.log("Error", err);
@@ -152,9 +153,10 @@ async function getAllTransactionsOfUser(){
     return { status: "error", message: "Something went wrong!" };
   }
 }
-async function getAllTransactionsOfUser2(){
+async function getAllTransactionsOfUser2(page_number){
+  console.log("page", page_number || 1);
   try{
-    const res = await axios.get(`${Backend_URL}/api/stock/transaction/` , 
+    const res = await axios.get(`${Backend_URL}/api/stock/transaction/?page=${page_number || 1}` , 
     {
       headers: {
         'Content-Type': 'application/json',
@@ -269,7 +271,7 @@ async function getNSEDataForSearch(){
         },
       }
       );
-      console.log("search data by symbol" , res.data);
+      // console.log("search data by symbol" , res.data);
       return { status: "success", data: res.data };
     }catch(err){
       console.log("Error", err);

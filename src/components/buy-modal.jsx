@@ -32,9 +32,9 @@ const BuyModal = ({
   let date = formatDate(new Date());
   return (
     <div
-      className={`flex top-0 w-screen z-200 h-screen bg-[rgba(0,0,0,0.2)] backdrop-blur justify-center items-center fixed`}
+      className={`flex top-0 w-screen z-1000 h-screen bg-[rgba(0,0,0,0.2)] backdrop-blur justify-center items-center fixed`}
     >
-      <div className={`w-1/2 h-fit bg-white flex flex-col mx-auto `}>
+      <div className={`esm:w-full sm:w-3/4 md:w-1/2 h-fit bg-white flex flex-col mx-auto `}>
         <div className="w-full h-fit flex">
           <div className={`w-1/2 flex justify-center gap-5 py-4 ${isBuyDone? "bg-gray17" : "bg-green4"} `}>
             <img src={ModalCreate} alt="create" />

@@ -1,114 +1,34 @@
 import { useEffect, useState } from "react";
 import Sidebar2 from "../components/sidebar2";
 import UserNav from "../components/user-nav";
-import { stockAPI } from "../requests/stock";
-import { userDashboardData } from "../requests/user-dashbaord";
-import Error from "../components/error";
+// import Error from "../components/error";
 import ReactApexChart from "react-apexcharts";
 import { useNavigate } from "react-router-dom";
-
-// import {
-//   LineChart,
-//   Line,
-//   XAxis,
-//   YAxis,
-//   CartesianGrid,
-//   Tooltip,
-//   Legend,
-//   ResponsiveContainer,
-// } from "recharts";
-// import {Line} from 'react-chartjs-2';
-// import {Chart as ChartJS, Title, Tooltip, LineElement, Legend, CategoryScale, LinearScale, PointElement} from 'chart.js';
-// ChartJS.register(
-// Title, Tooltip, LineElement, CategoryScale, LinearScale, Legend, PointElement
-// )
+import { useTradingOverview } from "../Contexts/tradingOverviewContext";
+import { IoMdArrowDropleft, IoMdArrowDropright } from "react-icons/io";
 import { ClipLoader } from "react-spinners";
 
-// const data = [
-//   {
-//     date: "20/Jan/2024",
-//     "stock-overview": 4000,
-//   },
-//   {
-//     date: "21/Jan/2024",
-//     "stock-overview": 3000,
-//   },
-//   {
-//     date: "22/Jan/2024",
-//     "stock-overview": 2000,
-//   },
-//   {
-//     date: "23/Jan/2024",
-//     "stock-overview": 2780,
-//   },
-//   {
-//     date: "24/Jan/2024",
-//     "stock-overview": 1890,
-//   },
-//   {
-//     date: "25/Jan/2024",
-//     "stock-overview": 2390,
-//   },
-//   {
-//     date: "26/Jan/2024",
-//     "stock-overview": 3490,
-//   },
-// ];
-
-// import user from '/dash-user.svg';
-// import dollar from '/dash-dollar.svg';
-// import rulebook from '/dash-rulebook.svg';
-// import stastics from '/dash-stastics.svg';
-// import trading from '/dash-tradingobjective.svg';
-// import tick from '/dash-tickbig.svg';
-// import questionmark from '/dash-questionmark.svg';
-// import graycircle from '/dash-graycircle.svg';
-// import support from '/dash-support.svg';
 const TradingOverview = () => {
-  const [transactions, setTransactions] = useState([]);
   const [screenWidth, setScreenWidth] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const [isLoading2, setIsLoading2] = useState(false);
-  const [isError, setIsError] = useState(false);
-  const [performance_history, setPerformanceHistory] = useState({});
 
-  const [chartData, setChartData] = useState({});
+  const tradingOverviewCtx = useTradingOverview();
+  console.log("ctx", tradingOverviewCtx);
+  const {
+    isLoading,
+    isLoading2,
+    chartData,
+    // isError,
+    transactions,
+    total_pages,
+    selectedPageButton,
+    totalButtons,
+  } = tradingOverviewCtx.tradingOverviewState;
+  console.log("chart data", chartData);
+  console.log("transactionsfdas", transactions);
+  console.log("selected page", selectedPageButton);
+
   const navigate = useNavigate();
-  // {
-  //   series: [{
-  //     name: "Portfolio",
-  //     data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
-  //   }],
 
-  //   options: {
-  //     chart: {
-  //       height: 350,
-  //       type: 'line',
-  //       zoom: {
-  //         enabled: false
-  //       }
-  //     },
-  //     dataLabels: {
-  //       enabled: false
-  //     },
-  //     stroke: {
-  //       curve: 'straight'
-  //     },
-  //     title: {
-  //       text: 'Product Trends by Month',
-  //       align: 'left'
-  //     },
-  //     grid: {
-  //       row: {
-  //         colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
-  //         opacity: 0.5
-  //       },
-  //     },
-  //     xaxis: {
-  //       categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
-  //     }
-  //   }
-  // }
   useEffect(() => {
     setScreenWidth(window.innerWidth);
     const handleResize = () => {
@@ -119,130 +39,42 @@ const TradingOverview = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-  // const navigate = useNavigate();
 
-  async function fetchUserDetails() {
-    try {
-      setIsLoading(true);
-      const res = await userDashboardData.userData();
-      if (res.status === "success") {
-        console.log("p h", res.data.performance_history);
-        const ph = res.data.performance_history;
-        let data = [];
-        let categories = [];
-        if (ph.length > 0) {
-          for (let i = 0; i < ph.length; i++) {
-            data.push(Number(ph[i].value));
-            categories.push(ph[i].date);
-          }
-
-          let series = [
-            {
-              name: "Portfolio",
-              data: data,
-            },
-          ];
-
-          let options = {
-            chart: {
-              height: 350,
-              type: "line",
-              zoom: {
-                enabled: false,
-              },
-            },
-            dataLabels: {
-              enabled: false,
-            },
-            stroke: {
-              curve: "straight",
-            },
-            title: {
-              text: "Portfolio Analysis",
-              align: "left",
-            },
-            grid: {
-              row: {
-                colors: ["#f3f3f3", "transparent"], // takes an array which will be repeated on columns
-                opacity: 0.5,
-              },
-            },
-            xaxis: {
-              categories: categories,
-            },
-            yaxis: {
-              tickAmount: 10,
-            },
-          };
-          let finalData = {
-            series: series,
-            options: options,
-          };
-          console.log("final data", finalData);
-          setChartData(finalData);
-        }
-      }
-      setIsLoading(false);
-    } catch (err) {
-      setIsLoading(false);
-      setIsError(true);
-      console.log(err);
+  // Handle Pre Pagination
+  function handlePrePage() {
+    if (totalButtons[0] != 1) {
+      const newPages = [
+        totalButtons[0] - 3,
+        totalButtons[0] - 2,
+        totalButtons[0] - 1,
+      ];
+      tradingOverviewCtx.handleSelectedPageButton(newPages[0]);
+      tradingOverviewCtx.fetchTransactionsData(newPages[0]);
+      tradingOverviewCtx.handleTotalButtons(newPages);
     }
   }
-  useEffect(() => {
-    fetchUserDetails();
-  }, []);
 
-  useEffect(() => {
-    async function fetchUserTransactionHistory() {
-      try {
-        setIsLoading2(true);
-        const res = await stockAPI.getAllTransactionsOfUser2();
-        if (res.status === "success") {
-          console.log("transactions", res.data);
-          let data = res.data.map((item) => {
-            const dateString = item.transaction_date;
-            const dateObject = new Date(dateString);
-
-            const year = dateObject.getFullYear();
-            const month = dateObject.getMonth() + 1; // Month starts from 0
-            const day = dateObject.getDate();
-            const hours = dateObject.getHours();
-            const minutes = dateObject.getMinutes();
-            const seconds = dateObject.getSeconds();
-
-            const formattedDate = `${day}/${month}/${year}  (${hours}:${minutes}:${seconds})`;
-            item.transaction_date = formattedDate;
-            return item;
-          });
-          setIsLoading2(false);
-          console.log(data);
-          data = data.reverse();
-          setTransactions(data);
-        } else if (res.status === "error") {
-          throw new Error("Somehting went wrong");
-        }
-      } catch (err) {
-        console.log("2nd error", err);
-        setIsError(true);
-        setIsLoading2(false);
-      }
+  //Handle Next Pagination
+  function handleNextPage() {
+    let n = totalButtons.length;
+    let arr = [
+      totalButtons[n - 1] + 1,
+      totalButtons[n - 1] + 2,
+      totalButtons[n - 1] + 3,
+    ];
+    console.log("arr", arr);
+    let newPages = arr.filter((item) => {
+      return item <= total_pages;
+    });
+    if (newPages.length > 0) {
+      tradingOverviewCtx.handleTotalButtons(newPages);
+      tradingOverviewCtx.handleSelectedPageButton(newPages[0]);
+      tradingOverviewCtx.fetchTransactionsData(newPages[0]);
     }
-    fetchUserTransactionHistory();
-  }, []);
-
-  useEffect(() => {
-    console.log("chart data", chartData);
-  }, [chartData]);
-
-  if (isError) {
-    return (
-      <Error
-        title={"Trading Overview"}
-        active={"trading-overview"}
-        sidebarType={"sidebar2"}
-      />
-    );
+  }
+  function handlePagiButtonPress(page) {
+    tradingOverviewCtx.handleSelectedPageButton(page);
+    tradingOverviewCtx.fetchTransactionsData(page);
   }
 
   return (
@@ -255,7 +87,7 @@ const TradingOverview = () => {
           title={"Trading Overview"}
         />
         <div className="w-full p-10 h-fit">
-          <div className="bg-white w-full flex justify-center items-center h-80 mb-10 py-5">
+          <div className="bg-white w-full flex justify-center items-center h-fit mb-10 py-5">
             {isLoading ? (
               <ClipLoader size={20} color="black" />
             ) : // <p>NO graph</p>
@@ -265,14 +97,18 @@ const TradingOverview = () => {
                 options={chartData.options}
                 series={chartData.series}
                 type="line"
-                height={220}
-                width={800}
+                height={300}
+                width={
+                  window.innerWidth > 1023
+                    ? window.innerWidth - (window.innerWidth * 25) / 100 - 200
+                    : window.innerWidth - 200
+                }
               />
             ) : (
               <p>No Data</p>
             )}
           </div>
-          <table className="w-full">
+          <table className="w-full ">
             <thead className="w-full">
               <tr className="flex w-full py-3 px-7 items-center">
                 <th className="w-11p font-poppins text-xs font-medium text-center">
@@ -307,9 +143,9 @@ const TradingOverview = () => {
                 </th>
               </tr>
             </thead>
-            <tbody className="w-full ">
+            <div className="w-full overflow-y-scroll max-h-h-1000 ">
               {isLoading2 ? (
-                <div className="w-full flex justify-center items-center pt-60">
+                <div className="w-full  flex justify-center items-center pt-60">
                   <ClipLoader size={20} color="black" />
                 </div>
               ) : (transactions && transactions.length) > 0 ? (
@@ -357,14 +193,20 @@ const TradingOverview = () => {
                           navigate("/trading-platform-detail", {
                             state: {
                               name: item.stock_data.name,
-                              pChange:
-                                item.stock_data.percentage_Change,
+                              pChange: item.stock_data.percentage_Change,
                               lastPrice: item.stock_data.lastPrice,
                               symbol: item.stock_data.symbol,
                               series: item.stock_data.series,
                               listingDate: item.stock_data.listingDate,
-                              previousClose:
-                                item.stock_data.previousClose,
+                              previousClose: item.stock_data.previousClose,
+                              stock_buying_data: {
+                                price_per_unit: item.price_per_unit,
+                                quantity: item.quantity,
+                                transaction_type: item.transaction_type,
+                                marketOrlimit: item.limit_triggered
+                                  ? "Limit"
+                                  : "Market Price",
+                              },
                             },
                           });
                         }}
@@ -378,8 +220,59 @@ const TradingOverview = () => {
               ) : (
                 <p className="text-center  mt-40">No Data Available!</p>
               )}
-            </tbody>
+            </div>
           </table>
+        </div>
+        <div className="w-full flex gap-5 justify-center items-center mt-10">
+          <button
+            onClick={() => {
+              tradingOverviewCtx.handleTotalButtons([1,2,3]);
+              tradingOverviewCtx.handleSelectedPageButton(1);
+              tradingOverviewCtx.fetchTransactionsData(1);
+            }}
+            className="hover:bg-purple1 hover:text-white bg-white rounded-xl py-2 border border-solid border-black px-5 "
+          >
+            Latest
+          </button>
+          <IoMdArrowDropleft
+            size={30}
+            style={{ cursor: "pointer" }}
+            onClick={handlePrePage}
+          />
+
+          {totalButtons &&
+            totalButtons.length > 0 &&
+            totalButtons.map((page) => {
+              return (
+                <button
+                  onClick={() => {
+                    handlePagiButtonPress(page);
+                  }}
+                  className={`${
+                    selectedPageButton === page
+                      ? "bg-purple1 text-white"
+                      : "bg-white text-black"
+                  } hover:bg-purple1 hover:text-white  rounded-full w-10 h-10 flex justify-center items-center border border-solid border-black`}
+                  key={page}
+                >
+                  {page}
+                </button>
+              );
+            })}
+          <IoMdArrowDropright
+            size={30}
+            style={{ cursor: "pointer" }}
+            onClick={handleNextPage}
+          />
+          {/* <button
+            onClick={() => {
+              // setPages([97, 98, 99]);
+              setSelectedPage(99);
+            }}
+            className="hover:bg-purple1 hover:text-white bg-white rounded-xl py-2 border border-solid border-black px-5 "
+          >
+            Last
+          </button> */}
         </div>
       </div>
     </div>
