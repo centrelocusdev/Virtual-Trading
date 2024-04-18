@@ -373,7 +373,7 @@ const UserNav = ({ title, sidebarType, active }) => {
                         <span>Account Overview</span>
                       </li>
                     </Link>
-                    <Link to="/trading-overview">
+                   <Link to="/trading-overview">
                       <li
                         onClick={() => {
                           setActiveTab("trading-overview");
@@ -396,7 +396,7 @@ const UserNav = ({ title, sidebarType, active }) => {
                         <span>Trading Overview</span>
                       </li>
                     </Link>
-                    <Link to={"/trading-platform"}>
+                     <Link to={"/trading-platform"}>
                       <li
                         onClick={() => {
                           setActiveTab("trading-platform");

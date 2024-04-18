@@ -13,7 +13,7 @@ import { IoIosArrowDropright } from "react-icons/io";
 import { IoIosArrowDropleft } from "react-icons/io";
 import { FaLongArrowAltUp } from "react-icons/fa";
 import { IoMdArrowDropup } from "react-icons/io";
-
+import { useAccountOverview } from "../Contexts/accountOverviewContext";
 // import { stockAPI } from "../requests/stock";
 const Trading_Platform = () => {
   const [pages, setPages] = useState([1, 2, 3]);
@@ -32,7 +32,8 @@ const Trading_Platform = () => {
   const [searchedStocks, setSearchedStocks] = useState([]);
   const navigate = useNavigate();
   const [screenWidth, setScreenWidth] = useState("");
-
+  const AccountOverviewCtx = useAccountOverview();
+  const { user } = AccountOverviewCtx.AccountOverviewState.userData;
   //Tracking Screen width
   useEffect(() => {
     setScreenWidth(window.innerWidth);
@@ -91,7 +92,7 @@ const Trading_Platform = () => {
     async function fetchHeaderData() {
       try {
         setIsLoadingHeader(true);
-        const res = await stockAPI.getHeaderStocks(headerPage , 4);
+        const res = await stockAPI.getHeaderStocks(headerPage, 4);
         if (res.status === "success") {
           console.log("header data", res);
           setHeaderStockData(res.data);
@@ -125,7 +126,7 @@ const Trading_Platform = () => {
           for (let i = 0; i < 4; i++) {
             data.push(res.data[i]);
           }
-          console.log("final search" , data);
+          console.log("final search", data);
           setSearchedStocks(data);
         }
       } catch (err) {
@@ -152,21 +153,26 @@ const Trading_Platform = () => {
     };
   }, []);
 
-  function handleSearchChange(e){
-    if(e.target.value === ""){
+  function handleSearchChange(e) {
+    if (e.target.value === "") {
       let data = [];
-          for (let i = 0; i < 4; i++) {
-            data.push(searchedStocksAll[i]);
-          }
+      for (let i = 0; i < 4; i++) {
+        data.push(searchedStocksAll[i]);
+      }
       setSearchedStocks(data);
       return;
     }
-    console.log("value search" , e.target.value);
-    const searchedList = searchedStocksAll && searchedStocksAll.length>0 &&  searchedStocksAll.filter((item) => {
-      return item.nameofcompany.toLowerCase().includes(e.target.value.toLowerCase());
-    })
+    console.log("value search", e.target.value);
+    const searchedList =
+      searchedStocksAll &&
+      searchedStocksAll.length > 0 &&
+      searchedStocksAll.filter((item) => {
+        return item.nameofcompany
+          .toLowerCase()
+          .includes(e.target.value.toLowerCase());
+      });
     setSearchedStocks(searchedList);
-    console.log("filter searched data" , searchedList);
+    console.log("filter searched data", searchedList);
   }
 
   // if ((isLoading || isLoadingHeader) && (!isError && !isErrorHeader)) {
@@ -301,12 +307,26 @@ const Trading_Platform = () => {
   //     </div>
   //   );
   // }
+  if ((user && user.account_status) === false) {
+  //  if (false) {
+    return (
+      <Error
+      title={"Trading Platform"}
+      active={"trading-platform"}
+      sidebarType={"sidebar2"}
+      content= {"Your account has been closed as you did not adhere to the daily loss limit or profit target rules."}
+    />
+    
+    );
+  }
+
   if ((isError || isErrorHeader) && !isLoading && !isLoadingHeader) {
     return (
       <Error
         title={"Trading Platform"}
         active={"trading-platform"}
         sidebarType={"sidebar2"}
+        content= {"Oops! Something went wrong. Try Again!"}
       />
     );
   }
@@ -323,7 +343,9 @@ const Trading_Platform = () => {
           <div className=" esm:w-full sm:w-1/3 flex self-end flex-col justify-between mb-12 relative">
             <div className="flex esm:w-full  justify-between  p-3 bg-white rounded-2xl.1 text-black">
               <input
-              onChange={(e) => {handleSearchChange(e)}}
+                onChange={(e) => {
+                  handleSearchChange(e);
+                }}
                 id="input-box"
                 onClick={() => {
                   handleSearch();
@@ -341,16 +363,21 @@ const Trading_Platform = () => {
                     searchedStocks.length > 0 &&
                     searchedStocks.map((item) => {
                       return (
-                        <li onClick={() => {navigate("/trading-platform-detail", {
-                          state: {
-                            name: item.nameofcompany,
-                            symbol: item.symbol,
-                            series: item.series,
-                            listingDate: item.dateoflisting,
-                            previousClose: "undefined"
-                          },
-                        });}}
-                         key={item.symbol} className="hover:bg-purple2 hover:text-white p-5 cursor-pointer z-30 border-b flex flex-col border-b-solid border-b-l-gray3  font-semibold font-lato">
+                        <li
+                          onClick={() => {
+                            navigate("/trading-platform-detail", {
+                              state: {
+                                name: item.nameofcompany,
+                                symbol: item.symbol,
+                                series: item.series,
+                                listingDate: item.dateoflisting,
+                                previousClose: "undefined",
+                              },
+                            });
+                          }}
+                          key={item.symbol}
+                          className="hover:bg-purple2 hover:text-white p-5 cursor-pointer z-30 border-b flex flex-col border-b-solid border-b-l-gray3  font-semibold font-lato"
+                        >
                           <span className="text-gray12 text-2xl">
                             {item.nameofcompany}
                           </span>
@@ -377,70 +404,67 @@ const Trading_Platform = () => {
               className="self-center"
             />
             <div className="flex w-full flex-wrap gap-5  justify-center">
-            {isLoadingHeader ? (
-              <ClipLoader className="ml-60" size={20} color="#683AB5" />
-            ) : (
-              headerStockData &&
-              headerStockData.length > 0 &&
-              headerStockData.map((item) => {
-                return (
-                  <div
-                    onClick={() => {
-                      navigate("/trading-platform-detail", {
-                        state: {
-                          name: item.name,
-                          pChange: item.percentage_Change,
-                          lastPrice: item.lastPrice,
-                          symbol: item.symbol,
-                          series: item.series,
-                          listingDate: item.listingDate,
-                          previousClose: item.previousClose
-
-                        },
-                      });
-                    }}
-                    key={item.symbol}
-                    className="esm:w-full sm:w-1/5 cursor-pointer px-4 min-h-170 flex flex-col  py-5 gap-y-4  bg-white border border-solid border-purple1 rounded-2lg"
-                  >
-                    <p className="text-black  font-manrope text-2xl font-extrabold">
-                      {item.name}
-                    </p>
-                    <div className="flex justify-between">
-                      <span className="text-gray15 text-lg font-lato font-bold">
-                        Price
-                      </span>
-                      <span className="font-manrope font-bold text-lg text-black">
-                        {item.lastPrice}
-                      </span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-gray15 text-lg font-lato font-bold">
-                        Change
-                      </span>
-                      <div className="flex items-center">
-                        <span
-                          className={`${
-                            item.percentage_Change < 0
-                              ? "text-red2"
-                              : "text-green1"
-                          } text-lg font-semibold font-manrope`}
-                        >
-                          {item.percentage_Change.toFixed(2)}%
+              {isLoadingHeader ? (
+                <ClipLoader className="ml-60" size={20} color="#683AB5" />
+              ) : (
+                headerStockData &&
+                headerStockData.length > 0 &&
+                headerStockData.map((item) => {
+                  return (
+                    <div
+                      onClick={() => {
+                        navigate("/trading-platform-detail", {
+                          state: {
+                            name: item.name,
+                            pChange: item.percentage_Change,
+                            lastPrice: item.lastPrice,
+                            symbol: item.symbol,
+                            series: item.series,
+                            listingDate: item.listingDate,
+                            previousClose: item.previousClose,
+                          },
+                        });
+                      }}
+                      key={item.symbol}
+                      className="esm:w-full sm:w-1/5 cursor-pointer px-4 min-h-170 flex flex-col  py-5 gap-y-4  bg-white border border-solid border-purple1 rounded-2lg"
+                    >
+                      <p className="text-black  font-manrope text-2xl font-extrabold">
+                        {item.name}
+                      </p>
+                      <div className="flex justify-between">
+                        <span className="text-gray15 text-lg font-lato font-bold">
+                          Price
                         </span>
-                        {item.percentage_Change < 0 ? (
-                          <FaLongArrowAltDown size={20} color="#D34645" />
-                        ) : (
-                          <FaLongArrowAltUp size={20} color="#0CAF60" />
-                        )}
+                        <span className="font-manrope font-bold text-lg text-black">
+                          {item.lastPrice}
+                        </span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-gray15 text-lg font-lato font-bold">
+                          Change
+                        </span>
+                        <div className="flex items-center">
+                          <span
+                            className={`${
+                              item.percentage_Change < 0
+                                ? "text-red2"
+                                : "text-green1"
+                            } text-lg font-semibold font-manrope`}
+                          >
+                            {item.percentage_Change.toFixed(2)}%
+                          </span>
+                          {item.percentage_Change < 0 ? (
+                            <FaLongArrowAltDown size={20} color="#D34645" />
+                          ) : (
+                            <FaLongArrowAltUp size={20} color="#0CAF60" />
+                          )}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                );
-              })
-            )}
+                  );
+                })
+              )}
             </div>
-
-           
 
             <IoIosArrowDropright
               onClick={handleHeaderNextPage}
@@ -471,7 +495,7 @@ const Trading_Platform = () => {
               </option>
             </select>
           </div>
-         
+
           <table className="w-full ">
             <thead className="w-full">
               <tr className="flex w-full py-3 px-7 items-center">
@@ -494,7 +518,7 @@ const Trading_Platform = () => {
                   Open Price
                 </th>
                 <th className="w-1/6 font-poppins text-xs font-medium text-center">
-                 Previous Close Price
+                  Previous Close Price
                 </th>
                 <th className="w-1/6 font-poppins text-xs font-medium text-center">
                   High
@@ -508,7 +532,6 @@ const Trading_Platform = () => {
               </tr>
             </thead>
             <div className="w-full overflow-y-scroll h-h-1000">
-            
               {isLoading ? (
                 <ClipLoader className="ml-60 mt-20" size={20} color="#683AB5" />
               ) : (
@@ -527,7 +550,7 @@ const Trading_Platform = () => {
                             symbol: item.metadata.symbol,
                             series: item.metadata.series,
                             listingDate: item.metadata.listingDate,
-                            previousClose: item.price_info.previousClose
+                            previousClose: item.price_info.previousClose,
                           },
                         });
                       }}
@@ -574,7 +597,9 @@ const Trading_Platform = () => {
                         {item.price_info.open}
                       </td>
                       <td className="w-1/6 font-poppins text-xs font-normal text-center">
-                        {item.price_info.close!= 0 ? item.price_info.close: item.price_info.previousClose}
+                        {item.price_info.close != 0
+                          ? item.price_info.close
+                          : item.price_info.previousClose}
                       </td>
                       <td className="w-1/6 font-poppins text-xs font-normal text-center">
                         {item.price_info.intraDayHighLow.max}
@@ -590,10 +615,9 @@ const Trading_Platform = () => {
                 })
               )}
             </div>
-           
           </table>
-         
           
+
           <div className="w-full flex gap-5 justify-center items-center mt-10">
             <button
               onClick={() => {

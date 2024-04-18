@@ -77,6 +77,25 @@ async function userData(){
     }
 }
 
+async function userLivePortfolioValue(){
+    try{
+        const res = await axios.get(`${Backend_URL}/api/live-portfolio-value/` ,
+        { headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem("token_access")}`
+          }}
+        );
+        console.log("user live portfolio value", res);
+        if(res){
+            return {status: "success" , data: res.data};
+        }
+
+    }catch(err){
+        console.log("Error", err);
+        // return {status: "error", message: "Something went wrong!"};
+    }
+}
+
 async function newsData(){
     try{
         const res = await axios.get(`${Backend_URL}/api/news`);
@@ -157,4 +176,4 @@ async function differentTypesOfTraders(){
         return {status: "error", message: "Something went wrong!"};
     }
 }
-export const userDashboardData = {getEducationalBlogs , likeBlog , updateProfile, unLikeBlog , userData, newsData, leaderboardData , differentTypesOfTraders};
+export const userDashboardData = {getEducationalBlogs , likeBlog , updateProfile, unLikeBlog , userData, newsData, leaderboardData , differentTypesOfTraders , userLivePortfolioValue};

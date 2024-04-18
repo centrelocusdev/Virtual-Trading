@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState} from "react";
 import Sidebar2 from "../components/sidebar2";
 import UserNav from "../components/user-nav";
 import { FaArrowLeft } from "react-icons/fa";
@@ -16,6 +16,7 @@ import { FaIndianRupeeSign } from "react-icons/fa6";
 import { AiOutlinePercentage } from "react-icons/ai";
 import { FaLongArrowAltUp } from "react-icons/fa";
 import { FaLongArrowAltDown } from "react-icons/fa";
+import { useAccountOverview } from "../Contexts/accountOverviewContext";
 
 import { toast } from "react-toastify";
 // import { useHistory } from 'react-router-dom';
@@ -25,6 +26,8 @@ import { IoMdArrowDropup } from "react-icons/io";
 import moment from "moment";
 // import tradingAll from '/trading-all.svg';
 const Trading_Platform_Detail = () => {
+  const AccountOverviewCtx = useAccountOverview();
+
   const [screenWidth, setScreenWidth] = useState("");
   const [timePeriod, setTimePeriod] = useState("1Day");
   const [chartLoading, setChartLoading] = useState(true);
@@ -440,6 +443,7 @@ const Trading_Platform_Detail = () => {
         is_intraday
       );
       if (res.status === "success") {
+        AccountOverviewCtx.fetchUserDetails();
         if (transaction_type === "BUY") {
           setIsBuyDone(true);
         } else {
@@ -793,6 +797,7 @@ const Trading_Platform_Detail = () => {
               </div>
             )}
           </div>
+          <p className="text-center text-red-600 mb-5 font-base text-lg">In the daily chart, we have the option to check different candle sizes, while for the rest of the data, we only have one-day candles.</p>
 
           <div className="w-full flex justify-center gap-x-12">
             <button

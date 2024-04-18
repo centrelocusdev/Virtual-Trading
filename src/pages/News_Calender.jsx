@@ -92,6 +92,7 @@ const News_Calender = () => {
         title={"News Calender"}
         active={"news-calender"}
         sidebarType={"sidebar2"}
+        content= {"Oops! Something went wrong. Try Again!"}
       />
     );
   }

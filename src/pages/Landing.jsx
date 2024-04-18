@@ -42,7 +42,7 @@ const Landing = () => {
     async function fetchHeaderData() {
       try {
         setIsLoadingHeader(true);
-        const res = await stockAPI.getHeaderStocks(headerPage, 5);
+        const res = await stockAPI.getHeaderStocks(headerPage, 4);
         if (res.status === "success") {
           console.log("header data", res);
           setHeaderStockData(res.data);
@@ -86,7 +86,7 @@ console.log(isErrorHeader);
           /> */}
 
           {isLoadingHeader ? (
-            <div className="w-full m-auto flex justify-center items-center">
+            <div className="w-full m-auto h-fit flex justify-center items-center">
               <ClipLoader size={20} color="white" />
             </div>
           ) : (
@@ -108,7 +108,7 @@ console.log(isErrorHeader);
                     });
                   }}
                   key={item.symbol}
-                  className="w-260 cursor-pointer px-4 min-h-170 flex flex-col  py-5 gap-y-4  bg-white border border-solid border-purple1 rounded-2lg"
+                  className="min-w-260 w-1/6 cursor-pointer px-4 min-h-170 flex flex-col  py-5 gap-y-4  bg-white border border-solid border-purple1 rounded-2lg"
                 >
                   <p className="text-black  font-manrope text-2xl font-extrabold">
                     {item.name}

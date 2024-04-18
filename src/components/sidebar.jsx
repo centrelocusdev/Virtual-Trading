@@ -8,11 +8,12 @@ import { FaRegCircleUser } from "react-icons/fa6";
 import { FaRegNewspaper } from "react-icons/fa";
 import { FaBook } from "react-icons/fa";
 import { IoMdHelpCircle } from "react-icons/io";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { RiBillLine } from "react-icons/ri";
 const Sidebar = ({ active }) => {
   const [activeTab, setActiveTab] = useState(active);
+  
 
   return (
     <div className="w-1/5  h-fit shadow-box bg-white rounded-2xl.1 py-16 px-9 flex flex-col items-center gap-y-12">

@@ -7,12 +7,16 @@ import { useNavigate } from "react-router-dom";
 import { useTradingOverview } from "../Contexts/tradingOverviewContext";
 import { IoMdArrowDropleft, IoMdArrowDropright } from "react-icons/io";
 import { ClipLoader } from "react-spinners";
-
+import { useAccountOverview } from "../Contexts/accountOverviewContext";
+import Error from "../components/error";
 const TradingOverview = () => {
   const [screenWidth, setScreenWidth] = useState("");
-
   const tradingOverviewCtx = useTradingOverview();
-  console.log("ctx", tradingOverviewCtx);
+  const AccountOverviewCtx = useAccountOverview();
+  const { user } = AccountOverviewCtx.AccountOverviewState.userData;
+  useEffect(() => {
+    console.log("ctx", tradingOverviewCtx);
+  },[tradingOverviewCtx])
   const {
     isLoading,
     isLoading2,
@@ -75,6 +79,19 @@ const TradingOverview = () => {
   function handlePagiButtonPress(page) {
     tradingOverviewCtx.handleSelectedPageButton(page);
     tradingOverviewCtx.fetchTransactionsData(page);
+  }
+
+  if ((user && user.account_status) === false) {
+    // if (false) {
+    return (
+      <Error
+      title={"Trading Overview"}
+      active={"trading-overview"}
+      sidebarType={"sidebar2"}
+      content= {"Your account has been closed as you did not adhere to the daily loss limit or profit target rules."}
+    />
+    
+    );
   }
 
   return (
@@ -226,7 +243,7 @@ const TradingOverview = () => {
         <div className="w-full flex gap-5 justify-center items-center mt-10">
           <button
             onClick={() => {
-              tradingOverviewCtx.handleTotalButtons([1,2,3]);
+              tradingOverviewCtx.handleTotalButtons([1, 2, 3]);
               tradingOverviewCtx.handleSelectedPageButton(1);
               tradingOverviewCtx.fetchTransactionsData(1);
             }}

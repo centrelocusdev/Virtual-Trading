@@ -2,7 +2,7 @@ import Sidebar2 from "../components/sidebar2";
 import UserNav from "../components/user-nav";
 import { useState, useEffect } from "react";
 import { MdError } from "react-icons/md";
-const Error = ({active, sidebarType, title}) => {
+const Error = ({active, sidebarType, title, content}) => {
   const [screenWidth, setScreenWidth] = useState("");
   useEffect(() => {
     setScreenWidth(window.innerWidth);
@@ -23,9 +23,9 @@ const Error = ({active, sidebarType, title}) => {
           active={active}
           title={title}
         />
-         <div className="w-full  flex mt-52  items-center flex-col">
+         <div className="w-3/5 m-auto justify-center  flex mt-52  items-center flex-col">
          <MdError size={100} color="#D34645" />
-          <p className="text-3xl text-red2">Oops! Something went wrong. Try Again!</p></div>
+          <p className="text-3xl text-red2 text-center">{content}</p></div>
       </div>
      
     </div>

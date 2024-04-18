@@ -37,6 +37,9 @@ const Sidebar2 = ({ active }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
   const [userData, setUserData] = useState({});
+  // console.log("sidebar account status" ,user.account_status);
+  // useEffect(() => {
+  // },[AccountOverviewCtx])
 
   function closeResetModal() {
     setIsResetModalOpen(false);
@@ -143,26 +146,26 @@ const Sidebar2 = ({ active }) => {
                 </li>
               </Link>
               <Link to={"/trading-platform"}>
-                <li
-                  onClick={() => {
-                    setActiveTab("trading-platform");
-                  }}
-                  className={`${
-                    activeTab === "trading-platform"
-                      ? "bg-purple1 text-white"
-                      : "text-purple1"
-                  } hover:bg-purple2 hover:text-white rounded-4xl gap-x-7 flex justify-start items-center px-4 py-2`}
-                >
-                  {/* <img className="w-7 h-7" src={tradingPlateform} alt="help" /> */}
-                  <BsGraphUpArrow
-                    size={20}
-                    color={`${
-                      activeTab === "trading-platform" ? "white" : "#683AB5"
-                    }`}
-                  />
-                  <span>Trading Platform</span>
-                </li>
-              </Link>
+              <li
+                onClick={() => {
+                  setActiveTab("trading-platform");
+                }}
+                className={`${
+                  activeTab === "trading-platform"
+                    ? "bg-purple1 text-white"
+                    : "text-purple1"
+                } hover:bg-purple2 hover:text-white rounded-4xl gap-x-7 flex justify-start items-center px-4 py-2`}
+              >
+                {/* <img className="w-7 h-7" src={tradingPlateform} alt="help" /> */}
+                <BsGraphUpArrow
+                  size={20}
+                  color={`${
+                    activeTab === "trading-platform" ? "white" : "#683AB5"
+                  }`}
+                />
+                <span>Trading Platform</span>
+              </li>
+            </Link>
 
               <li
                 onClick={() => {
