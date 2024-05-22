@@ -75,7 +75,9 @@ function AccountOverviewProvider({ children }) {
   }
   useEffect(() => {
     if (token) {
+      console.log("before fetching user details");
       fetchUserDetails();
+      console.log("after fetching user details");
     }
   }, [token]);
 

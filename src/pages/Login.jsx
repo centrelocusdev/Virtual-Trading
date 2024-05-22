@@ -8,7 +8,7 @@ import { auth } from "../requests/auth";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import ClipLoader from "react-spinners/ClipLoader";
-import { useState } from "react";
+import { useState  , useContext} from "react";
 import { useDisclosure } from "@chakra-ui/react";
 import style from "../assets/style/login.module.css";
 import {
@@ -20,6 +20,7 @@ import {
   ModalCloseButton,
   Button,
 } from "@chakra-ui/react";
+import { useAccountOverview } from "../Contexts/accountOverviewContext";
 function reducer(state, action) {
   switch (action.type) {
     case "updateEmail":
@@ -41,6 +42,7 @@ function reducer(state, action) {
 import { useReducer } from "react";
 
 const Login = () => {
+  const AccountOverviewCtx = useAccountOverview();
   const initialState = {
     email: "",
     otp: "",
@@ -130,6 +132,7 @@ const Login = () => {
           // console.log("in the login", res);
           setLoading(false);
           toast.success(res.message);
+          AccountOverviewCtx.fetchUserDetails();
           setTimeout(() => {
             navigate("/account-overview");
           }, 3000);

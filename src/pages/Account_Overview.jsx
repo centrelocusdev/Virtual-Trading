@@ -35,6 +35,7 @@ const Account_Overview = () => {
   const [portfolioLoading, setPortfolioLoading] = useState(false);
   const { news, userData, isLoading, isNewsLoading, isError } =
     AccountOverviewCtx. AccountOverviewState;
+    console.log("context acc overview" ,AccountOverviewCtx. AccountOverviewState )
   const navigate = useNavigate();
   const {
     isOpen: isRulesOpen,

@@ -30,6 +30,7 @@ const BuyModal = ({
     return `${month}/${day}/${year}`;
   }
   let date = formatDate(new Date());
+  
   return (
     <div
       className={`flex top-0 w-screen z-1000 h-screen bg-[rgba(0,0,0,0.2)] backdrop-blur justify-center items-center fixed`}

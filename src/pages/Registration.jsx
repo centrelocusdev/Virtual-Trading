@@ -28,8 +28,10 @@ function reducer(state, action) {
   }
 }
 
+import { useAccountOverview } from "../Contexts/accountOverviewContext";
 // import { MdKeyboardArrowDown } from "react-icons/md";
 const Registration = () => {
+  const AccountOverviewCtx = useAccountOverview();
   const initialState = {
     phone: "",
     password: "",
@@ -288,6 +290,8 @@ const Registration = () => {
         ) {
           setLoading(false);
           toast.success("Payment has been done successfully!");
+          AccountOverviewCtx.fetchUserDetails();
+
           setTimeout(() => {
             navigate("/confirmation");
           }, 5000);

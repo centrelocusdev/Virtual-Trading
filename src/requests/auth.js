@@ -101,6 +101,7 @@ async function registrationOtpVerification(formData) {
         "token": token
       });
       if(res && res.data && res.data.status && res.data.status === 'OK'){
+        console.log("password reset");
         return {status: "success"};
       }else{
         return {status: "error"};
