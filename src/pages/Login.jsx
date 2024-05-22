@@ -40,10 +40,12 @@ function reducer(state, action) {
   }
 }
 import { useReducer } from "react";
+import { useTradingOverview } from "../Contexts/tradingOverviewContext";
 
 const Login = () => {
   const AccountOverviewCtx = useAccountOverview();
-  const initialState = {
+  const TradingOverviewCtx = useTradingOverview();
+    const initialState = {
     email: "",
     otp: "",
     newPassword: "",
@@ -133,6 +135,8 @@ const Login = () => {
           setLoading(false);
           toast.success(res.message);
           AccountOverviewCtx.fetchUserDetails();
+          TradingOverviewCtx.fetchUserDetails();
+          TradingOverviewCtx.fetchTransactionsData();
           setTimeout(() => {
             navigate("/account-overview");
           }, 3000);

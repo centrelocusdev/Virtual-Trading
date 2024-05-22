@@ -195,7 +195,7 @@ function TradingOverviewProvider({ children }) {
   }, [token]);
 
   return (
-    <TradingOverviewContext.Provider value={{tradingOverviewState , fetchTransactionsData ,handleSelectedPageButton , handleTotalButtons}}>
+    <TradingOverviewContext.Provider value={{tradingOverviewState , fetchTransactionsData , fetchUserDetails ,handleSelectedPageButton , handleTotalButtons}}>
       {children}
     </TradingOverviewContext.Provider>
   );
